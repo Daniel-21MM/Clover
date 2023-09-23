@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal</title>
+    <link rel="stylesheet" href="../public/homestyle.css">
+    <!-- CDN DE FONT AWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="menu">
+        <ion-icon name="menu-outline"></ion-icon>
+        <ion-icon name="close-outline"></ion-icon>
+    </div>
+
+    <div class="barra-lateral">
+        <div>
+            <div class="nombre-pagina">
+                <!-- <span>Bienvenido</span> -->
+                <center><img src="../assets/img/LogoClover.png" alt="" width="80%">
+                </center>
+
+            </div>
+        </div>
+
+        <nav class="navegacion">
+            <ul>
+                <li>
+                    <a id="inbox" href="#">
+                        <i class="fa-solid fa-mug-saucer"></i>
+                        <span>Ordenes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-sharp fa-solid fa-dollar-sign"></i>
+                        <span>Ventas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Articulos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuracion</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div>
+            <div class="linea"></div>
+
+            <div class="modo-oscuro">
+                <div class="info">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Salir</span>
+                </div>
+
+            </div>
+
+            <div class="usuario">
+                <img src="../assets/img/people.png" alt="">
+                <div class="info-usuario">
+                    <div class="nombre-email">
+                        <span class="nombre">Ejemplo</span>
+                        <span class="email">Ejemplo@gmail.com</span>
+                    </div>
+                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <main>
+        <!--  -->
+        <div class="head-title">
+            <div class="left">
+                <h1>Dashboard</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Inicio</a>
+                    </li>
+                    <li><i class="fa-solid fa-chevron-right"></i></li>
+                    <li>
+                        <a class="active" href="#">Mesas</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!--  -->
+        <ul class="box-info">
+            <li>
+                <div class="container-img">
+                    <img src="../assets/img/mesa.png">
+                </div>
+                <span class="text">
+                    <h2>Mesa 1</h2>
+                    <div class="container-buttons">
+                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
+                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
+                    </div>
+                    <p>Estado: <span>Disponible</span></p>
+                </span>
+            </li>
+            <li>
+                <div class="container-img">
+                    <img src="../assets/img/mesa.png">
+                </div>
+                <span class="text">
+                    <h2>Mesa 2</h2>
+                    <div class="container-buttons">
+                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
+                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
+                    </div>
+                    <p>Estado: <span>Disponible</span></p>
+                </span>
+            </li>
+            <li class="mesa-3">
+                <div class="container-img">
+                    <img src="../assets/img/mesa.png">
+                </div>
+                <span class="text">
+                    <h2>Mesa 3</h2>
+                    <div class="container-buttons">
+                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
+                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Dar Salida</button>
+                    </div>
+                    <p>Estado: <span><b>No Disponible</b></span></p>
+                </span>
+            </li>
+            <li>
+                <div class="container-img">
+                    <img src="../assets/img/mesa.png">
+                </div>
+                <span class="text">
+                    <h2>Mesa 4</h2>
+                    <div class="container-buttons">
+                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
+                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
+                    </div>
+                    <p>Estado: <span>Disponible</span></p>
+                </span>
+            </li>
+            <li class="mesa-3">
+                <div class="container-img">
+                    <img src="../assets/img/mesa.png">
+                </div>
+                <span class="text">
+                    <h2>Mesa 5</h2>
+                    <div class="container-buttons">
+                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
+                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Dar Salida</button>
+                    </div>
+                    <p>Estado: <span><b>No Disponible</b></span></p>
+                </span>
+            </li>
+            <li>
+                <div class="container-img">
+                    <img src="../assets/img/mesa.png">
+                </div>
+                <span class="text">
+                    <h2>Mesa 6</h2>
+                    <div class="container-buttons">
+                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
+                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
+                    </div>
+                    <p>Estado: <span>Disponible</span></p>
+                </span>
+            </li>
+           
+           
+           
+        </ul>
+
+    </main>
+</html>
