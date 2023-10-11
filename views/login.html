@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesion</title>
-    <link rel="stylesheet" href="../public/loginstyle.css">
+    <!-- Estilos  -->
+    <link rel="stylesheet" href="../assets/css/loginstyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -13,89 +14,57 @@
 
 <body>
     <!--    -->
+    <!-- Tu código HTML con comentarios descriptivos -->
     <div class="container" id="container">
-        <!-- seccion de formulario de crear una cuenta -->
+        <!-- Sección de formulario de crear una cuenta -->
         <div class="form-container sign-up-container">
-            <form action="#" class="form-create-account">
-                <h1>Crear cuenta</h1>
+            <!-- Formulario de recuperación de contraseña -->
+            <form action="#" class="form-create-account" id="form-create-account">
+                <h1>Restaurar contraseña</h1>
                 <div class="icon-create-account">
-                    <i class="fa-solid fa-user-plus"></i>
+                    <i class="fa-solid fa-lock-open"></i>
                 </div>
-                <input type="text" placeholder="Nombre" required id="usuarioRegistrar" />
                 <input type="email" placeholder="Correo" required id="correo" />
-                <input type="password" placeholder="Contraseña" required id="contrasenaRegistrar" />
-                <button id="RegistrarUsuario">Crear cuenta</button>
+                <button type="submit">Enviar</button>
             </form>
         </div>
-        <!-- Seccion del formulario de inicio de sesion-->
+        <!-- Sección del formulario de inicio de sesión -->
         <div class="form-container sign-in-container">
             <form action="#" class="form-sing-up">
-                <h1>Iniciar Sesion</h1>
+                <h1>Iniciar Sesión</h1>
                 <div class="social-container">
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <input type="text" id="usuario" placeholder="Usuario" required>
                 <input type="password" id="contrasena" placeholder="Contraseña" required>
-                <a href="#" onclick="sendEmail()">¿Olvidaste tu contraseña?</a>
                 <button id="Iniciar">Iniciar sesión</button>
             </form>
         </div>
-        <!-- Parte del overlay de la derecha-->
+        <!-- Parte del overlay de la derecha -->
         <div class="overlay-container">
             <div class="overlay">
                 <!-- Panel de Inicio de Sesión -->
                 <div class="overlay-panel overlay-left">
-                    <h1>¡Bienvenido de nuevo!</h1>
+                    <h1>Olvidé mis datos</h1>
                     <img src="../assets/img/LogoClover.png" alt="Logo de Clover Wings Restaurante">
-                    <p>Para seguir disfrutando de nuestros deliciosos platillos, inicia sesión con tus datos personales.
-                    </p>
+                    <p>Ingrese su correo para información importante. Revise su carpeta de spam si no la encuentra en su bandeja de entrada.</p>
                     <button class="ghost" id="signIn">Iniciar Sesión</button>
                 </div>
-
                 <!-- Panel de Registro -->
                 <div class="overlay-panel overlay-right">
                     <h1>¡Bienvenido a Clover Wings!</h1>
                     <img src="../assets/img/LogoClover.png" alt="Logo de Clover Wings Restaurante">
-                   <p>Ingresa tus detalles personales y comienza un viaje culinario con nosotros.</p> 
-                    <button class="ghost" id="signUp">Regístrate Ahora</button>
+                    <p>Ingresa tus detalles personales y comienza un viaje culinario con nosotros.</p>
+                    <button class="ghost" id="signUp">Olvidé mi contraseña</button>
                 </div>
-
             </div>
         </div>
     </div>
-    <!--    -->
-    <script>
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
-        const usuarioRegistrarInput = document.getElementById('usuarioRegistrar');
-        const correoInput = document.getElementById('correo');
-        const contrasenaRegistrarInput = document.getElementById('contrasenaRegistrar');
-        const usuarioInput = document.getElementById('usuario');
-        const contrasenaInput = document.getElementById('contrasena');
 
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-            // Limpiar los campos de entrada al hacer clic en "Registrarme"
-            usuarioRegistrarInput.value = "";
-            correoInput.value = "";
-            contrasenaRegistrarInput.value = "";
-        });
-
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-            // Limpiar los campos de entrada al hacer clic en "Iniciar Sesión"
-            usuarioInput.value = "";
-            contrasenaInput.value = "";
-        });
-    </script>
-
+    <!-- Enlace alos archivos de script -->
+    <script src="../models/resetPassword.js"></script>
+    <script src="../models/loginModel.js"></script>
+    <script src="../assets/js/login.js"></script>
 </body>
-<script src="../models/resetPassword.js"></script>
-<script src="../models/loginModel.js"></script>
-<script src="../models/registerUsersModel.js"></script>
 
 </html>
-
-<!-- ESTA PARTE YA FUNCIONA NO TOCAR -->
-<!--

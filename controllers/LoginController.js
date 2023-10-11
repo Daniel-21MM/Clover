@@ -1,8 +1,8 @@
-const db = require('../database/db'); // Importa la conexión a la base de datos desde db.js
+const db = require('../database/db'); // Importamos la conexión a la base de datos desde db.js
 
 function loginUsuario(usuario, contrasena) {
   return new Promise((resolve, reject) => {
-    // Realiza la consulta SQL para seleccionar un registro de la tabla usuarios que coincida con el usuario y la contraseña proporcionados
+    // Realizamos la consulta SQL para seleccionar un registro de la tabla usuarios que coincida con el usuario y la contraseña proporcionados
     const sql = 'SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?';
 
     db.connection.query(sql, [usuario, contrasena], (queryErr, results) => {

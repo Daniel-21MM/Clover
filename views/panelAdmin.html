@@ -1,187 +1,239 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Principal</title>
-    <link rel="stylesheet" href="../public/homestyle.css">
-    <!-- CDN DE FONT AWESOME-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/editprolife.css">
+    <title>Editar Perfil</title>
 </head>
+
 <body>
-    <div class="menu">
-        <ion-icon name="menu-outline"></ion-icon>
-        <ion-icon name="close-outline"></ion-icon>
-    </div>
-
-    <div class="barra-lateral">
-        <div>
-            <div class="nombre-pagina">
-                <!-- <span>Bienvenido</span> -->
-                <center><img src="../assets/img/LogoClover.png" alt="" width="80%">
-                </center>
-
-            </div>
-        </div>
-
-        <nav class="navegacion">
-            <ul>
-                <li>
-                    <a id="inbox" href="#">
-                        <i class="fa-solid fa-mug-saucer"></i>
-                        <span>Ordenes</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-sharp fa-solid fa-dollar-sign"></i>
-                        <span>Ventas</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-solid fa-store"></i>
-                        <span>Articulos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-solid fa-gear"></i>
-                        <span>Configuracion</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <div>
-            <div class="linea"></div>
-
-            <div class="modo-oscuro">
-                <div class="info">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Salir</span>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="h-100">
+                <div class="logo-container" style="margin-top: 40px;">
+                    <center><img src="../assets/img/LogoClover.png" alt="" width="50%"></center>
                 </div>
-
-            </div>
-
-            <div class="usuario">
-                <img src="../assets/img/people.png" alt="">
-                <div class="info-usuario">
-                    <div class="nombre-email">
-                        <span class="nombre">Ejemplo</span>
-                        <span class="email">Ejemplo@gmail.com</span>
-                    </div>
-                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                <div class="sidebar-logo">
+                    <center><a href="#">Clover Wings</a></center>
                 </div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <main>
-        <!--  -->
-        <div class="head-title">
-            <div class="left">
-                <h1>Dashboard</h1>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Inicio</a>
+                <!-- Sidebar Navigation -->
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Tools & Components
                     </li>
-                    <li><i class="fa-solid fa-chevron-right"></i></li>
-                    <li>
-                        <a class="active" href="#">Mesas</a>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-sliders pe-2"></i>
+                            <!-- <i class="fa-solid fa-list pe-2"></i> -->
+                            Dashboard
+                        </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
+                            aria-expanded="false" aria-controls="pages">
+                            <!-- <i class="fa-regular fa-file-lines pe-2"></i> -->
+                            <i class="fa-solid fa-users"></i>  Empleados
+                              
+                        </a>
+                        <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="agregarEmpleado.html" class="sidebar-link">Agregar empleado</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Lista de empleados</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard"
+                            aria-expanded="false" aria-controls="dashboard">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            Ventas
+                        </a>
+                        <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Ventas totales</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">Informe de ventas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
+                            aria-expanded="false" aria-controls="auth">
+                            <i class="fa-solid fa-box"></i>
+                            Articulos
+                        </a>
+                        <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="fa-regular fa-circle fa-2xs" style="font-size: 8px;"></i> Agregar articulo</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="fa-regular fa-circle fa-2xs" style="font-size: 8px;"></i> Lista de articulos</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link"><i class="fa-regular fa-circle fa-2xs" style="font-size: 8px;"></i> Agregar categoria</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <hr>
+                    <!-- <li class="sidebar-header">
+                        Multi Level Nav
+                    </li> -->
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#settings"
+                            aria-expanded="false" aria-controls="settings">
+                            <i class="fas fa-cog"></i>
+                            Configuración
+                        </a>
+                        <ul id="settings" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">
+                                    <i class="fa-regular fa-circle fa-2xs" style="font-size: 8px;"></i>
+                                    Configuración General
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
                 </ul>
             </div>
+        </aside>
+        <!-- Main Component -->
+        <div class="main">
+
+            <nav class="navbar bg-black">
+                <!-- Botón en el lado izquierdo -->
+                <div class="navbar-button">
+                    <button class="btn" type="button" data-bs-theme="dark">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                <!-- Espacio flexible para empujar la imagen a la esquina derecha -->
+                <div class="navbar-flex-grow"></div>
+
+                <!-- Imagen de perfil redondeada en el lado derecho -->
+                <div class="navbar-image">
+                    <img src="../assets/img/LogoClover.png" alt="Foto de perfil" class="rounded-circle" width="50">
+                </div>
+            </nav>
+
+            <main class="content px-3 py-2">
+                <div class="container mt-3 ml-3 m-5">
+                    <div class="bread">
+                        <h2>Agregar empleado</h2>
+                    </div>
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Empleados</li>
+                            <li class="breadcrumb-item active" aria-current="page">Agregar Empleado</li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class="formulario-container">
+
+                    <!-- Envuelve los contenedores en una etiqueta <form> -->
+                    <form>
+                        <div class="row">
+                            <!-- Primer contenedor hijo -->
+                            <div class="col-md-4">
+                                <div class="p-3 mb-2">
+                                    <!-- Tres inputs en la primera fila -->
+                                    <div class="mb-3">
+                                        <label for="input1" class="form-label">Nombre de Usuario</label>
+                                        <input type="text" class="form-control" id="input1" name="input1" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input2" class="form-label">Correo Electrónico</label>
+                                        <input type="email" class="form-control" id="input2" name="input2" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input3" class="form-label">Contraseña</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="input3" name="input3"
+                                                required>
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Segundo contenedor hijo -->
+                            <div class="col-md-4">
+                                <div class="p-3 mb-2">
+                                    <!-- Tres inputs en la segunda fila -->
+                                    <div class="mb-3">
+                                        <label for="input4" class="form-label">Teléfono</label>
+                                        <input type="tel" class="form-control" id="input4" name="input4" required
+                                            maxlength="10">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input5" class="form-label">Rol</label>
+                                        <select class="form-select" id="input5" name="input5" required>
+                                            <option value="admin">Administrador</option>
+                                            <option value="empleado">Empleado</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input3" class="form-label">Confirmar contraseña</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="input3" name="input3"
+                                                required>
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tercer contenedor hijo -->
+                            <div class="col-md-4">
+                                <div class="p-3 mb-2">
+                                    <!-- Input para subir imagen en la última fila -->
+                                    <div class="mb-4">
+                                        <label for="">Imagen de perfil</label>
+                                    </div>
+                                    <div class="mb-3 d-flex align-items-center justify-content-center">
+                                        <div class="custom-file-container">
+                                            <label class="custom-file-upload">
+                                                <input type="file" class="custom-file-input" id="imagen" name="imagen"
+                                                    style="display: none;">
+                                                <label for="imagen" class="custom-file-label">
+                                                    <i class="fa-solid fa-cloud-arrow-up"></i> <br> Cargar Imagen
+                                                </label>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+
+            </main>
 
         </div>
-        <!--  -->
-        <ul class="box-info">
-            <li>
-                <div class="container-img">
-                    <img src="../assets/img/mesa.png">
-                </div>
-                <span class="text">
-                    <h2>Mesa 1</h2>
-                    <div class="container-buttons">
-                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
-                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
-                    </div>
-                    <p>Estado: <span>Disponible</span></p>
-                </span>
-            </li>
-            <li>
-                <div class="container-img">
-                    <img src="../assets/img/mesa.png">
-                </div>
-                <span class="text">
-                    <h2>Mesa 2</h2>
-                    <div class="container-buttons">
-                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
-                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
-                    </div>
-                    <p>Estado: <span>Disponible</span></p>
-                </span>
-            </li>
-            <li class="mesa-3">
-                <div class="container-img">
-                    <img src="../assets/img/mesa.png">
-                </div>
-                <span class="text">
-                    <h2>Mesa 3</h2>
-                    <div class="container-buttons">
-                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
-                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Dar Salida</button>
-                    </div>
-                    <p>Estado: <span><b>No Disponible</b></span></p>
-                </span>
-            </li>
-            <li>
-                <div class="container-img">
-                    <img src="../assets/img/mesa.png">
-                </div>
-                <span class="text">
-                    <h2>Mesa 4</h2>
-                    <div class="container-buttons">
-                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
-                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
-                    </div>
-                    <p>Estado: <span>Disponible</span></p>
-                </span>
-            </li>
-            <li class="mesa-3">
-                <div class="container-img">
-                    <img src="../assets/img/mesa.png">
-                </div>
-                <span class="text">
-                    <h2>Mesa 5</h2>
-                    <div class="container-buttons">
-                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
-                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Dar Salida</button>
-                    </div>
-                    <p>Estado: <span><b>No Disponible</b></span></p>
-                </span>
-            </li>
-            <li>
-                <div class="container-img">
-                    <img src="../assets/img/mesa.png">
-                </div>
-                <span class="text">
-                    <h2>Mesa 6</h2>
-                    <div class="container-buttons">
-                        <button class="btn-detalles"><i class="fa-solid fa-eye"></i>Ver Detalles</button>
-                        <button class="btn-atender"><i class="fa-solid fa-check"></i>Atender</button>
-                    </div>
-                    <p>Estado: <span>Disponible</span></p>
-                </span>
-            </li>
-           
-           
-           
-        </ul>
-
-    </main>
+    </div>
+    <!-- Scripts necesarios -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="../assets/js/sidebars.js"></script>
+</body>
 </html>

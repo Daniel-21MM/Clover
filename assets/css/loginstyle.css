@@ -9,21 +9,17 @@ h1 {
 	font-weight: bold;
 	margin: 0;
 }
+
 h2 {
 	text-align: center;
 }
+
 p {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
 	margin: 20px 0 30px;
-}
-
-a {
-	font-size: 14px;
-	text-decoration: none;
-	margin: 15px 0;
 }
 
 button {
@@ -65,7 +61,7 @@ form {
 input {
 	/*background-color: #eee;*/
 	border: none;
-    border-bottom: 2.5px solid #049935;
+	border-bottom: 2.5px solid #049935;
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
@@ -106,7 +102,7 @@ a {
 .form-sing-up button {
 	background-color: #049935;
 	border: none;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .container.right-panel-active .sign-in-container {
@@ -243,11 +239,12 @@ a {
 	margin-top: 20px;
 	cursor: pointer;
 }
-.icon-create-account{
-  font-size: 70px;
-  color: white;
-  background-color: #049935;
-  padding: 20px;
-  border-radius: 50%;
-  margin: 20px;
+
+.icon-create-account {
+	font-size: 70px;
+	color: white;
+	background-color: #049935;
+	padding: 20px;
+	border-radius: 50%;
+	margin: 20px;
 }

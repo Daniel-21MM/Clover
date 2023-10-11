@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
   database: 'cloverwingsbd' 
 });
 
-// Conecta a la base de datos
+// Conectamos a la base de datos
 connection.connect((err) => {
   if (err) {
     console.error('Error al conectar a la base de datos: ' + err.message);

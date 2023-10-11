@@ -49,8 +49,8 @@ function crearVentanaPrincipal() {
 // Función para crear la ventana de inicio (ya no toma un usuario como parámetro)
 function crearVentanaInicio() {
   ventanaInicio = new BrowserWindow({
-    width: 1800,
-    height: 1000,
+    width: 1500,
+    height: 800,
     autoHideMenuBar: false,
     resizable: true,
     webPreferences: {
@@ -59,14 +59,14 @@ function crearVentanaInicio() {
       enableRemoteModule: true,
     },
   });
-  ventanaInicio.loadFile(path.join(__dirname, 'views', 'panelAdmin.html'));
+  ventanaInicio.loadFile(path.join(__dirname, 'views', 'AdminPanel.html'));
 }
 
 // Función para crear la ventana de empleados
 function crearVentanaEmpleados() {
   ventanaEmpleados = new BrowserWindow({
-    width: 1800,
-    height: 1000,
+    width: 2000,
+    height: 1200,
     autoHideMenuBar: false,
     resizable: true,
     webPreferences: {
@@ -75,7 +75,7 @@ function crearVentanaEmpleados() {
       enableRemoteModule: true,
     },
   });
-  ventanaEmpleados.loadFile(path.join(__dirname, 'views', 'panelEmployees.html'));
+  ventanaEmpleados.loadFile(path.join(__dirname, 'views', 'log.html'));
 }
 
 // Agregar un manejador para el evento 'abrirVentanaInicio'
