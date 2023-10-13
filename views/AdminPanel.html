@@ -1,16 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Panel Administrador</title>
+	<!-- CDN Bootstrap 5 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<!-- CDN BoxIcons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- Enlaces Css -->
 	<link rel="stylesheet" href="../assets/css/PanelAdmin.css">
-	<title>Panel Principal</title>
 </head>
 
 <body>
-
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-smile icon'></i>Clover</a>
@@ -21,13 +25,12 @@
 				<a href="#">
 					<i class='bx bxs-user icon'></i> Usuarios
 					<i class='bx bx-chevron-right icon-right'></i>
-				  </a>
-				  
+				</a>
+
 				<ul class="side-dropdown">
-					<li><a href="#">Alert</a></li>
-					<li><a href="#">Badges</a></li>
-					<li><a href="#">Breadcrumbs</a></li>
-					<li><a href="#">Button</a></li>
+					<li><a href="listUsers.html">Lista De Usuarios</a></li>
+					<li><a href="addUser.html">Agregar Usuario</a></li>
+					<li><a href="editUsers.html">Editar Usuarios</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
@@ -44,12 +47,6 @@
 				</ul>
 			</li>
 		</ul>
-		<!-- <div class="ads">
-			<div class="wrapper">
-				<a href="#" class="btn-upgrade">Upgrade</a>
-				<p>Become a <span>PRO</span> member and enjoy <span>All Features</span></p>
-			</div>
-		</div> -->
 	</section>
 	<!-- SIDEBAR -->
 
@@ -220,6 +217,10 @@
 	</section>
 	<!-- NAVBAR -->
 
+	<!-- Script CND de Bootstrap 5 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	<script src="../assets/js/adminPanel.js"></script>
 </body>

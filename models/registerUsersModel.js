@@ -1,4 +1,4 @@
-// const registerUsers = require('../controllers/registerUserController');m
+// const registerUsers = require('../controllers/registerUserController');
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   const usuarioRegisterInput = document.getElementById('usuarioRegistrar');

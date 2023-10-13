@@ -1,94 +1,21 @@
-<!DOCTYPE html>
+<!-- Bootstap 5-->
+<!doctype html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi perfil</title>
+    <!-- CDN de Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- CDN BoxIcons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Enlace Css -->
     <link rel="stylesheet" href="../assets/css/editprolife.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Panel Principal</title>
-    <style>
-       body{
-        background-color: #f5f6fa;;
-       }
-       a{
-        text-decoration: none;
-       }
-       
-        .container{
-            margin-top: 80px;
-        }
-        .account-settings .user-profile {
-            margin: 0 0 1rem 0;
-            padding-bottom: 1rem;
-            text-align: center;
-        }
-
-        .account-settings .user-profile .user-avatar {
-            margin: 0 0 1rem 0;
-        }
-
-        .account-settings .user-profile .user-avatar img {
-            width: 90px;
-            height: 90px;
-            -webkit-border-radius: 100px;
-            -moz-border-radius: 100px;
-            border-radius: 100px;
-        }
-
-        .account-settings .user-profile h5.user-name {
-            margin: 0 0 0.5rem 0;
-        }
-
-        .account-settings .user-profile h6.user-email {
-            margin: 0;
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: #9fa8b9;
-        }
-
-        .account-settings .about {
-            margin: 2rem 0 0 0;
-            text-align: center;
-        }
-
-        .account-settings .about h5 {
-            margin: 0 0 15px 0;
-            color: #007ae1;
-        }
-
-        .account-settings .about p {
-            font-size: 0.825rem;
-        }
-
-        .form-control {
-            border: 1px solid #cfd1d8;
-            -webkit-border-radius: 2px;
-            -moz-border-radius: 2px;
-            border-radius: 2px;
-            font-size: .825rem;
-            background: #ffffff;
-            color: #2e323c;
-        }
-        input{
-            margin: 10px;
-        }
-
-        .card {
-            background: #ffffff;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            border: 0;
-            margin-bottom: 1rem;
-        }
-    </style>
 </head>
 
 <body>
-
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="AdminPanel.html" class="brand"><i class='bx bxs-smile icon'></i> Clover</a>
@@ -110,7 +37,8 @@
             <li class="divider" data-text="table and forms">Table and forms</li>
             <li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
             <li>
-                <a href="#"><i class='bx bxs-notepad icon'></i>Articulos <i class='bx bx-chevron-right icon-right'></i></a>
+                <a href="#"><i class='bx bxs-notepad icon'></i>Articulos <i
+                        class='bx bx-chevron-right icon-right'></i></a>
                 <ul class="side-dropdown">
                     <li><a href="#">Basic</a></li>
                     <li><a href="#">Select</a></li>
@@ -119,7 +47,7 @@
                 </ul>
             </li>
         </ul>
-		</div>
+        </div>
     </section>
     <!-- SIDEBAR -->
 
@@ -166,11 +94,12 @@
                                 <div class="account-settings">
                                     <div class="user-profile">
                                         <div class="user-avatar">
-                                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
-                                            
+                                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                                                alt="">
+
                                         </div>
-                                        <button type="button" id="submit" name="submit"
-                                            class="btn btn-success" style="margin: 10px;">Actualizar</button>
+                                        <button type="button" id="submit" name="submit" class="btn btn-success"
+                                            style="margin: 10px;">Actualizar</button>
                                         <h5 class="user-name">Daniel Mendez</h5>
                                         <h6 class="user-email">daniel@gmail.com</h6>
                                     </div>
@@ -191,8 +120,8 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="fullName">Nombre</label>
-                                            <input type="text" class="form-control" id="fullName"
-                                                placeholder="Nombre" required>
+                                            <input type="text" class="form-control" id="fullName" placeholder="Nombre"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -212,8 +141,8 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="website">Apellidos</label>
-                                            <input type="url" class="form-control" id="website"
-                                                placeholder="Apellidos" required>
+                                            <input type="url" class="form-control" id="website" placeholder="Apellidos"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -224,27 +153,29 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="Street">Calle</label>
-                                            <input type="name" class="form-control" id="Street"
-                                                placeholder="Calle" required>
+                                            <input type="name" class="form-control" id="Street" placeholder="Calle"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="ciTy">Ciudad</label>
-                                            <input type="name" class="form-control" id="ciTy" placeholder="Ciudad" required>
+                                            <input type="name" class="form-control" id="ciTy" placeholder="Ciudad"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="sTate">Estado</label>
-                                            <input type="text" class="form-control" id="sTate"
-                                                placeholder="Estado" required>
+                                            <input type="text" class="form-control" id="sTate" placeholder="Estado"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="zIp">Contraseña</label>
-                                            <input type="text" class="form-control" id="zIp" placeholder="Contraseña" required>
+                                            <input type="text" class="form-control" id="zIp" placeholder="Contraseña"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -252,7 +183,7 @@
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="text-right">
                                             <button type="button" id="submit" name="submit"
-                                            class="btn btn-success">Actualizar</button>
+                                                class="btn btn-success">Actualizar</button>
                                             <button type="button" id="submit" name="submit"
                                                 class="btn btn-danger">Cancelar</button>
                                         </div>
@@ -267,12 +198,12 @@
         </main>
         <!-- MAIN -->
     </section>
-    <!-- NAVBAR -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+
+    <!--Script de Bootstrap 5-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="../assets/js/adminPanel.js"></script>
+    <script src="../assets/js/Myprolife.js"></script>
 </body>
 
 </html>
