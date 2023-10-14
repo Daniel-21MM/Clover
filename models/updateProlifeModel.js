@@ -2,7 +2,7 @@ const Swal = require('sweetalert2');
 const updateController = require('../controllers/updateProlifeController');
 
 document.addEventListener('DOMContentLoaded', () => {
-    const userId = 1; // Reemplaza esto con la forma en que obtienes el ID del usuario
+    const idInput = document.getElementById('id'); // Obtener el campo de ID
     const nombreInput = document.getElementById('nombre');
     const telefonoInput = document.getElementById('telefono');
     const usuarioInput = document.getElementById('usuario');
@@ -11,15 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const actualizarButton = document.getElementById('actualizar');
 
     actualizarButton.addEventListener('click', async () => {
+        const userId = idInput.value; // Obtener el ID del usuario a actualizar
         const nuevoNombre = nombreInput.value;
         const nuevoTelefono = telefonoInput.value;
         const nuevoUsuario = usuarioInput.value;
         const nuevaContrasena = contrasenaInput.value;
         const nuevoCorreo = correoInput.value;
 
-        // Validar que los campos no estén vacíos
-        if (!nuevoNombre || !nuevoTelefono || !nuevoUsuario || !nuevaContrasena || !nuevoCorreo) {
-            console.log("Campos vacíos")
+        // Validar que los campos no estén vacíos, incluido el ID
+        if (!userId || !nuevoNombre || !nuevoTelefono || !nuevoUsuario || !nuevaContrasena || !nuevoCorreo) {
+            console.log("Campos vacíos");
             Swal.fire({
                 icon: 'error',
                 title: 'Campos vacíos',
