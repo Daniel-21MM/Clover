@@ -1,372 +1,366 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <title>account settings - Bootdey.com</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-        body {
-            background: #f5f5f5;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../assets/css/pruebas.css">
+    <title>Tabla</title>
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+
+        .form-input {
+            position: relative;
+            display: inline-block;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px 30px;
+            /* Aumentar el espacio para el icono */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #searchInput::placeholder {
+            color: #999;
+        }
+
+        #searchInput:focus {
+            border-color: #007BFF;
+        }
+
+        /* Estilos para el icono de búsqueda */
+        .form-input .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 20px;
+        }
+
+        /* Estilos para la paginación */
+
+        h3 {
+            font-size: 24px;
+        }
+
+        .form-input {
+            position: relative;
+            display: inline-block;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px 30px;
+            /* Aumentar el espacio para el icono */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #searchInput::placeholder {
+            color: #999;
+        }
+
+        #searchInput:focus {
+            border-color: var(--blue);
+        }
+
+        /* Estilos para el icono de búsqueda */
+        .form-input .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 20px;
+        }
+
+        /* Estilos para la paginación */
+        #pagination {
+            width: 100%;
+            display: flex;
+            justify-content: end;
             margin-top: 20px;
         }
 
-        .ui-w-80 {
-            width: 80px !important;
-            height: auto;
-        }
-
-        .btn-default {
-            border-color: rgba(24, 28, 33, 0.1);
-            background: rgba(0, 0, 0, 0);
-            color: #4E5155;
-        }
-
-        label.btn {
-            margin-bottom: 0;
-        }
-
-        .btn-outline-primary {
-            border-color: #26B4FF;
-            background: transparent;
-            color: #26B4FF;
-        }
-
-        .btn {
+        #prevPage,
+        #nextPage {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
             cursor: pointer;
+
+            border-radius: 5px;
         }
 
-        .text-light {
-            color: #babbbc !important;
+        .btn-next {
+            margin-right: 60px;
         }
 
-        .btn-facebook {
-            border-color: rgba(0, 0, 0, 0);
-            background: #3B5998;
+        .btn-previus {
+            margin-right: 15px;
+        }
+
+        #prevPage:disabled,
+        #nextPage:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Estilos para los botones de "Edit" y "Delete" con iconos */
+        button {
+            padding: 4px 4px;
+            /* Aumenta el tamaño del botón */
             color: #fff;
+            border: none;
+            background-color: #007BFF;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
-        .btn-instagram {
-            border-color: rgba(0, 0, 0, 0);
-            background: #000;
-            color: #fff;
+        /* Estilos para los botones de "Edit" y "Delete" con iconos al margen derecho */
+        button>.bx {
+            font-size: 24px;
+            /* Aumenta el tamaño del icono */
+            margin-right: 10px;
+            /* Aumenta el espacio entre el icono y el borde derecho */
         }
 
-        .card {
-            background-clip: padding-box;
-            box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
-        }
-
-        .row-bordered {
-            overflow: hidden;
-        }
-
-        .account-settings-fileinput {
-            position: absolute;
-            visibility: hidden;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-        }
-
-        .account-settings-links .list-group-item.active {
-            font-weight: bold !important;
-        }
-
-        html:not(.dark-style) .account-settings-links .list-group-item.active {
-            background: transparent !important;
-        }
-
-        .account-settings-multiselect~.select2-container {
-            width: 100% !important;
-        }
-
-        .light-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(24, 28, 33, 0.03) !important;
-        }
-
-        .light-style .account-settings-links .list-group-item.active {
-            color: #4e5155 !important;
-        }
-
-        .material-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(24, 28, 33, 0.03) !important;
-        }
-
-        .material-style .account-settings-links .list-group-item.active {
-            color: #4e5155 !important;
-        }
-
-        .dark-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(255, 255, 255, 0.03) !important;
-        }
-
-        .dark-style .account-settings-links .list-group-item.active {
-            color: #fff !important;
-        }
-
-        .light-style .account-settings-links .list-group-item.active {
-            color: #4E5155 !important;
-        }
-
-        .light-style .account-settings-links .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(24, 28, 33, 0.03) !important;
+        /* Estilo específico para el botón de eliminación */
+        button.delete {
+            background-color: #FF0000;
+            /* Fondo de color rojo */
         }
     </style>
 </head>
 
 <body>
-    <div class="container light-style flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-4">
-            Account settings
-        </h4>
-        <div class="card overflow-hidden">
-            <div class="row no-gutters row-bordered row-border-light">
-                <div class="col-md-3 pt-0">
-                    <div class="list-group list-group-flush account-settings-links">
-                        <a class="list-group-item list-group-item-action active" data-toggle="list"
-                            href="#account-general">General</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-change-password">Change password</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-info">Info</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-social-links">Social links</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-connections">Connections</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-notifications">Notifications</a>
+    <main>
+        <div class="table-data">
+            <div class="order">
+                <div class="head">
+                    <h3>Lista de usuarios</h3>
+                    <div class="form-input">
+                        <span class="icon bx bx-search"></span>
+                        <input type="text" id="searchInput" placeholder="Buscar...">
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="tab-content">
-                        <div class="tab-pane fade active show" id="account-general">
-                            <div class="card-body media align-items-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt
-                                    class="d-block ui-w-80">
-                                <div class="media-body ml-4">
-                                    <label class="btn btn-outline-primary">
-                                        Upload new photo
-                                        <input type="file" class="account-settings-fileinput">
-                                    </label> &nbsp;
-                                    <button type="button" class="btn btn-default md-btn-flat">Reset</button>
-                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                </div>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label class="form-label">Username</label>
-                                    <input type="text" class="form-control mb-1" value="nmaxwell">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control" value="Nelle Maxwell">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">E-mail</label>
-                                    <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
-                                    <div class="alert alert-warning mt-3">
-                                        Your email is not confirmed. Please check your inbox.<br>
-                                        <a href="javascript:void(0)">Resend confirmation</a>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Company</label>
-                                    <input type="text" class="form-control" value="Company Ltd.">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="account-change-password">
-                            <div class="card-body pb-2">
-                                <div class="form-group">
-                                    <label class="form-label">Current password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">New password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Repeat new password</label>
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="account-info">
-                            <div class="card-body pb-2">
-                                <div class="form-group">
-                                    <label class="form-label">Bio</label>
-                                    <textarea class="form-control"
-                                        rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Birthday</label>
-                                    <input type="text" class="form-control" value="May 3, 1995">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Country</label>
-                                    <select class="custom-select">
-                                        <option>USA</option>
-                                        <option selected>Canada</option>
-                                        <option>UK</option>
-                                        <option>Germany</option>
-                                        <option>France</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body pb-2">
-                                <h6 class="mb-4">Contacts</h6>
-                                <div class="form-group">
-                                    <label class="form-label">Phone</label>
-                                    <input type="text" class="form-control" value="+0 (123) 456 7891">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Website</label>
-                                    <input type="text" class="form-control" value>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="account-social-links">
-                            <div class="card-body pb-2">
-                                <div class="form-group">
-                                    <label class="form-label">Twitter</label>
-                                    <input type="text" class="form-control" value="https://twitter.com/user">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Facebook</label>
-                                    <input type="text" class="form-control" value="https://www.facebook.com/user">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Google+</label>
-                                    <input type="text" class="form-control" value>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">LinkedIn</label>
-                                    <input type="text" class="form-control" value>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Instagram</label>
-                                    <input type="text" class="form-control" value="https://www.instagram.com/user">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="account-connections">
-                            <div class="card-body">
-                                <button type="button" class="btn btn-twitter">Connect to
-                                    <strong>Twitter</strong></button>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <h5 class="mb-2">
-                                    <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i
-                                            class="ion ion-md-close"></i> Remove</a>
-                                    <i class="ion ion-logo-google text-google"></i>
-                                    You are connected to Google:
-                                </h5>
-                                <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                    data-cfemail="c4aaa9a5bcb3a1a8a884a9a5ada8eaa7aba9">[email&#160;protected]</a>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <button type="button" class="btn btn-facebook">Connect to
-                                    <strong>Facebook</strong></button>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <button type="button" class="btn btn-instagram">Connect to
-                                    <strong>Instagram</strong></button>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="account-notifications">
-                            <div class="card-body pb-2">
-                                <h6 class="mb-4">Activity</h6>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Email me when someone comments on my article</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Email me when someone answers on my forum
-                                            thread</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input">
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Email me when someone follows me</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body pb-2">
-                                <h6 class="mb-4">Application</h6>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">News and announcements</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input">
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Weekly product updates</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Weekly blog digest</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <table id="miTabla"> <!-- Añade un ID a tu tabla -->
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Fecha de registro</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img src="https://www.futuroprossimo.it/wp-content/uploads/2021/12/Synthesia-Avatar-960x500.jpg"
+                                    alt="">
+                                <p>Kristen Ayislin</p>
+                            </td>
+                            <td>01-10-2021</td>
+                            <td>kristen@example.com</td>
+                            <td>123-456-7890</td>
+                            <td><span class="status completed">Completo</span></td>
+                            <td>
+                                <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                <button class="delete"><i class='bx bx-trash'></i></button>
+                                <!-- Icono de eliminación con fondo rojo -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                <p>Jose Armando</p>
+                            </td>
+                            <td>01-10-2021</td>
+                            <td>jose@example.com</td>
+                            <td>234-567-8901</td>
+                            <td><span class="status pending">Pendiente</span></td>
+                            <td>
+                                <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                <button class="delete"><i class='bx bx-trash'></i></button>
+                                <!-- Icono de eliminación con fondo rojo -->
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://www.futuroprossimo.it/wp-content/uploads/2021/12/Synthesia-Avatar-960x500.jpg"
+                                    alt="">
+                                <p>Selina Yamilet</p>
+                            </td>
+                            <td>01-10-2021</td>
+                            <td>selina@example.com</td>
+                            <td>345-678-9012</td>
+                            <td><span class="status process">Procesahdo</span></td>
+                            <td>
+                                <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                <button class="delete"><i class='bx bx-trash'></i></button>
+                                <!-- Icono de eliminación con fondo rojo -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                <p>Alexis Gabriel</p>
+                            </td>
+                            <td>01-10-2021</td>
+                            <td>alexis@example.com</td>
+                            <td>456-789-0123</td>
+                            <td><span class="status pending">Pendiente</span></td>
+                            <td>
+                                <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                <button class="delete"><i class='bx bx-trash'></i></button>
+                                <!-- Icono de eliminación con fondo rojo -->
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                <p>Daniel Mendez</p>
+                            </td>
+                            <td>01-10-2021</td>
+                            <td>daniel@example.com</td>
+                            <td>567-890-1234</td>
+                            <td><span class="status completed">Completo</span></td>
+                            <td>
+                                <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                <button class="delete"><i class='bx bx-trash'></i></button>
+                                <!-- Icono de eliminación con fondo rojo -->
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                <p>Angel Eduardo</p>
+                            </td>
+                            <td>01-10-2021</td>
+                            <td>Angel@example.com</td>
+                            <td>567-890-1234</td>
+                            <td><span class="status completed">Completed</span></td>
+                            <td>
+                                <button>Edit</button>
+                                <button class="delete"><i class='bx bx-trash'></i></button>
+                                <!-- Icono de eliminación con fondo rojo -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                <p>Brian Ethel</p>
+                            </td>
+                            <td>01-10-2021</td>
+                            <td>Ethel@example.com</td>
+                            <td>567-890-1234</td>
+                            <td><span class="status completed">Completed</span></td>
+                            <td>
+                                <button>Edit</button>
+                                <button class="delete"><i class='bx bx-trash'></i></button>
+                                <!-- Icono de eliminación con fondo rojo -->
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+                <div id="pagination">
+                    <button id="prevPage" class="btn-previus">Anterior</button>
+                    <button id="nextPage" class="btn-next">Siguiente</button>
                 </div>
             </div>
+
         </div>
-        <div class="text-right mt-3">
-            <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-            <button type="button" class="btn btn-default">Cancel</button>
-        </div>
-    </div>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript">
+    </main>
+    <script>
+        var table = document.getElementById("miTabla");
+        var tbody = table.getElementsByTagName("tbody")[0];
+        var rows = tbody.getElementsByTagName("tr");
+
+        var searchInput = document.getElementById("searchInput");
+        var prevPageButton = document.getElementById("prevPage");
+        var nextPageButton = document.getElementById("nextPage");
+
+        var itemsPerPage = 5;
+        var currentPage = 0;
+        var totalPages = Math.ceil(rows.length / itemsPerPage);
+
+        function showPage(page) {
+            for (var i = 0; i < rows.length; i++) {
+                if (i < page * itemsPerPage || i >= (page + 1) * itemsPerPage) {
+                    rows[i].style.display = "none";
+                } else {
+                    rows[i].style.display = "";
+                }
+            }
+        }
+
+        function updatePagination() {
+            prevPageButton.disabled = currentPage === 0;
+            nextPageButton.disabled = currentPage === totalPages - 1;
+        }
+
+        showPage(currentPage);
+        updatePagination();
+
+        searchInput.addEventListener("input", function () {
+            var searchTerm = searchInput.value.toLowerCase();
+            for (var i = 0; i < rows.length; i++) {
+                var rowText = rows[i].textContent.toLowerCase();
+                rows[i].style.display = rowText.includes(searchTerm) ? "" : "none";
+            }
+
+            // Si el input de búsqueda está vacío, mantenemos la página actual
+            if (searchTerm === "") {
+                showPage(currentPage);
+            } else {
+                currentPage = 0;
+            }
+
+            updatePagination();
+        });
+
+        prevPageButton.addEventListener("click", function () {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+                updatePagination();
+            }
+        });
+
+        nextPageButton.addEventListener("click", function () {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                showPage(currentPage);
+                updatePagination();
+            }
+        });
 
     </script>
 </body>

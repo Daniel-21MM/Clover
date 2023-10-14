@@ -17,7 +17,9 @@
 	--blue: #049935;
 	--light-blue: #D0E4FF;
 	--dark-blue: #0C5FCD;
-	--red: #FC3B56;
+	--red: #DB504A;
+    --yellow: #FFCE26;
+    --orange: #FD7238;
 }
 
 html {
@@ -351,7 +353,278 @@ main .breadcrumbs li.divider {
 	color: var(--dark-grey);
 	pointer-events: none;
 }
-main .info-data {
+
+/* TABLE USERS */
+main .table-data {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+main .table-data>div {
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+main .table-data .head {
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+main .table-data .head h3 {
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+main .table-data .head .bx {
+    cursor: pointer;
+}
+
+main .table-data .order {
+    flex-grow: 1;
+    flex-basis: 500px;
+}
+
+main .table-data .order table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+main .table-data .order table th {
+    padding-bottom: 12px;
+    font-size: 13px;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+}
+
+main .table-data .order table td {
+    padding: 16px 0;
+}
+
+main .table-data .order table tr td:first-child {
+    display: flex;
+    align-items: center;
+    grid-gap: 12px;
+    padding-left: 6px;
+}
+
+main .table-data .order table td img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+main .table-data .order table tbody tr:hover {
+    background: var(--grey);
+}
+
+main .table-data .order table tr td .status {
+    font-size: 10px;
+    padding: 6px 16px;
+    color: var(--light);
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+main .table-data .order table tr td .status.completed {
+    background: var(--blue);
+}
+
+main .table-data .order table tr td .status.process {
+    background: var(--yellow);
+}
+
+main .table-data .order table tr td .status.pending {
+    background: var(--orange);
+}
+
+main .table-data .todo {
+    flex-grow: 1;
+    flex-basis: 300px;
+}
+
+main .table-data .todo .todo-list {
+    width: 100%;
+}
+
+main .table-data .todo .todo-list li {
+    width: 100%;
+    margin-bottom: 16px;
+    background: var(--grey);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main .table-data .todo .todo-list li .bx {
+    cursor: pointer;
+}
+
+main .table-data .todo .todo-list li.completed {
+    border-left: 10px solid var(--blue);
+}
+
+main .table-data .todo .todo-list li.not-completed {
+    border-left: 10px solid var(--orange);
+}
+
+main .table-data .todo .todo-list li:last-child {
+    margin-bottom: 0;
+}
+
+
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+h3 {
+	font-size: 24px;
+}
+
+.form-input {
+	position: relative;
+	display: inline-block;
+}
+
+#searchInput {
+	width: 100%;
+	padding: 10px 30px;
+	/* Aumentar el espacio para el icono */
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+	outline: none;
+}
+
+#searchInput::placeholder {
+	color: #999;
+}
+
+#searchInput:focus {
+	border-color: #007BFF;
+}
+
+/* Estilos para el icono de búsqueda */
+.form-input .icon {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #666;
+	font-size: 20px;
+}
+
+/* Estilos para la paginación */
+
+h3 {
+	font-size: 24px;
+}
+
+.form-input {
+	position: relative;
+	display: inline-block;
+}
+
+#searchInput {
+	width: 100%;
+	padding: 10px 30px;
+	/* Aumentar el espacio para el icono */
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+	outline: none;
+}
+
+#searchInput::placeholder {
+	color: #999;
+}
+
+#searchInput:focus {
+	border-color: var(--blue);
+}
+
+/* Estilos para el icono de búsqueda */
+.form-input .icon {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #666;
+	font-size: 20px;
+}
+
+/* Estilos para la paginación */
+#pagination {
+	width: 100%;
+	display: flex;
+	justify-content: end;
+	margin-top: 20px;
+}
+
+#prevPage,
+#nextPage {
+	padding: 10px 20px;
+	background-color: #007BFF;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+
+	border-radius: 5px;
+}
+
+.btn-next {
+	margin-right: 60px;
+}
+
+.btn-previus {
+	margin-right: 15px;
+}
+
+#prevPage:disabled,
+#nextPage:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
+/* Estilos para los botones de "Edit" y "Delete" con iconos */
+button {
+	padding: 4px 4px;
+	/* Aumenta el tamaño del botón */
+	color: #fff;
+	border: none;
+	background-color: #007BFF;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+/* Estilos para los botones de "Edit" y "Delete" con iconos al margen derecho */
+button>.bx {
+	font-size: 24px;
+	/* Aumenta el tamaño del icono */
+	margin-right: 10px;
+	/* Aumenta el espacio entre el icono y el borde derecho */
+}
+
+/* Estilo específico para el botón de eliminación */
+button.delete {
+	background-color: #FF0000;
+	/* Fondo de color rojo */
+}
+/* main .info-data {
 	margin-top: 36px;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -575,9 +848,15 @@ main .btn-send {
 }
 main .btn-send:hover {
 	background: var(--dark-blue);
-}
+} */
+
 /* MAIN */
 /* CONTENT */
+
+
+
+
+
 
 @media screen and (max-width: 768px) {
 	#content {

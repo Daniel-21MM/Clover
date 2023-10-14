@@ -4,204 +4,238 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Usuarios</title>
     <!-- CDN BoxIcons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- Enlace Css -->
-    <link rel="stylesheet" href="../assets/css/editprolife.css">
-    <!-- CDN de Bootstrap 5-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/UserList.css">
 </head>
 
 <body>
-        <!-- SIDEBAR -->
-        <section id="sidebar">
-            <a href="AdminPanel.html" class="brand"><i class='bx bxs-smile icon'></i> Clover</a>
-            <ul class="side-menu">
-                <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-                <li class="divider" data-text=" Principal">Principal</li>
-                <li>
-                    <a href="#"><i class='bx bxs-inbox icon'></i> Elementos <i
-                            class='bx bx-chevron-right icon-right'></i></a>
-                    <ul class="side-dropdown">
-                        <li><a href="#">Alert</a></li>
-                        <li><a href="#">Badges</a></li>
-                        <li><a href="#">Breadcrumbs</a></li>
-                        <li><a href="#">Button</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
-                <li><a href="#"><i class='bx bxs-widget icon'></i> Widgets</a></li>
-                <li class="divider" data-text="table and forms">Table and forms</li>
-                <li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
-                <li>
-                    <a href="#"><i class='bx bxs-notepad icon'></i>Articulos <i
-                            class='bx bx-chevron-right icon-right'></i></a>
-                    <ul class="side-dropdown">
-                        <li><a href="#">Basic</a></li>
-                        <li><a href="#">Select</a></li>
-                        <li><a href="#">Checkbox</a></li>
-                        <li><a href="#">Radio</a></li>
-                    </ul>
-                </li>
-            </ul>
-            </div>
-        </section>
-        <!-- SIDEBAR -->
-    
-        <!-- NAVBAR -->
-        <section id="content">
-            <!-- NAVBAR -->
-            <nav>
-                <i class='bx bx-menu toggle-sidebar'></i>
-                <form action="#">
-                    <div class="form-group">
-                        <input type="text" placeholder="Buscar...">
-                        <i class='bx bx-search icon'></i>
-                    </div>
-                </form>
-                <a href="#" class="nav-link">
-                    <i class='bx bxs-bell icon'></i>
-                    <span class="badge">5</span>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="AdminPanel.html" class="brand"><i class='bx bxs-smile icon'></i>Clover</a>
+        <ul class="side-menu">
+            <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+            <li class="divider" data-text="Principal">Principal</li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user icon'></i> Usuarios
+                    <i class='bx bx-chevron-right icon-right'></i>
                 </a>
-                <a href="#" class="nav-link">
-                    <i class='bx bxs-message-square-dots icon'></i>
-                    <span class="badge">8</span>
-                </a>
-                <span class="divider"></span>
-                <div class="profile">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                        alt="">
-                    <ul class="profile-link">
-                        <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
-                        <li><a href="#"><i class='bx bxs-cog'></i>Configuracion</a></li>
-                        <li><a href="login.html"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- NAVBAR -->
-    
-            <!-- MAIN -->
-            <main>
-    
-                <div class="container">
-                    <div class="row gutters">
-                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <div class="account-settings">
-                                        <div class="user-profile">
-                                            <div class="user-avatar">
-                                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                                                    alt="">
-    
-                                            </div>
-                                            <button type="button" id="submit" name="submit" class="btn btn-success"
-                                                style="margin: 10px;">Actualizar</button>
-                                            <h5 class="user-name">Daniel Mendez</h5>
-                                            <h6 class="user-email">daniel@gmail.com</h6>
-                                        </div>
-                                        <div class="about">
-                                            <h5>Administrador</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <div class="row gutters">
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h5 class="mb-2 text-success">Detalles del perfil</h5>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="fullName">Nombre</label>
-                                                <input type="text" class="form-control" id="fullName" placeholder="Nombre"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="eMail">Correo</label>
-                                                <input type="email" class="form-control" id="eMail"
-                                                    placeholder="ejemplo@gmail.com" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="phone">Telefono</label>
-                                                <input type="text" class="form-control" id="phone"
-                                                    placeholder="Numero de telefono" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="website">Apellidos</label>
-                                                <input type="url" class="form-control" id="website" placeholder="Apellidos"
-                                                    required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row gutters">
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="mt-3 mb-2 text-primary">Direccion</h6>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="Street">Calle</label>
-                                                <input type="name" class="form-control" id="Street" placeholder="Calle"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="ciTy">Ciudad</label>
-                                                <input type="name" class="form-control" id="ciTy" placeholder="Ciudad"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="sTate">Estado</label>
-                                                <input type="text" class="form-control" id="sTate" placeholder="Estado"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                            <div class="form-group">
-                                                <label for="zIp">Contraseña</label>
-                                                <input type="text" class="form-control" id="zIp" placeholder="Contraseña"
-                                                    required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row gutters">
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="text-right">
-                                                <button type="button" id="submit" name="submit"
-                                                    class="btn btn-success">Actualizar</button>
-                                                <button type="button" id="submit" name="submit"
-                                                    class="btn btn-danger">Cancelar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-            </main>
-            <!-- MAIN -->
-        </section>
 
-    <!--Script de Bootstrap 5-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+                <ul class="side-dropdown">
+                    <li><a href="listUsers.html">Lista De Usuarios</a></li>
+                    <li><a href="addUser.html">Agregar Usuario</a></li>
+                    <li><a href="editUsers.html">Editar Usuarios</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
+            <li><a href="#"><i class='bx bxs-widget icon'></i> Widgets</a></li>
+            <li class="divider" data-text="table and forms">Table and forms</li>
+            <li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
+            <li>
+                <a href="#"><i class='bx bxs-notepad icon'></i> Forms <i class='bx bx-chevron-right icon-right'></i></a>
+                <ul class="side-dropdown">
+                    <li><a href="#">Basic</a></li>
+                    <li><a href="#">Select</a></li>
+                    <li><a href="#">Checkbox</a></li>
+                    <li><a href="#">Radio</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- NAVBAR -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu toggle-sidebar'></i>
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="Buscar...">
+                    <i class='bx bx-search icon'></i>
+                </div>
+            </form>
+            <a href="#" class="nav-link">
+                <i class='bx bxs-bell icon'></i>
+                <span class="badge">5</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class='bx bxs-message-square-dots icon'></i>
+                <span class="badge">8</span>
+            </a>
+            <span class="divider"></span>
+            <div class="profile">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    alt="">
+                <ul class="profile-link">
+                    <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
+                    <li><a href="#"><i class='bx bxs-cog'></i>Configuracion</a></li>
+                    <li><a href="login.html"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <h1 class="title">Usuarios</h1>
+            <ul class="breadcrumbs">
+                <li><a href="AdminPanel.html">Dashboard</a></li>
+                <li class="divider">/</li>
+                <li><a href="#" class="active">Usuarios</a></li>
+            </ul>
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Lista de usuarios</h3>
+                        <div class="form-input">
+                            <span class="icon bx bx-search"></span>
+                            <input type="text" id="searchInput" placeholder="Buscar...">
+                        </div>
+                    </div>
+                    <table id="miTabla"> <!-- Añade un ID a tu tabla -->
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Fecha de registro</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="https://www.futuroprossimo.it/wp-content/uploads/2021/12/Synthesia-Avatar-960x500.jpg"
+                                        alt="">
+                                    <p>Kristen Ayislin</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td>kristen@example.com</td>
+                                <td>123-456-7890</td>
+                                <td><span class="status completed">Completo</span></td>
+                                <td>
+                                    <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                    <button class="delete"><i class='bx bx-trash'></i></button>
+                                    <!-- Icono de eliminación con fondo rojo -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                    <p>Jose Armando</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td>jose@example.com</td>
+                                <td>234-567-8901</td>
+                                <td><span class="status pending">Pendiente</span></td>
+                                <td>
+                                    <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                    <button class="delete"><i class='bx bx-trash'></i></button>
+                                    <!-- Icono de eliminación con fondo rojo -->
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://www.futuroprossimo.it/wp-content/uploads/2021/12/Synthesia-Avatar-960x500.jpg"
+                                        alt="">
+                                    <p>Selina Yamilet</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td>selina@example.com</td>
+                                <td>345-678-9012</td>
+                                <td><span class="status process">Procesahdo</span></td>
+                                <td>
+                                    <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                    <button class="delete"><i class='bx bx-trash'></i></button>
+                                    <!-- Icono de eliminación con fondo rojo -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                    <p>Alexis Gabriel</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td>alexis@example.com</td>
+                                <td>456-789-0123</td>
+                                <td><span class="status pending">Pendiente</span></td>
+                                <td>
+                                    <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                    <button class="delete"><i class='bx bx-trash'></i></button>
+                                    <!-- Icono de eliminación con fondo rojo -->
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                    <p>Daniel Mendez</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td>daniel@example.com</td>
+                                <td>567-890-1234</td>
+                                <td><span class="status completed">Completo</span></td>
+                                <td>
+                                    <button><i class='bx bx-edit'></i></button> <!-- Icono de edición -->
+                                    <button class="delete"><i class='bx bx-trash'></i></button>
+                                    <!-- Icono de eliminación con fondo rojo -->
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                    <p>Angel Eduardo</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td>Angel@example.com</td>
+                                <td>567-890-1234</td>
+                                <td><span class="status completed">Completed</span></td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button class="delete"><i class='bx bx-trash'></i></button>
+                                    <!-- Icono de eliminación con fondo rojo -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://www.assyst.de/cms/upload/sub/digitalisierung/15-M.jpg" alt="">
+                                    <p>Brian Ethel</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td>Ethel@example.com</td>
+                                <td>567-890-1234</td>
+                                <td><span class="status completed">Completed</span></td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button class="delete"><i class='bx bx-trash'></i></button>
+                                    <!-- Icono de eliminación con fondo rojo -->
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                    <div id="pagination">
+                        <button id="prevPage" class="btn-previus">Anterior</button>
+                        <button id="nextPage" class="btn-next">Siguiente</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <!-- MAIN -->
+    </section>
+
+    <script src="../assets/js/Myprolife.js"></script>
+    <script src="../assets/js/UserTable.js"></script>
 </body>
 
 </html>
