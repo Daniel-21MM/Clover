@@ -377,7 +377,7 @@ a{
      border: 1px solid #cfd1d8;
      -webkit-border-radius: 2px;
      -moz-border-radius: 2px;
-     border-radius: 2px;
+     border-radius: 5px;
      font-size: .825rem;
      background: #ffffff;
      color: #2e323c;
