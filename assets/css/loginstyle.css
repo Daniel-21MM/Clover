@@ -68,7 +68,6 @@ input {
 }
 
 input:focus {
-	/*outline-color: #049935;*/
 	outline: none;
 }
 
