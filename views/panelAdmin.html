@@ -1,45 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../assets/css/pruebas.css">
-    <title>Tabla</title>
+    <title>Cargar Imagen</title>
 </head>
-
 <body>
-
-    <h1>Actualizar Datos de Usuario</h1>
-    <form id="miFormulario">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br><br>
-
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" placeholder="Teléfono" required maxlength="10"><br><br>
-
-        <label for="usuario">Usuario:</label>
-        <input type="text" id="usuario" name="usuario" placeholder="Usuario" required><br><br>
-
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required><br><br>
-
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" placeholder="Correo" required><br><br>
-
-        <label for="rol">Rol:</label>
-        <input type="text" id="rol" name="rol" value="Administrador" readonly><br><br>
-
-        <label for="id">ID del Usuario:</label>
-        <input type="text" id="id" name="id" placeholder="ID del Usuario" required><br><br>
-
-
-        <button type="button" id="actualizar">Actualizar</button>
-
-
-        <button type="button" id="cancelar"><a href="AdminPanel.html">Salir</a></button>
+    <h1>Subir Imagen</h1>
+    <form id="imageForm" enctype="multipart/form-data">
+        <input type="file" id="imageInput" accept=".jpg, .jpeg, .png" required>
+        <button type="button" id="subirImagenButton">Subir Imagen</button>
+        <button><a href="AdminPanel.html">Salir</a></button>
     </form>
-    <script src="../models/updateProlifeModel.js"></script>
+    <div> 
+        <!--Aqui hay que mostrar la imagen que guardamos en la base-->
+        <img src="" alt="" id="imagenMostrada" width="400px">
+    </div>
+    <script src="../controllers/updateImageController.js"></script>
 </body>
-
 </html>
+
+
