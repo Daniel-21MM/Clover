@@ -1,11 +1,9 @@
-// Controlador (updateImageController.js)
 const fs = require('fs');
 const guardarImagenModel = require('../models/updateImageModel');
 
 document.addEventListener('DOMContentLoaded', () => {
     const imageInput = document.getElementById('imageInput');
     const subirImagenButton = document.getElementById('subirImagenButton');
-    const imagenMostrada = document.getElementById('imagenMostrada'); // Agrega el ID 'imagenMostrada' a la etiqueta <img>
 
     subirImagenButton.addEventListener('click', async () => {
         const file = imageInput.files[0];
@@ -25,11 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             try {
                                 const resultado = await guardarImagenModel.guardarImagen(data);
                                 console.log('Imagen guardada en la base de datos con ID:', resultado);
-                                
-                                // Muestra la imagen en la etiqueta <img>
-                                const imagenBase64 = 'data:image/jpeg;base64,' + data.toString('base64');
-                                imagenMostrada.src = imagenBase64;
-
                                 // Muestra un mensaje de éxito
                             } catch (error) {
                                 console.error('Error al guardar la imagen:', error);

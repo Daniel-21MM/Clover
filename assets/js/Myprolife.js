@@ -158,3 +158,27 @@ allProgress.forEach(item=> {
 	item.style.setProperty('--value', item.dataset.value)
 })
 
+// LOAD IMAGE-PROLIFE 
+
+ // Obtén una referencia al input de tipo file y la imagen
+ const fileInput = document.getElementById("imageInput");
+ const avatarImage = document.getElementById("imagenMostrada");
+
+ // Agrega un evento clic a la imagen que activará el input de archivo
+ avatarImage.addEventListener("click", () => {
+	 fileInput.click();
+ });
+
+ // Agrega un evento change al input de archivo para manejar la selección del archivo
+ fileInput.addEventListener("change", (event) => {
+	 // Aquí puedes manejar el archivo seleccionado, por ejemplo, mostrar una vista previa
+	 const selectedFile = event.target.files[0];
+	 if (selectedFile) {
+		 const reader = new FileReader();
+		 reader.onload = (e) => {
+			 // Muestra la imagen seleccionada en la vista previa
+			 avatarImage.src = e.target.result;
+		 };
+		 reader.readAsDataURL(selectedFile);
+	 }
+ });
