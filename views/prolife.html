@@ -101,13 +101,12 @@
 
                                         <form id="imageForm" enctype="multipart/form-data">
                                             <div class="user-avatar">
-                                                <input type="file" name="cambiarFoto" style="display: none;"
-                                                id="imageInput" accept=".jpg, .jpeg, .png" required>
+                                                <input type="file" id="imageInput" accept=".jpg, .jpeg, .png" required style="display: none;">
                                                 <img src="" alt="" id="imagenMostrada">
                                             </div>
-                                            <button type="button" id="subirImagenButton" for="cambiarFoto" class="btn btn-success" style="margin: 10px;">Cambiar</button>
+                                            <button type="button" id="subirImagenButton" for="imageInput" class="btn btn-success" style="margin: 10px">Actualizar</button>
                                         </form>
-
+                                        
                                         <h5 class="user-name">Daniel Mendez</h5>
                                         <h6 class="user-email">daniel@gmail.com</h6>
                                     </div>
@@ -217,8 +216,9 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="../assets/js/Myprolife.js"></script>
-    <script src="../models/updateProlifeModel.js"></script>
     <script src="../controllers/updateImageController.js"></script>
+    <script src="../models/updateProlifeModel.js"></script>
+   
 
 </body>
 

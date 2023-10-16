@@ -1,6 +1,7 @@
 const fs = require('fs');
 const guardarImagenModel = require('../models/updateImageModel');
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const imageInput = document.getElementById('imageInput');
     const subirImagenButton = document.getElementById('subirImagenButton');
@@ -23,7 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             try {
                                 const resultado = await guardarImagenModel.guardarImagen(data);
                                 console.log('Imagen guardada en la base de datos con ID:', resultado);
+
                                 // Muestra un mensaje de éxito
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Foto de perfil actualizada',
+                                    text: 'Tu foto de perfil ha sido actualizada exitosamente.',
+                                });
                             } catch (error) {
                                 console.error('Error al guardar la imagen:', error);
                                 // Maneja el error
@@ -37,7 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Formato de archivo no válido. Se admiten solo archivos JPEG y PNG.');
             }
         } else {
-            console.log('No se ha seleccionado ninguna imagen.');
+            // Muestra una notificación SweetAlert cuando no se selecciona una imagen
+            Swal.fire({
+                icon: 'error',
+                title: 'No se ha seleccionado una imagen',
+                text: 'Por favor, selecciona una imagen para subir.',
+            });
         }
     });
 });
