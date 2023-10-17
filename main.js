@@ -49,8 +49,8 @@ function crearVentanaPrincipal() {
 // Función para crear la ventana de inicio (ya no toma un usuario como parámetro)
 function crearVentanaInicio() {
   ventanaInicio = new BrowserWindow({
-    width: 1500,
-    height: 800,
+    width: 1400,
+    height: 750,
     autoHideMenuBar: false,
     resizable: true,
     webPreferences: {
