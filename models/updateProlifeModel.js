@@ -1,8 +1,19 @@
 const Swal = require('sweetalert2');
 const updateController = require('../controllers/updateProlifeController');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const idInput = document.getElementById('id'); // Obtener el campo de ID
+document.addEventListener('DOMContentLoaded', async () => {
+    const userNameElement = document.querySelector('.user-name'); // Selección por clase
+    const userEmailElement = document.querySelector('.user-email'); // Selección por clase
+
+    const storedName = localStorage.getItem('user_name');
+    const storedEmail = localStorage.getItem('user_email');
+
+    if (storedName && storedEmail) {
+        userNameElement.textContent = storedName;
+        userEmailElement.textContent = storedEmail;
+    }
+
+    const idInput = document.getElementById('id');
     const nombreInput = document.getElementById('nombre');
     const telefonoInput = document.getElementById('telefono');
     const usuarioInput = document.getElementById('usuario');
@@ -11,14 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const actualizarButton = document.getElementById('actualizar');
 
     actualizarButton.addEventListener('click', async () => {
-        const userId = idInput.value; // Obtener el ID del usuario a actualizar
+        const userId = idInput.value;
         const nuevoNombre = nombreInput.value;
         const nuevoTelefono = telefonoInput.value;
         const nuevoUsuario = usuarioInput.value;
         const nuevaContrasena = contrasenaInput.value;
         const nuevoCorreo = correoInput.value;
 
-        // Validar que los campos no estén vacíos, incluido el ID
         if (!userId || !nuevoNombre || !nuevoTelefono || !nuevoUsuario || !nuevaContrasena || !nuevoCorreo) {
             console.log("Campos vacíos");
             Swal.fire({
@@ -29,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Mostrar alerta de confirmación
         const confirmacion = await Swal.fire({
             title: '¿Estás seguro de actualizar?',
             text: 'Esta acción no se puede deshacer.',
@@ -49,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         title: 'Actualización exitosa',
                         text: 'Los datos se han actualizado con éxito.',
                     });
+                    userNameElement.textContent = nuevoNombre;
+                    userEmailElement.textContent = nuevoCorreo;
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -60,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error al actualizar el perfil:', error.message);
             }
         } else {
-            // El usuario hizo clic en "No"
             Swal.fire({
                 icon: 'info',
                 title: 'Acción cancelada',

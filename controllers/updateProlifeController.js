@@ -4,7 +4,7 @@ const Swal = require('sweetalert2');
 function actualizarUsuario(usuarioId, nuevoNombre, nuevoTelefono, nuevoUsuario, nuevaContrasena, nuevoCorreo) {
     return new Promise((resolve, reject) => {
         // Primero, verifica si el usuario con el ID proporcionado existe
-        const consultaUsuarioSQL = 'SELECT * FROM usuarios WHERE id = ?';
+        const consultaUsuarioSQL = 'SELECT nombre, correo FROM usuarios WHERE id = ?';
         db.connection.query(consultaUsuarioSQL, [usuarioId], (err, rows) => {
             if (err) {
                 console.error('Error al consultar el usuario: ' + err.message);
@@ -38,6 +38,7 @@ function actualizarUsuario(usuarioId, nuevoNombre, nuevoTelefono, nuevoUsuario, 
                                 title: 'Actualización exitosa',
                                 text: 'Los datos se han actualizado con éxito.',
                             });
+                            guardarDatosUsuarioEnLocalStorage(nuevoNombre, nuevoCorreo);
                             resolve(true);
                         } else {
                             Swal.fire({
@@ -54,6 +55,12 @@ function actualizarUsuario(usuarioId, nuevoNombre, nuevoTelefono, nuevoUsuario, 
     });
 }
 
+function guardarDatosUsuarioEnLocalStorage(nombre, correo) {
+    localStorage.setItem('user_name', nombre);
+    localStorage.setItem('user_email', correo);
+}
+
 module.exports = {
     actualizarUsuario,
+    guardarDatosUsuarioEnLocalStorage,
 };

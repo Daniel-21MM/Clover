@@ -6,7 +6,7 @@ function guardarImagen(imagenBuffer, usuario_id) {
         const nombreDeArchivoUnico = 'imagenPerfil';
 
         // Define la ruta de la imagen en la carpeta "assets"
-        const rutaImagen = `./assets/${nombreDeArchivoUnico}.jpg`;
+        const rutaImagen = `./assets/imgUsers/${nombreDeArchivoUnico}.jpg`;
 
         // Guarda la imagen en la carpeta "assets"
         fs.writeFile(rutaImagen, imagenBuffer, (err) => {
@@ -14,7 +14,7 @@ function guardarImagen(imagenBuffer, usuario_id) {
                 reject(err);
             } else {
                 // Actualiza la ruta de la imagen en la base de datos para el usuario especificado
-                const sql = 'UPDATE imgusers SET imagen_path = ? WHERE usuario_id = ?';
+                const sql = 'UPDATE usuarios SET imgPerfilUrl = ? WHERE id = ?';
                 db.connection.query(sql, [rutaImagen, usuario_id], (dbErr, results) => {
                     if (dbErr) {
                         reject(dbErr);
@@ -30,3 +30,4 @@ function guardarImagen(imagenBuffer, usuario_id) {
 module.exports = {
     guardarImagen,
 };
+
