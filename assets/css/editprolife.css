@@ -348,15 +348,19 @@ a{
      border-radius: 100px;
  }
 
+ .account-settings .user-profile .user-avatar img:hover {
+    cursor: pointer;
+ }
+
  .account-settings .user-profile h5.user-name {
-     margin: 0 0 0.5rem 0;
+	margin: 5% 0 0 0;
  }
 
  .account-settings .user-profile h6.user-email {
-     margin: 0;
      font-size: 0.8rem;
      font-weight: 400;
      color: #9fa8b9;
+	 margin: 3% 0 0 0;
  }
 
  .account-settings .about {

@@ -2,8 +2,8 @@ const Swal = require('sweetalert2');
 const updateController = require('../controllers/updateProlifeController');
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const userNameElement = document.querySelector('.user-name'); // Selección por clase
-    const userEmailElement = document.querySelector('.user-email'); // Selección por clase
+    const userNameElement = document.querySelector('.user-name');
+    const userEmailElement = document.querySelector('.user-email');
 
     const storedName = localStorage.getItem('user_name');
     const storedEmail = localStorage.getItem('user_email');
@@ -21,6 +21,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const correoInput = document.getElementById('correo');
     const actualizarButton = document.getElementById('actualizar');
 
+    const storedData = localStorage.getItem('user_data');
+
+    if (storedData) {
+        const userData = JSON.parse(storedData);
+        idInput.value = userData.id;
+        nombreInput.value = userData.nombre;
+        telefonoInput.value = userData.telefono;
+        usuarioInput.value = userData.usuario;
+        contrasenaInput.value = userData.contrasena;
+        correoInput.value = userData.correo;
+    }
+
     actualizarButton.addEventListener('click', async () => {
         const userId = idInput.value;
         const nuevoNombre = nombreInput.value;
@@ -30,7 +42,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const nuevoCorreo = correoInput.value;
 
         if (!userId || !nuevoNombre || !nuevoTelefono || !nuevoUsuario || !nuevaContrasena || !nuevoCorreo) {
-            console.log("Campos vacíos");
             Swal.fire({
                 icon: 'error',
                 title: 'Campos vacíos',
@@ -49,26 +60,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         if (confirmacion.isConfirmed) {
-            try {
-                const actualizacionExitosa = await updateController.actualizarUsuario(userId, nuevoNombre, nuevoTelefono, nuevoUsuario, nuevaContrasena, nuevoCorreo);
+            const actualizacionExitosa = await updateController.actualizarUsuario(userId, nuevoNombre, nuevoTelefono, nuevoUsuario, nuevaContrasena, nuevoCorreo);
 
-                if (actualizacionExitosa) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Actualización exitosa',
-                        text: 'Los datos se han actualizado con éxito.',
-                    });
-                    userNameElement.textContent = nuevoNombre;
-                    userEmailElement.textContent = nuevoCorreo;
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error en la actualización',
-                        text: 'No se pudo actualizar los datos del usuario.',
-                    });
-                }
-            } catch (error) {
-                console.error('Error al actualizar el perfil:', error.message);
+            if (actualizacionExitosa) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Actualización exitosa',
+                    text: 'Los datos se han actualizado con éxito.',
+                });
+                userNameElement.textContent = nuevoNombre;
+                userEmailElement.textContent = nuevoCorreo;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en la actualización',
+                    text: 'No se pudo actualizar los datos del usuario.',
+                });
             }
         } else {
             Swal.fire({
@@ -77,5 +84,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 text: 'La actualización ha sido cancelada.'
             });
         }
+
+        const userData = {
+            id: userId,
+            nombre: nuevoNombre,
+            telefono: nuevoTelefono,
+            usuario: nuevoUsuario,
+            contrasena: nuevaContrasena,
+            correo: nuevoCorreo
+        };
+        localStorage.setItem('user_data', JSON.stringify(userData));
     });
 });

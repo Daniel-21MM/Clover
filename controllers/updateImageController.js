@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                     console.log('Imagen guardada en la base de datos con ID:', resultado);
     
                                     // Actualiza la etiqueta img con la nueva imagen
-                                    imagenMostrada.src = `/assets/imgUsers/${resultado}.jpg`;
+                                    imagenMostrada.src = `/assets/imgUsers${resultado}.jpg`;
     
                                     // Muestra un mensaje de éxito
                                     Swal.fire({
