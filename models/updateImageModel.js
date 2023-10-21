@@ -1,13 +1,27 @@
 const db = require('../database/db');
 
-function guardarImagen(imagenBuffer) {
+function guardarImagen(imagenBuffer, usuario_id) {
     return new Promise((resolve, reject) => {
-        const sql = 'INSERT INTO imagenes (imagen) VALUES (?)';
-        db.connection.query(sql, [imagenBuffer], (err, results) => {
+        // Genera un nombre de archivo único (por ejemplo, usando un ID de usuario o un nombre aleatorio)
+        const nombreDeArchivoUnico = 'imagenPerfil';
+
+        // Define la ruta de la imagen en la carpeta "assets"
+        const rutaImagen = `./assets/${nombreDeArchivoUnico}.jpg`;
+
+        // Guarda la imagen en la carpeta "assets"
+        fs.writeFile(rutaImagen, imagenBuffer, (err) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(results.insertId);
+                // Actualiza la ruta de la imagen en la base de datos para el usuario especificado
+                const sql = 'UPDATE imgusers SET imagen_path = ? WHERE usuario_id = ?';
+                db.connection.query(sql, [rutaImagen, usuario_id], (dbErr, results) => {
+                    if (dbErr) {
+                        reject(dbErr);
+                    } else {
+                        resolve(results.changedRows > 0); // Devuelve verdadero si se realizó una actualización
+                    }
+                });
             }
         });
     });

@@ -7,7 +7,7 @@ const createTransporter = () => {
     service: 'Gmail',
     auth: {
       user: 'danielsanz8001@gmail.com', // Coloca tu dirección de correo electrónico de Gmail
-      pass: 'aujrkzioxtpdjwbu', // Coloca tu contraseña de Gmail
+      pass: 'ugjfyxooxzagdfyn', // Coloca tu contraseña de Gmail
     },
   });
 };
@@ -67,7 +67,7 @@ document.getElementById('form-create-account').addEventListener('submit', functi
     if (err) {
       console.error('Error al consultar la base de datos:', err);
       // Muestra un mensaje de error al usuario
-      Swal.fire('Error', 'Error al consultar la base de datos', 'error');
+      Swal.fire('¡Oh, no!', 'Ah ocurrido un error en el servidor, intentalo mas tarde', 'error');
       return;
     }
 

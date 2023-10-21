@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesion</title>
     <!-- Estilos  -->
     <link rel="stylesheet" href="../assets/css/loginstyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
 </head>
-
 <body>
-    <!--    -->
     <!-- Tu código HTML con comentarios descriptivos -->
     <div class="container" id="container">
         <!-- Sección de formulario de crear una cuenta -->
@@ -22,7 +17,7 @@
             <form action="#" class="form-create-account" id="form-create-account">
                 <h1>Restaurar contraseña</h1>
                 <div class="icon-create-account">
-                    <i class="fa-solid fa-lock-open"></i>
+                    <i class="fas fa-lock-open"></i>
                 </div>
                 <input type="email" placeholder="Correo" required id="correo" />
                 <button type="submit">Enviar</button>
@@ -33,7 +28,7 @@
             <form action="#" class="form-sing-up">
                 <h1>Iniciar Sesión</h1>
                 <div class="social-container">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fas fa-user"></i>
                 </div>
                 <input type="text" id="usuario" placeholder="Usuario" required>
                 <input type="password" id="contrasena" placeholder="Contraseña" required>
@@ -47,8 +42,7 @@
                 <div class="overlay-panel overlay-left">
                     <h1>Olvidé mis datos</h1>
                     <img src="../assets/img/LogoClover.png" alt="Logo de Clover Wings Restaurante">
-                    <p>Ingrese su correo para información importante. Revise su carpeta de spam si no la encuentra en su
-                        bandeja de entrada.</p>
+                    <p>Ingrese su correo para información importante. Revise su carpeta de spam si no la encuentra en su bandeja de entrada.</p>
                     <button class="ghost" id="signIn">Iniciar Sesión</button>
                 </div>
                 <!-- Panel de Registro -->
@@ -62,10 +56,9 @@
         </div>
     </div>
 
-    <!-- Enlace alos archivos de script -->
+    <!-- Enlace a los archivos de script -->
     <script src="../models/resetPassword.js"></script>
     <script src="../models/loginModel.js"></script>
     <script src="../assets/js/login.js"></script>
 </body>
-
 </html>
