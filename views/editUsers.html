@@ -1,161 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tabla con Paginación y Búsqueda</title>
-    <style>
-        /* Estilos para la tabla */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+<style>
+    /* Estilos para ocultar el input de archivo */
+    #fileInput {
+      display: none;
+    }
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
+    .border-dotted i {
+      font-size: 2rem;
+      color: #28a745;
+      cursor: pointer;
+    }
 
-        th {
-            background-color: #333;
-            color: #fff;
-        }
+    .border-dotted {
+      border: 2px dotted #28a745;
+      padding: 1%;
+      text-align: center;
+      width: 100%;
+      margin: auto;
+      position: relative;
+    }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        /* Estilos para la caja de búsqueda */
-        #searchInput {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        /* Estilos para la paginación */
-        #pagination {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        #prevPage, #nextPage {
-            padding: 5px 10px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        #prevPage:disabled, #nextPage:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-    </style>
+    #imagePreview {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      display: none;
+    }
+</style>
 </head>
 <body>
-
-<table id="miTabla">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Edad</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Juan</td>
-            <td>25</td>
-        </tr>
-        <tr>
-            <td>María</td>
-            <td>30</td>
-        </tr>
-        <tr>
-            <td>Luis</td>
-            <td>35</td>
-        </tr>
-        <tr>
-            <td>Ana</td>
-            <td>28</td>
-        </tr>
-        <tr>
-            <td>Pedro</td>
-            <td>32</td>
-        </tr>
-        <tr>
-            <td>Sofía</td>
-            <td>29</td>
-        </tr>
-        <!-- Agrega más filas de datos aquí -->
-    </tbody>
-</table>
-
-<input type="text" id="searchInput" placeholder="Buscar...">
-
-<div id="pagination">
-    <button id="prevPage">Anterior</button>
-    <button id="nextPage">Siguiente</button>
+<div class="container">
+    <div class="card">
+        <div class="form-group">
+            <label for="fileInput" class="border-dotted">
+                <i class="fa fa-file-image-o fa-3x text-success" id="fileIcon"></i>
+                <img id="imagePreview">
+            </label>
+            <input type="file" id="fileInput">
+        </div>
+    </div>
 </div>
 
-
 <script>
-    var table = document.getElementById("miTabla");
-    var tbody = table.getElementsByTagName("tbody")[0];
-    var rows = tbody.getElementsByTagName("tr");
+// Función para manejar el evento de cambio en el input de archivo
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const fileInput = event.target;
+    const imagePreview = document.getElementById('imagePreview');
+    const fileIcon = document.getElementById('fileIcon');
+    const borderDotted = document.querySelector('.border-dotted');
 
-    var searchInput = document.getElementById("searchInput");
-    var prevPageButton = document.getElementById("prevPage");
-    var nextPageButton = document.getElementById("nextPage");
+    if (fileInput.files.length > 0) {
+        // Se seleccionó un archivo
+        const selectedFile = fileInput.files[0];
+        const objectURL = URL.createObjectURL(selectedFile);
 
-    var itemsPerPage = 5;
-    var currentPage = 0;
-    var totalPages = Math.ceil(rows.length / itemsPerPage);
+        // Mostrar la imagen dinámicamente
+        imagePreview.src = objectURL;
+        imagePreview.style.display = 'block';
 
-    function showPage(page) {
-        for (var i = 0; i < rows.length; i++) {
-            if (i < page * itemsPerPage || i >= (page + 1) * itemsPerPage) {
-                rows[i].style.display = "none";
-            } else {
-                rows[i].style.display = "";
-            }
-        }
+        // Ocultar el ícono
+        fileIcon.style.display = 'none';
+
+        // Ocultar el borde punteado
+        borderDotted.style.border = 'none';
     }
+});
 
-    function updatePagination() {
-        prevPageButton.disabled = currentPage === 0;
-        nextPageButton.disabled = currentPage === totalPages - 1;
-    }
-
-    showPage(currentPage);
-    updatePagination();
-
-    searchInput.addEventListener("input", function () {
-        var searchTerm = searchInput.value.toLowerCase();
-        for (var i = 0; i < rows.length; i++) {
-            var rowText = rows[i].textContent.toLowerCase();
-            rows[i].style.display = rowText.includes(searchTerm) ? "" : "none";
-        }
-        currentPage = 0;
-        updatePagination();
-    });
-
-    prevPageButton.addEventListener("click", function () {
-        if (currentPage > 0) {
-            currentPage--;
-            showPage(currentPage);
-            updatePagination();
-        }
-    });
-
-    nextPageButton.addEventListener("click", function () {
-        if (currentPage < totalPages - 1) {
-            currentPage++;
-            showPage(currentPage);
-            updatePagination();
-        }
-    });
+// Manejar el clic en el ícono para abrir el cuadro de diálogo del archivo
+document.getElementById('fileIcon').addEventListener('click', function() {
+    const fileInput = document.getElementById('fileInput');
+    fileInput.click();
+});
 </script>
 </body>
-
 </html>
-
