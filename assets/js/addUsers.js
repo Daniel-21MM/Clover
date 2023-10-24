@@ -22,6 +22,9 @@ allDropdown.forEach(item=> {
 })
 
 
+
+
+
 // SIDEBAR COLLAPSE
 const toggleSidebar = document.querySelector('nav .toggle-sidebar');
 const allSideDivider = document.querySelectorAll('#sidebar .divider');
@@ -155,27 +158,48 @@ allProgress.forEach(item=> {
 	item.style.setProperty('--value', item.dataset.value)
 })
 
-// LOAD IMAGE-PROLIFE 
 
- // Obtén una referencia al input de tipo file y la imagen
- const fileInput = document.getElementById("imageInput");
- const avatarImage = document.getElementById("imagenMostrada");
+// ADD USER SCRIPTS
+function chooseFile() {
+    document.getElementById("fileInput").click();
+  }
 
- // Agrega un evento clic a la imagen que activará el input de archivo
- avatarImage.addEventListener("click", () => {
-	 fileInput.click();
- });
+  function previewImage() {
+    const fileInput = document.getElementById("fileInput");
+    const imagePreview = document.getElementById("imagePreview");
+    const fileIcon = document.getElementById("fileIcon");
 
- // Agrega un evento change al input de archivo para manejar la selección del archivo
- fileInput.addEventListener("change", (event) => {
-	 // Aquí puedes manejar el archivo seleccionado, por ejemplo, mostrar una vista previa
-	 const selectedFile = event.target.files[0];
-	 if (selectedFile) {
-		 const reader = new FileReader();
-		 reader.onload = (e) => {
-			 // Muestra la imagen seleccionada en la vista previa
-			 avatarImage.src = e.target.result;
-		 };
-		 reader.readAsDataURL(selectedFile);
-	 }
- });
+    if (fileInput.files && fileInput.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = "block";
+        fileIcon.style.display = "none"; // Ocultar el icono
+      };
+
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  }
+
+  function changeImage() {
+    document.getElementById("fileInput").value = ""; // Reiniciar el valor del input de archivo
+    document.getElementById("imagePreview").style.display = "none"; // Ocultar la imagen previsualizada
+    document.getElementById("fileIcon").style.display = "block"; // Mostrar el icono
+  }
+
+  function clearForm() {
+    // Obtener todos los elementos de entrada del formulario
+    const formElements = document.querySelectorAll("#contact-form input, #contact-form select");
+
+    // Limpiar el valor de cada elemento de entrada
+    formElements.forEach((element) => {
+      element.value = "";
+    });
+
+    // Reiniciar la imagen previsualizada
+    changeImage();
+  }
+
+
+

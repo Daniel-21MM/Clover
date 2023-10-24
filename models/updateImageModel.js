@@ -1,33 +1,75 @@
-const db = require('../database/db');
+const fs = require('fs');
+const guardarImagenModel = require('../controllers/updateImageController');
 
-function guardarImagen(imagenBuffer, usuario_id) {
-    return new Promise((resolve, reject) => {
-        // Genera un nombre de archivo único (por ejemplo, usando un ID de usuario o un nombre aleatorio)
-        const nombreDeArchivoUnico = 'imagenPerfil';
+document.addEventListener('DOMContentLoaded', async () => {
+    const imageInput = document.getElementById('imageInput');
+    const subirImagenButton = document.getElementById('subirImagenButton');
+    const imagenMostrada = document.getElementById('imagenMostrada');
 
-        // Define la ruta de la imagen en la carpeta "assets"
-        const rutaImagen = `./assets/imgUsers/${nombreDeArchivoUnico}.jpg`;
-
-        // Guarda la imagen en la carpeta "assets"
-        fs.writeFile(rutaImagen, imagenBuffer, (err) => {
-            if (err) {
-                reject(err);
-            } else {
-                // Actualiza la ruta de la imagen en la base de datos para el usuario especificado
-                const sql = 'UPDATE usuarios SET imgPerfilUrl = ? WHERE id = ?';
-                db.connection.query(sql, [rutaImagen, usuario_id], (dbErr, results) => {
-                    if (dbErr) {
-                        reject(dbErr);
+    subirImagenButton.addEventListener('click', async () => {
+        // Pregunta al usuario si está seguro de actualizar la foto
+        const confirmacion = await Swal.fire({
+            icon: 'question',
+            title: '¿Está seguro de actualizar su foto de perfil?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No',
+        });
+    
+        if (confirmacion.isConfirmed) {
+            // El usuario confirmó la actualización
+            const file = imageInput.files[0];
+    
+            if (file) {
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+    
+                if (['jpg', 'jpeg', 'png'].includes(fileExtension)) {
+                    const maxSizeBytes = 5 * 1024 * 1024; // 5MB
+    
+                    if (file.size <= maxSizeBytes) {
+                        fs.readFile(file.path, async (err, data) => {
+                            if (err) {
+                                console.error(err);
+                                // Maneja el error
+                            } else {
+                                try {
+                                    const resultado = await guardarImagenModel.guardarImagen(data);
+                                    console.log('Imagen guardada en la base de datos con ID:', resultado);
+    
+                                    // Actualiza la etiqueta img con la nueva imagen
+                                    imagenMostrada.src = `/assets/imgUsers${resultado}.jpg`;
+    
+                                    // Muestra un mensaje de éxito
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Foto de perfil actualizada',
+                                        text: 'Tu foto de perfil ha sido actualizada exitosamente.',
+                                    }).then(() => {
+                                        // Recargar la página actual
+                                        location.reload();
+                                    });
+                                } catch (error) {
+                                    console.error('Error al guardar la imagen:', error);
+                                    // Maneja el error
+                                }
+                            }
+                        });
                     } else {
-                        resolve(results.changedRows > 0); // Devuelve verdadero si se realizó una actualización
+                        console.log('El tamaño del archivo supera el límite máximo de 5 MB.');
                     }
+                } else {
+                    console.log('Formato de archivo no válido. Se admiten solo archivos JPEG y PNG.');
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No se ha seleccionado una imagen',
+                    text: 'Por favor, selecciona una imagen para subir.',
                 });
             }
-        });
+        }
     });
-}
+    
+});
 
-module.exports = {
-    guardarImagen,
-};
 
