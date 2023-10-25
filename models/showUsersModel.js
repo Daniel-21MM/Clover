@@ -31,7 +31,7 @@ async function cargarDatosTabla() {
                 <td>${telefonoFormateado}</td>
                 <td>${fecha}</td>
                 <td>
-                    <button><i class='bx bx-edit'></i></button>
+                    <button class="edit" data-id="${usuario.id}"><i class='bx bx-edit'></i></button>
                     <button class="delete" data-id="${usuario.id}"><i class='bx bx-trash'></i></button>
                 </td>
             `;
@@ -40,6 +40,19 @@ async function cargarDatosTabla() {
 
             const deleteButton = tr.querySelector('.delete');
             deleteButton.addEventListener('click', eliminarUsuario);
+        });
+
+        // Agrega un manejador de eventos al botón "Editar" para redirigir a la vista de edición
+        const editButtons = document.querySelectorAll('.edit');
+
+        editButtons.forEach((editButton) => {
+            editButton.addEventListener('click', () => {
+                // Obtiene el ID del usuario que se está editando
+                const idUsuario = editButton.getAttribute('data-id');
+
+                // Redirige a la vista de edición (editUser.html) con el ID del usuario como parámetro
+                window.location.href = `editUsers.html?id=${idUsuario}`;
+            });
         });
     } catch (error) {
         console.error('Error al cargar los datos en la tabla: ', error);
@@ -85,3 +98,5 @@ function eliminarUsuario(event) {
 document.addEventListener('DOMContentLoaded', () => {
     cargarDatosTabla();
 });
+
+
