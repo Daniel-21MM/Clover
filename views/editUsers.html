@@ -1,78 +1,213 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
+
 <head>
-<style>
-    /* Estilos para ocultar el input de archivo */
-    #fileInput {
-      display: none;
-    }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Administrador</title>
+  <!-- CDN BoxIcons -->
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Incluir Font Awesome desde CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Enlaces Css -->
+  <link rel="stylesheet" href="../assets/css/addUser.css">
 
-    .border-dotted i {
-      font-size: 2rem;
-      color: #28a745;
-      cursor: pointer;
-    }
 
-    .border-dotted {
-      border: 2px dotted #28a745;
-      padding: 1%;
-      text-align: center;
-      width: 100%;
-      margin: auto;
-      position: relative;
-    }
-
-    #imagePreview {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      display: none;
-    }
-</style>
 </head>
+
 <body>
-<div class="container">
-    <div class="card">
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand"><i class='bx bxs-smile icon'></i>Clover</a>
+    <ul class="side-menu">
+      <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+      <li class="divider" data-text="Principal">Principal</li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-user icon'></i> Usuarios
+          <i class='bx bx-chevron-right icon-right'></i>
+        </a>
+
+        <ul class="side-dropdown">
+          <li><a href="listUsers.html">Lista De Usuarios</a></li>
+          <li><a href="addUser.html">Agregar Usuario</a></li>
+          <li><a href="editUsers.html">Editar Usuarios</a></li>
+        </ul>
+      </li>
+      <li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
+      <li><a href="#"><i class='bx bxs-package icon'></i>Articulos</a></li>
+
+      <li class="divider" data-text="Opciones">Opciones</li>
+      <li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-cog icon'></i> Configuración
+          <i class='bx bx-chevron-right icon-right'></i>
+        </a>
+
+
+
+        <ul class="side-dropdown">
+          <li><a href="#">Configuracion general</a></li>
+          <li><a href="#">Configuracion de perfil</a></li>
+          <!-- <li><a href="#">Checkbox</a></li>
+					<li><a href="#">Radio</a></li> -->
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <!-- SIDEBAR -->
+
+  <!-- NAVBAR -->
+  <section id="content">
+    <!-- NAVBAR -->
+    <nav>
+      <i class='bx bx-menu toggle-sidebar'></i>
+      <form action="#">
         <div class="form-group">
-            <label for="fileInput" class="border-dotted">
-                <i class="fa fa-file-image-o fa-3x text-success" id="fileIcon"></i>
-                <img id="imagePreview">
-            </label>
-            <input type="file" id="fileInput">
+          <input type="text" placeholder="Buscar...">
+          <i class='bx bx-search icon'></i>
         </div>
-    </div>
-</div>
+      </form>
+      <a href="#" class="nav-link">
+        <i class='bx bxs-bell icon'></i>
+        <span class="badge">5</span>
+      </a>
+      <a href="#" class="nav-link">
+        <i class='bx bxs-message-square-dots icon'></i>
+        <span class="badge">8</span>
+      </a>
+      <span class="divider"></span>
+      <div class="profile">
+        <img src="../assets/imgUsers/imagenPerfil.jpg" alt="">
+        <ul class="profile-link">
+          <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
+          <li><a href="#"><i class='bx bxs-cog'></i> Configuracion</a></li>
+          <li><a href="login.html"><i class='bx bxs-log-out-circle'></i> Salir</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- NAVBAR -->
 
-<script>
-// Función para manejar el evento de cambio en el input de archivo
-document.getElementById('fileInput').addEventListener('change', function(event) {
-    const fileInput = event.target;
-    const imagePreview = document.getElementById('imagePreview');
-    const fileIcon = document.getElementById('fileIcon');
-    const borderDotted = document.querySelector('.border-dotted');
+    <!-- MAIN -->
 
-    if (fileInput.files.length > 0) {
-        // Se seleccionó un archivo
-        const selectedFile = fileInput.files[0];
-        const objectURL = URL.createObjectURL(selectedFile);
+    <main>
+      <div class="bread-container">
+        <h1 class="title">Editar Empleado</h1>
+        <ul class="breadcrumbs">
+          <li><a href="AdminPanel.html">Dashboard</a></li>
+          <li class="divider">/</li>
+          <li><a href="#" class="active">usuarios</a></li>
+          <li class="divider">/</li>
+          <li><a href="#" class="active">editar empleado</a></li>
+        </ul>
+      </div>
 
-        // Mostrar la imagen dinámicamente
-        imagePreview.src = objectURL;
-        imagePreview.style.display = 'block';
+      <div class="container">
+        <div class="card">
 
-        // Ocultar el ícono
-        fileIcon.style.display = 'none';
+          <form id="contact-form">
+            <div class="row">
+              <div class="column">
+                <div class="form-group">
+                  <label for="name">Nombre*</label>
+                  <input id="name" type="text" name="name" required="required">
+                </div>
+              </div>
+              <div class="column">
+                <div class="form-group">
+                  <label for="telephone">Telefono*</label>
+                  <input id="telephone" type="tel" name="telephone" required="required">
+                </div>
+              </div>
+              <div class="column">
+                <div class="form-group">
+                  <label for="username">Usuario*</label>
+                  <input id="username" type="text" name="username" required="required">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <div class="form-group">
+                  <label for="password">Contraseña*</label>
+                  <input id="password" type="password" name="password" required="required">
+                </div>
+              </div>
+              <div class="column">
+                <div class="form-group">
+                  <label for="email">Correo*</label>
+                  <input id="email" type="email" name="email" required="required">
+                </div>
+              </div>
+              <div class="column">
+                <div class="form-group">
+                  <label for="role">Rol*</label>
+                  <select id="role" name="role">
+                    <option value="1">Administrador</option>
+                    <option value="0">Empleado</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <div class="form-group">
+                  <label for="registration_date">Fecha de registro*</label>
+                  <input id="registration_date" type="date" name="registration_date" required="required">
+                </div>
+              </div>
+              <div class="column">
+                <div class="form-group">
+                  <label for="input5">Direccion*</label>
+                  <input id="Direccion" type="text" name="input5">
+                </div>
+              </div>
 
-        // Ocultar el borde punteado
-        borderDotted.style.border = 'none';
-    }
-});
+              <div class="column">
+                <label for="">Imagen</label>
+                <div class="form-group border-dotted" id="imageContainer" onclick="chooseFile()">
+                  <i class="fa fa-file-image-o fa-3x text-success" id="fileIcon" ></i>
 
-// Manejar el clic en el ícono para abrir el cuadro de diálogo del archivo
-document.getElementById('fileIcon').addEventListener('click', function() {
-    const fileInput = document.getElementById('fileInput');
-    fileInput.click();
-});
-</script>
+                  <input type="file" id="fileInput" style="display: none;" accept="image/*" onchange="previewImage()">
+
+                  <img id="imagePreview"
+                    style="width: 150px; height: 150px; object-fit: cover; display: none; cursor: pointer;"
+                    onclick="changeImage()">
+                </div>
+              </div>
+           
+
+            </div>
+
+            <div class="form-group">
+              <button type="button" class="btn-send" onclick="registrarUsuario()">Registrar</button>
+              <button type="button" class="btn-send" onclick="clearForm()">Limpiar</button>
+          </div>
+
+          </form>
+
+
+        </div>
+      </div>
+
+
+
+    </main>
+
+
+
+
+    <!-- MAIN -->
+  </section>
+  <!-- NAVBAR -->
+
+
+
+
+  <!-- Script CND de Bootstrap 5 -->
+  <script src="../assets/js/addUsers.js"></script>
+  <script src="../models/addUsersModel.js"></script>
 </body>
+
 </html>
