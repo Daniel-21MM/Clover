@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const usuarioController = require('../controllers/addUserController');
+const Swal = require('sweetalert2');
 
 async function registrarUsuario() {
     const archivo = document.getElementById('fileInput').files[0];
@@ -8,7 +9,9 @@ async function registrarUsuario() {
     let imgPerfilUrl = '';
     if (archivo) {
         try {
-            imgPerfilUrl = await guardarImagen(archivo);
+            // Obtener el número actual de imágenes en la carpeta
+            const numeroDeImagenes = obtenerNumeroDeImagenes();
+            imgPerfilUrl = await guardarImagen(archivo, numeroDeImagenes);
         } catch (error) {
             console.error('Error al guardar la imagen: ' + error);
         }
@@ -26,7 +29,12 @@ async function registrarUsuario() {
     usuarioController.insertarUsuario(nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha)
         .then((registroExitoso) => {
             if (registroExitoso) {
-                // Puedes realizar acciones adicionales aquí, como limpiar el formulario o redirigir al usuario.
+                // Puedes realizar acciones adicionales aquí, como mostrar un Sweet Alert.
+                Swal.fire({
+                    title: 'Usuario creado',
+                    text: 'El usuario se ha registrado con éxito.',
+                    icon: 'success',
+                });
             }
         });
 }
@@ -47,17 +55,34 @@ function clearForm() {
 
     // Puedes agregar más campos aquí según sea necesario
 }
-function guardarImagen(archivo) {
+
+function obtenerNumeroDeImagenes() {
+    const rutaCarpeta = path.join(__dirname, '../assets/imgUsers/');
+    // Leemos la lista de archivos en la carpeta
+    const archivos = fs.readdirSync(rutaCarpeta);
+
+    // Filtrar solo archivos de imagen, si es necesario
+    const imagenes = archivos.filter((archivo) =>
+        archivo.toLowerCase().endsWith('.jpg') ||
+        archivo.toLowerCase().endsWith('.jpeg') ||
+        archivo.toLowerCase().endsWith('.png')
+    );
+
+    // Retornar el número de imágenes
+    return imagenes.length;
+}
+
+function guardarImagen(archivo, numeroDeImagenes) {
     return new Promise((resolve, reject) => {
-        const rutaCarpeta = path.join(__dirname, '../assets/imgUsers/'); // Ruta a la carpeta de imágenes
-        const nombreArchivo = Date.now() + '_' + archivo.name; // Nombre único para evitar conflictos
+        const rutaCarpeta = path.join(__dirname, '../assets/imgUsers/');
+        const nombreArchivo = `imgPerfil${numeroDeImagenes + 1}.jpg`; // Nombre con contador
         const rutaCompleta = path.join(rutaCarpeta, nombreArchivo);
 
         fs.copyFile(archivo.path, rutaCompleta, (err) => {
             if (err) {
                 reject(err);
             } else {
-                resolve('/assets/imgUsers/' + nombreArchivo); // Ruta relativa para guardar en la base de datos
+                resolve('../assets/imgUsers/' + nombreArchivo);
             }
         });
     });

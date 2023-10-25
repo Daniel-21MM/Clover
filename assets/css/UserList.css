@@ -428,15 +428,15 @@ main .table-data .order table tbody tr:hover {
     background: var(--grey);
 }
 
-main .table-data .order table tr td .status {
+/* main .table-data .order table tr td .status {
     font-size: 10px;
     padding: 6px 16px;
     color: var(--light);
     border-radius: 20px;
     font-weight: 700;
-}
+} */
 
-main .table-data .order table tr td .status.completed {
+/* main .table-data .order table tr td .status.completed {
     background: var(--blue);
 }
 
@@ -446,7 +446,7 @@ main .table-data .order table tr td .status.process {
 
 main .table-data .order table tr td .status.pending {
     background: var(--orange);
-}
+} */
 
 main .table-data .todo {
     flex-grow: 1;
