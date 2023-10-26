@@ -1,52 +1,49 @@
 const db = require('../database/db');
-const Swal = require('sweetalert2');
 
-// Función para insertar un nuevo usuario en la base de datos
 async function insertarUsuario(nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha) {
-    return new Promise(async (resolve, reject) => {
-        // Validación para campos vacíos
-        if (!nombre || !telefono || !usuario || !contrasena || !correo || !direccion || !fecha) {
-            Swal.fire('Campos vacíos', 'Por favor, completa todos los campos obligatorios.', 'warning');
-            reject(false);
-            return;
-        }
+    // Validación para campos vacíos
+    if (!nombre || !telefono || !usuario || !contrasena || !correo || !direccion || !fecha) {
+        console.log('Campos vacíos');
+        return Promise.reject(false); // Rechazamos la promesa si hay campos vacíos
+    }
 
-        // Mostrar un SweetAlert de confirmación antes de registrar
-        const confirmacion = await Swal.fire({
-            title: '¿Deseas registrar al usuario?',
-            showCancelButton: true,
-            confirmButtonText: 'Sí',
-            cancelButtonText: 'No',
-        });
+    console.log('Antes de mostrar confirmación');
+    console.log('Después de mostrar confirmación');
 
-        if (confirmacion.isConfirmed) {
-            const sql = 'INSERT INTO usuarios (nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            const values = [nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha];
+    if (true) { // Puedes reemplazar true con tu lógica de confirmación
+        console.log('Usuario confirmó la acción');
 
+        console.log('Antes de ejecutar la consulta SQL');
+        
+        const sql = 'INSERT INTO usuarios (nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const values = [nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha];
+
+        return new Promise((resolve, reject) => {
             db.connection.query(sql, values, (queryErr, results) => {
+                console.log('Ejecutando consulta SQL');
                 if (queryErr) {
                     console.error('Error al insertar el usuario: ' + queryErr.message);
                     reject(false);
                 } else {
                     if (results.affectedRows === 1) {
-                        // Mostrar SweetAlert de éxito
-                        Swal.fire('Usuario creado', 'El usuario se ha registrado con éxito', 'success');
+                        console.log('Usuario creado con éxito');
                         resolve(true);
                     } else {
-                        // Mostrar SweetAlert de error
-                        Swal.fire('Error', 'No se pudo registrar el usuario', 'error');
+                        console.error('No se pudo registrar el usuario');
                         reject(false);
                     }
                 }
             });
-        } else {
-            // Mostrar SweetAlert de acción cancelada
-            Swal.fire('Acción cancelada', 'No se ha registrado al usuario', 'info');
-            reject(false);
-        }
-    });
+        });
+    } else {
+        console.log('Usuario canceló la acción');
+        return Promise.reject(false); // Si no se confirma, rechazamos la promesa
+    }
 }
+
+// Resto del código...
 
 module.exports = {
     insertarUsuario,
+   
 };

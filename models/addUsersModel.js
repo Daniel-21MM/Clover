@@ -1,3 +1,4 @@
+// ============
 const fs = require('fs');
 const path = require('path');
 const usuarioController = require('../controllers/addUserController');
@@ -5,6 +6,26 @@ const Swal = require('sweetalert2');
 
 async function registrarUsuario() {
     const archivo = document.getElementById('fileInput').files[0];
+    const nombre = document.getElementById('name').value;
+    const telefono = document.getElementById('telephone').value;
+    const usuario = document.getElementById('username').value;
+    const contrasena = document.getElementById('password').value;
+    const correo = document.getElementById('email').value;
+    const rol = document.getElementById('role').value;
+    const direccion = document.getElementById('Direccion').value;
+    const fecha = document.getElementById('registration_date').value;
+
+    // Mostrar un SweetAlert de confirmación antes de registrar
+    const confirmacion = await Swal.fire({
+        title: '¿Deseas registrar al usuario?',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+    });
+
+    if (!confirmacion.isConfirmed) {
+        return; // Si no se confirma, simplemente salimos de la función
+    }
 
     let imgPerfilUrl = '';
     if (archivo) {
@@ -16,15 +37,6 @@ async function registrarUsuario() {
             console.error('Error al guardar la imagen: ' + error);
         }
     }
-
-    const nombre = document.getElementById('name').value;
-    const telefono = document.getElementById('telephone').value;
-    const usuario = document.getElementById('username').value;
-    const contrasena = document.getElementById('password').value;
-    const correo = document.getElementById('email').value;
-    const rol = document.getElementById('role').value;
-    const direccion = document.getElementById('Direccion').value;
-    const fecha = document.getElementById('registration_date').value;
 
     usuarioController.insertarUsuario(nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha)
         .then((registroExitoso) => {
@@ -87,6 +99,7 @@ function guardarImagen(archivo, numeroDeImagenes) {
         });
     });
 }
+// Resto del código...
 
 module.exports = {
     registrarUsuario,
