@@ -3,24 +3,17 @@ const db = require('../database/db');
 async function insertarUsuario(nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha) {
     // Validación para campos vacíos
     if (!nombre || !telefono || !usuario || !contrasena || !correo || !direccion || !fecha) {
-        console.log('Campos vacíos');
         return Promise.reject(false); // Rechazamos la promesa si hay campos vacíos
     }
 
-    console.log('Antes de mostrar confirmación');
-    console.log('Después de mostrar confirmación');
-
     if (true) { // Puedes reemplazar true con tu lógica de confirmación
         console.log('Usuario confirmó la acción');
-
-        console.log('Antes de ejecutar la consulta SQL');
         
         const sql = 'INSERT INTO usuarios (nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
         const values = [nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha];
 
         return new Promise((resolve, reject) => {
             db.connection.query(sql, values, (queryErr, results) => {
-                console.log('Ejecutando consulta SQL');
                 if (queryErr) {
                     console.error('Error al insertar el usuario: ' + queryErr.message);
                     reject(false);
