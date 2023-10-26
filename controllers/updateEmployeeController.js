@@ -1,51 +1,63 @@
-const db = require('../database/db');
 const Swal = require('sweetalert2');
+const modelo = require('../models/updateEmployeeModel'); // Importa el modelo
 
-async function actualizarUsuario(user_id, nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion) {
-    return new Promise(async (resolve, reject) => {
-        // Validación para campos vacíos
-        if (!user_id || !nombre || !telefono || !usuario || !contrasena || !correo || !direccion) {
-            Swal.fire('Campos vacíos', 'Por favor, completa todos los campos obligatorios.', 'warning');
-            reject(false);
-            return;
-        }
+async function actualizarUsuario() {
+    const user_id = document.getElementById('user_id').value;
+    const nombre = document.getElementById('name').value;
+    const telefono = document.getElementById('telephone').value;
+    const usuario = document.getElementById('username').value;
+    const contrasena = document.getElementById('password').value;
+    const correo = document.getElementById('email').value;
+    const rol = document.getElementById('role').value;
+    const direccion = document.getElementById('Direccion').value;
 
-        // Mostrar un SweetAlert de confirmación antes de actualizar
-        const confirmacion = await Swal.fire({
-            title: '¿Deseas actualizar al usuario?',
-            showCancelButton: true,
-            confirmButtonText: 'Sí',
-            cancelButtonText: 'No',
-        });
+    // Validación para campos vacíos
+    if (!user_id || !nombre || !telefono || !usuario || !contrasena || !correo || !direccion) {
+        Swal.fire('Campos vacíos', 'Por favor, completa todos los campos obligatorios.', 'warning');
+        return false;
+    }
 
-        if (confirmacion.isConfirmed) {
-            const sql = 'UPDATE usuarios SET nombre=?, telefono=?, usuario=?, contrasena=?, correo=?, rol=?, imgPerfilUrl=?, direccion=? WHERE id=?';
-            const values = [nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, user_id];
-
-            db.connection.query(sql, values, (queryErr, results) => {
-                if (queryErr) {
-                    console.error('Error al actualizar el usuario: ' + queryErr.message);
-                    reject(false);
-                } else {
-                    if (results.affectedRows === 1) {
-                        // Mostrar SweetAlert de éxito
-                        Swal.fire('Usuario actualizado', 'El usuario se ha actualizado con éxito', 'success');
-                        resolve(true);
-                    } else {
-                        // Mostrar SweetAlert de error
-                        Swal.fire('Error', 'No se pudo actualizar el usuario', 'error');
-                        reject(false);
-                    }
-                }
-            });
-        } else {
-            // Mostrar SweetAlert de acción cancelada
-            Swal.fire('Acción cancelada', 'No se ha actualizado al usuario', 'info');
-            reject(false);
-        }
+    // Mostrar un SweetAlert de confirmación antes de actualizar
+    const confirmacion = await Swal.fire({
+        title: '¿Deseas actualizar al usuario?',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
     });
+
+    if (confirmacion.isConfirmed) {
+        const archivo = document.getElementById('fileInput').files[0];
+        let imgPerfilUrl = '';
+
+        if (archivo) {
+            try {
+                // Obtener el número actual de imágenes en la carpeta
+                const numeroDeImagenes = await modelo.obtenerNumeroDeImagenes();
+
+
+                // Eliminar la foto anterior si existe
+                const rutaFotoAnterior = await modelo.obtenerRutaFotoAnterior(user_id);
+                if (rutaFotoAnterior) {
+                    await modelo.eliminarFotoAnterior(rutaFotoAnterior);
+                }
+
+                imgPerfilUrl = await modelo.guardarImagen(archivo, numeroDeImagenes);
+
+            } catch (error) {
+                console.error('Error al guardar la imagen: ' + error);
+            }
+        }
+
+        const actualizacionExitosa = await modelo.actualizarUsuario(user_id, nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion);
+
+        if (actualizacionExitosa) {
+            Swal.fire({
+                title: 'Usuario actualizado',
+                text: 'El usuario se ha actualizado con éxito.',
+                icon: 'success',
+            });
+        }
+    }
 }
 
-module.exports = {
-    actualizarUsuario,
-};
+
