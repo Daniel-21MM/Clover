@@ -59,5 +59,3 @@ async function actualizarUsuario() {
         }
     }
 }
-
-
