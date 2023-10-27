@@ -1,25 +1,23 @@
-const db = require('../database/db');
+const fs = require('fs');
+const path = require('path');
+const db = require('../database/db'); // Asegúrate de importar db correctamente
 
 function guardarImagen(imagenBuffer, usuario_id) {
     return new Promise((resolve, reject) => {
-        // Genera un nombre de archivo único (por ejemplo, usando un ID de usuario o un nombre aleatorio)
-        const nombreDeArchivoUnico = 'imagenPerfil';
+        const nombreDeArchivoUnico = `imagenPerfil_${usuario_id}_${Date.now()}.jpg`;
 
-        // Define la ruta de la imagen en la carpeta "assets"
-        const rutaImagen = `./assets/imgUsers/${nombreDeArchivoUnico}.jpg`;
+        const rutaImagen = path.join(__dirname, '../assets/imgUsers/', nombreDeArchivoUnico); // Corregimos la ruta absoluta
 
-        // Guarda la imagen en la carpeta "assets"
         fs.writeFile(rutaImagen, imagenBuffer, (err) => {
             if (err) {
                 reject(err);
             } else {
-                // Actualiza la ruta de la imagen en la base de datos para el usuario especificado
                 const sql = 'UPDATE usuarios SET imgPerfilUrl = ? WHERE id = ?';
                 db.connection.query(sql, [rutaImagen, usuario_id], (dbErr, results) => {
                     if (dbErr) {
                         reject(dbErr);
                     } else {
-                        resolve(results.changedRows > 0); // Devuelve verdadero si se realizó una actualización
+                        resolve(results.changedRows > 0);
                     }
                 });
             }
@@ -30,6 +28,3 @@ function guardarImagen(imagenBuffer, usuario_id) {
 module.exports = {
     guardarImagen,
 };
-
-
-

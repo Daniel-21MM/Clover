@@ -11,29 +11,31 @@ async function cargarDatosTabla() {
         const resultados = await modelo.obtenerDatosUsuariosDesdeBD(consultaSQL);
 
         resultados.forEach((usuario) => {
-            const fecha = new Date(usuario.fecha).toISOString().split('T')[0];
-            const rolTexto = usuario.rol === 1 ? 'Administrador' : 'Empleado';
-            const telefonoFormateado = formatearTelefono(usuario.telefono);
+            if (usuario.id !== 1) { // Omitir el usuario con ID 1
+                const fecha = new Date(usuario.fecha).toISOString().split('T')[0];
+                const rolTexto = usuario.rol === 1 ? 'Administrador' : 'Empleado';
+                const telefonoFormateado = formatearTelefono(usuario.telefono);
 
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${usuario.id}</td>
-                <td><img src="${usuario.imgPerfilUrl}" alt="Perfil de usuario"></td>
-                <td>${usuario.usuario}</td>
-                <td>${rolTexto}</td>
-                <td>${usuario.correo}</td>
-                <td>${telefonoFormateado}</td>
-                <td>${fecha}</td>
-                <td>
-                    <button class="edit" data-id="${usuario.id}"><i class='bx bx-edit'></i></button>
-                    <button class="delete" data-id="${usuario.id}"><i class='bx bx-trash'></i></button>
-                </td>
-            `;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${usuario.id}</td>
+                    <td><img src="${usuario.imgPerfilUrl}" alt="Perfil de usuario"></td>
+                    <td>${usuario.usuario}</td>
+                    <td>${rolTexto}</td>
+                    <td>${usuario.correo}</td>
+                    <td>${telefonoFormateado}</td>
+                    <td>${fecha}</td>
+                    <td>
+                        <button class="edit" data-id="${usuario.id}"><i class='bx bx-edit'></i></button>
+                        <button class="delete" data-id="${usuario.id}"><i class='bx bx-trash'></i></button>
+                    </td>
+                `;
 
-            tabla.appendChild(tr);
+                tabla.appendChild(tr);
 
-            const deleteButton = tr.querySelector('.delete');
-            deleteButton.addEventListener('click', eliminarUsuario);
+                const deleteButton = tr.querySelector('.delete');
+                deleteButton.addEventListener('click', eliminarUsuario);
+            }
         });
 
         // Agrega un manejador de eventos al botón "Editar" para redirigir a la vista de edición

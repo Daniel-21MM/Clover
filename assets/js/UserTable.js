@@ -140,6 +140,20 @@ allProgress.forEach(item=> {
 	item.style.setProperty('--value', item.dataset.value)
 })
 
+// MOSTRAR IMAGEN 
+document.addEventListener('DOMContentLoaded', () => {
+    const imagenEnOtraPagina = document.getElementById('imagenEnOtraPagina');
+    
+    // Obtener la imagen desde Local Storage si existe
+    const rutaImagen = localStorage.getItem('rutaImagen');
+
+    if (rutaImagen) {
+        imagenEnOtraPagina.src = rutaImagen;
+    } else {
+        imagenEnOtraPagina.src = 'ruta_predeterminada.jpg'; // Ruta predeterminada si no hay imagen en Local Storage
+    }
+});
+
 
 // FILTER AND PAGINATION OF TABLE USERS 
 

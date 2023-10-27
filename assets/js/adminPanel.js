@@ -2,13 +2,13 @@
 const allDropdown = document.querySelectorAll('#sidebar .side-dropdown');
 const sidebar = document.getElementById('sidebar');
 
-allDropdown.forEach(item=> {
+allDropdown.forEach(item => {
 	const a = item.parentElement.querySelector('a:first-child');
 	a.addEventListener('click', function (e) {
 		e.preventDefault();
 
-		if(!this.classList.contains('active')) {
-			allDropdown.forEach(i=> {
+		if (!this.classList.contains('active')) {
+			allDropdown.forEach(i => {
 				const aLink = i.parentElement.querySelector('a:first-child');
 
 				aLink.classList.remove('active');
@@ -29,17 +29,17 @@ allDropdown.forEach(item=> {
 const toggleSidebar = document.querySelector('nav .toggle-sidebar');
 const allSideDivider = document.querySelectorAll('#sidebar .divider');
 
-if(sidebar.classList.contains('hide')) {
-	allSideDivider.forEach(item=> {
+if (sidebar.classList.contains('hide')) {
+	allSideDivider.forEach(item => {
 		item.textContent = '-'
 	})
-	allDropdown.forEach(item=> {
+	allDropdown.forEach(item => {
 		const a = item.parentElement.querySelector('a:first-child');
 		a.classList.remove('active');
 		item.classList.remove('show');
 	})
 } else {
-	allSideDivider.forEach(item=> {
+	allSideDivider.forEach(item => {
 		item.textContent = item.dataset.text;
 	})
 }
@@ -47,18 +47,18 @@ if(sidebar.classList.contains('hide')) {
 toggleSidebar.addEventListener('click', function () {
 	sidebar.classList.toggle('hide');
 
-	if(sidebar.classList.contains('hide')) {
-		allSideDivider.forEach(item=> {
+	if (sidebar.classList.contains('hide')) {
+		allSideDivider.forEach(item => {
 			item.textContent = '-'
 		})
 
-		allDropdown.forEach(item=> {
+		allDropdown.forEach(item => {
 			const a = item.parentElement.querySelector('a:first-child');
 			a.classList.remove('active');
 			item.classList.remove('show');
 		})
 	} else {
-		allSideDivider.forEach(item=> {
+		allSideDivider.forEach(item => {
 			item.textContent = item.dataset.text;
 		})
 	}
@@ -68,13 +68,13 @@ toggleSidebar.addEventListener('click', function () {
 
 
 sidebar.addEventListener('mouseleave', function () {
-	if(this.classList.contains('hide')) {
-		allDropdown.forEach(item=> {
+	if (this.classList.contains('hide')) {
+		allDropdown.forEach(item => {
 			const a = item.parentElement.querySelector('a:first-child');
 			a.classList.remove('active');
 			item.classList.remove('show');
 		})
-		allSideDivider.forEach(item=> {
+		allSideDivider.forEach(item => {
 			item.textContent = '-'
 		})
 	}
@@ -83,13 +83,13 @@ sidebar.addEventListener('mouseleave', function () {
 
 
 sidebar.addEventListener('mouseenter', function () {
-	if(this.classList.contains('hide')) {
-		allDropdown.forEach(item=> {
+	if (this.classList.contains('hide')) {
+		allDropdown.forEach(item => {
 			const a = item.parentElement.querySelector('a:first-child');
 			a.classList.remove('active');
 			item.classList.remove('show');
 		})
-		allSideDivider.forEach(item=> {
+		allSideDivider.forEach(item => {
 			item.textContent = item.dataset.text;
 		})
 	}
@@ -113,7 +113,7 @@ imgProfile.addEventListener('click', function () {
 // MENU
 const allMenu = document.querySelectorAll('main .content-data .head .menu');
 
-allMenu.forEach(item=> {
+allMenu.forEach(item => {
 	const icon = item.querySelector('.icon');
 	const menuLink = item.querySelector('.menu-link');
 
@@ -125,20 +125,20 @@ allMenu.forEach(item=> {
 
 
 window.addEventListener('click', function (e) {
-	if(e.target !== imgProfile) {
-		if(e.target !== dropdownProfile) {
-			if(dropdownProfile.classList.contains('show')) {
+	if (e.target !== imgProfile) {
+		if (e.target !== dropdownProfile) {
+			if (dropdownProfile.classList.contains('show')) {
 				dropdownProfile.classList.remove('show');
 			}
 		}
 	}
 
-	allMenu.forEach(item=> {
+	allMenu.forEach(item => {
 		const icon = item.querySelector('.icon');
 		const menuLink = item.querySelector('.menu-link');
 
-		if(e.target !== icon) {
-			if(e.target !== menuLink) {
+		if (e.target !== icon) {
+			if (e.target !== menuLink) {
 				if (menuLink.classList.contains('show')) {
 					menuLink.classList.remove('show')
 				}
@@ -154,10 +154,25 @@ window.addEventListener('click', function (e) {
 // PROGRESSBAR
 const allProgress = document.querySelectorAll('main .card .progress');
 
-allProgress.forEach(item=> {
+allProgress.forEach(item => {
 	item.style.setProperty('--value', item.dataset.value)
 })
 
+
+// Mostrar img 
+
+document.addEventListener('DOMContentLoaded', () => {
+	const imagenEnOtraPagina = document.getElementById('imagenEnOtraPagina');
+
+	// Obtener la imagen desde Local Storage si existe
+	const rutaImagen = localStorage.getItem('rutaImagen');
+
+	if (rutaImagen) {
+		imagenEnOtraPagina.src = rutaImagen;
+	} else {
+		imagenEnOtraPagina.src = 'ruta_predeterminada.jpg'; // Ruta predeterminada si no hay imagen en Local Storage
+	}
+});
 
 
 
@@ -165,32 +180,32 @@ allProgress.forEach(item=> {
 
 // APEXCHART
 var options = {
-  series: [{
-  name: 'series1',
-  data: [31, 40, 28, 51, 42, 109, 100]
-}, {
-  name: 'series2',
-  data: [11, 32, 45, 32, 34, 52, 41]
-}],
-  chart: {
-  height: 350,
-  type: 'area'
-},
-dataLabels: {
-  enabled: false
-},
-stroke: {
-  curve: 'smooth'
-},
-xaxis: {
-  type: 'datetime',
-  categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-},
-tooltip: {
-  x: {
-    format: 'dd/MM/yy HH:mm'
-  },
-},
+	series: [{
+		name: 'series1',
+		data: [31, 40, 28, 51, 42, 109, 100]
+	}, {
+		name: 'series2',
+		data: [11, 32, 45, 32, 34, 52, 41]
+	}],
+	chart: {
+		height: 350,
+		type: 'area'
+	},
+	dataLabels: {
+		enabled: false
+	},
+	stroke: {
+		curve: 'smooth'
+	},
+	xaxis: {
+		type: 'datetime',
+		categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+	},
+	tooltip: {
+		x: {
+			format: 'dd/MM/yy HH:mm'
+		},
+	},
 };
 
 var chart = new ApexCharts(document.querySelector("#chart"), options);
