@@ -1,13 +1,31 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url('../fonts/Montserrat-Black.otf') format('woff2');
+}
+@font-face {
+    font-family: 'Montserrat-Light';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url('../fonts/Montserrat-Light.otf') format('woff2');
+}
 * {
-	box-sizing: border-box;
-	font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+.custom-title-class {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.custom-text-class {
+    font-family: 'Montserrat-Light', sans-serif;
 }
 
 h1 {
 	font-weight: bold;
 	margin: 0;
+	font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
@@ -15,6 +33,7 @@ h2 {
 }
 
 p {
+	font-family: 'Montserrat-Light', sans-serif;
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
@@ -23,6 +42,7 @@ p {
 }
 
 button {
+	font-family: 'Montserrat', sans-serif;
 	border-radius: 20px;
 	border: 1px solid;
 	color: #FFFFFF;
@@ -59,12 +79,12 @@ form {
 }
 
 input {
-	/*background-color: #eee;*/
 	border: none;
 	border-bottom: 2.5px solid #049935;
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
+	font-family: 'Montserrat-Light', sans-serif
 }
 
 input:focus {

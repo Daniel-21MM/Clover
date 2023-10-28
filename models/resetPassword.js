@@ -40,14 +40,32 @@ const sendEmail = (email, usuario, contrasena) => {
     if (error) {
       console.error('Error al enviar el correo:', error);
       // Mostrar una alerta de error
-      Swal.fire('Error', 'Error al restablecer la contraseña', 'error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al restablecer la contraseña',
+        customClass: {
+          title: 'custom-title-class',
+          htmlContainer: 'custom-text-class',
+        },
+        confirmButtonColor: '#049935',
+        confirmButtonText: 'Ok',
+      });
+
     } else {
       console.log('Correo enviado con éxito:', info.response);
       // Mostrar una alerta de éxito
-      Swal.fire('Contraseña Restablecida', 'Revise su correo electrónico', 'success');
-
-      // Notificar al proceso principal que el correo se ha enviado (si es necesario)
-      // ipcRenderer.send('email-sent');
+      Swal.fire({
+        icon: 'success',
+        title: 'Contraseña Restablecida',
+        text: 'Revise su correo electrónico',
+        customClass: {
+            title: 'custom-title-class',
+            htmlContainer: 'custom-text-class',
+        },
+        confirmButtonColor: '#049935',
+        confirmButtonText: 'Ok',
+    });
     }
   });
 };
@@ -67,17 +85,39 @@ document.getElementById('form-create-account').addEventListener('submit', functi
     if (err) {
       console.error('Error al consultar la base de datos:', err);
       // Muestra un mensaje de error al usuario
-      Swal.fire('¡Oh, no!', 'Ah ocurrido un error en el servidor, intentalo mas tarde', 'error');
+      Swal.fire({
+          icon: 'error',
+          title: '¡Oh, no!',
+          text: 'Ah ocurrido un error en el servidor, intentalo más tarde',
+          customClass: {
+              title: 'custom-title-class',
+              htmlContainer: 'custom-text-class',
+          },
+          confirmButtonColor: '#049935',
+          confirmButtonText: 'Ok',
+      });
       return;
-    }
+  }
+  
 
     // Verifica si se encontró un usuario con el correo electrónico proporcionado
     if (results.length === 0) {
       console.error('Usuario no encontrado');
       // Muestra un mensaje de error al usuario
-      Swal.fire('¡Error!', 'No se encontró un usuario con ese correo electrónico', 'error');
+      Swal.fire({
+          icon: 'error',
+          title: '¡Error!',
+          text: 'No se encontró un usuario con ese correo electrónico',
+          customClass: {
+              title: 'custom-title-class',
+              htmlContainer: 'custom-text-class',
+          },
+          confirmButtonColor: '#049935',
+          confirmButtonText: 'Ok',
+      });
       return;
-    }
+  }
+  
 
     // Obtiene los datos del usuario y la contraseña desde la consulta
     const usuario = results[0].usuario;

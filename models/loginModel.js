@@ -7,62 +7,74 @@ document.addEventListener('DOMContentLoaded', () => {
   const contrasenaInput = document.getElementById('contrasena');
   const iniciarSesionButton = document.getElementById('Iniciar');
 
-  iniciarSesionButton.addEventListener('click', async () => {
-    const usuario = usuarioInput.value;
-    const contrasena = contrasenaInput.value;
+  let eventoConfigurado = false; 
 
-    // Validar campos vacíos
-    if (!usuario || !contrasena) {
-      console.log("Campos vacíos");
-      return;
-    }
+  if (!eventoConfigurado) {
+ 
+    iniciarSesionButton.addEventListener('click', async () => {
+      const usuario = usuarioInput.value;
+      const contrasena = contrasenaInput.value;
 
-    try {
-      const resultadoInicioSesion = await usuarios.loginUsuario(usuario, contrasena);
+      // Validar campos vacíos
+      if (!usuario || !contrasena) {
+        console.log("Campos vacíos");
+        return;
+      }
 
-      if (resultadoInicioSesion) {
-        if (resultadoInicioSesion.rol === 1) {
-          // Mostrar una alerta de bienvenida
-          Swal.fire({
-            icon: 'success',
-            title: '¡Bienvenido!',
-            text: 'Inicio de sesión exitoso',
-          }).then(() => {
-            // Si el rol es 1 (administrador), abrir la ventana de inicio
-            ipcRenderer.send('abrirVentanaInicio');
-            // Cerrar la ventana actual (index.html)
-            ipcRenderer.send('cerrarVentanaActual');
+      try {
+        const resultadoInicioSesion = await usuarios.loginUsuario(usuario, contrasena);
+
+        if (resultadoInicioSesion) {
+          const rol = resultadoInicioSesion.rol;
+
+          mostrarAlerta('¡Bienvenido!', 'Inicio de sesión exitoso', 'success', () => {
+            if (rol === 1) {
+              abrirVentana('Inicio');
+            } else {
+              abrirVentana('Empleados');
+            }
           });
         } else {
-          // Mostrar una alerta de bienvenida
-          Swal.fire({
-            icon: 'success',
-            title: '¡Bienvenido!',
-            text: 'Inicio de sesión exitoso',
-          }).then(() => {
-            // Si el rol no es 1, abrir la ventana de empleados
-            ipcRenderer.send('abrirVentanaEmpleados');
-            // Cerrar la ventana actual (index.html)
-            ipcRenderer.send('cerrarVentanaActual');
+          mostrarAlerta('¡Datos Incorrectos!', 'Verifica tus credenciales', 'error', () => {
+            usuarioInput.value = '';
+            contrasenaInput.value = '';
           });
         }
-      } else {
-        // Mostrar una alerta de datos incorrectos
-        Swal.fire({
-          icon: 'error',
-          title: '¡Datos Incorrectos!',
-          text: 'Verifica tus credenciales',
-        }).then(() => {
-          // Restablecer los campos de entrada a una cadena vacía
-          usuarioInput.value = '';
-          contrasenaInput.value = '';
-        });
+      } catch (error) {
+        console.error('Error de inicio de sesión:', error.message);
+
+        if (error.message === 'Credenciales incorrectas') {
+          // Mostrar la alerta de "Credenciales Incorrectas" en caso de error de credenciales
+          mostrarAlerta('¡Datos Incorrectos!', 'Verifica tus credenciales', 'error', () => {
+            usuarioInput.value = '';
+            contrasenaInput.value = '';
+          });
+        } else {
+          // Mostrar la alerta de "Error en el servidor" en otros casos de error
+          mostrarAlerta('¡Oh, no!', 'Se ha producido un error en el servidor. Inténtalo más tarde.', 'error');
+        }
       }
-    } catch (error) {
-      console.error('Error de inicio de sesión:', error.message);
-    }
-  });
+    });
+
+    eventoConfigurado = true;
+  }
 });
 
+function mostrarAlerta(title, text, icon, callback) {
+  Swal.fire({
+    icon: icon,
+    title: title,
+    text: text,
+    customClass: {
+      title: 'custom-title-class',
+      htmlContainer: 'custom-text-class',
+    },
+    confirmButtonColor: '#049935',
+    confirmButtonText: 'Ok',
+  }).then(callback);
+}
 
-
+function abrirVentana(ventana) {
+  ipcRenderer.send(`abrirVentana${ventana}`);
+  ipcRenderer.send('cerrarVentanaActual');
+}
