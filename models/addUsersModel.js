@@ -1,4 +1,3 @@
-// ============
 const fs = require('fs');
 const path = require('path');
 const usuarioController = require('../controllers/addUserController');
@@ -15,6 +14,26 @@ async function registrarUsuario() {
     const direccion = document.getElementById('Direccion').value;
     const fecha = document.getElementById('registration_date').value;
 
+    // Verifica que los campos requeridos no estén vacíos
+    if (!nombre || !telefono || !usuario || !contrasena || !correo || !direccion || !fecha) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Campos vacíos',
+            text: 'Por favor, complete todos los campos requeridos.',
+        });
+        return;
+    }
+
+    // Verifica si se ha seleccionado un archivo de imagen
+    if (!archivo) {
+        Swal.fire({
+            icon: 'warning',
+            title: '¡Imagen no seleccionada!',
+            text: 'Por favor, seleccione una imagen de perfil.',
+        });
+        return;
+    }
+
     // Mostrar un SweetAlert de confirmación antes de registrar
     const confirmacion = await Swal.fire({
         title: '¿Deseas registrar al usuario?',
@@ -24,7 +43,7 @@ async function registrarUsuario() {
     });
 
     if (!confirmacion.isConfirmed) {
-        return; // Si no se confirma, simplemente salimos de la función
+        return;
     }
 
     let imgPerfilUrl = '';
@@ -41,7 +60,6 @@ async function registrarUsuario() {
     usuarioController.insertarUsuario(nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion, fecha)
         .then((registroExitoso) => {
             if (registroExitoso) {
-                // Puedes realizar acciones adicionales aquí, como mostrar un Sweet Alert.
                 Swal.fire({
                     title: 'Usuario creado',
                     text: 'El usuario se ha registrado con éxito.',
@@ -57,15 +75,11 @@ function clearForm() {
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
     document.getElementById('email').value = '';
-    document.getElementById('role').value = '1'; // Establecer el valor predeterminado para el rol
+    document.getElementById('role').value = '1'; 
     document.getElementById('Direccion').value = '';
     document.getElementById('registration_date').value = '';
 
-    // También puedes restablecer la vista previa de la imagen si es necesario
     document.getElementById('imagePreview').style.display = 'none';
-    // O cualquier otra lógica que necesites para la vista previa de la imagen
-
-    // Puedes agregar más campos aquí según sea necesario
 }
 
 function obtenerNumeroDeImagenes() {
@@ -80,7 +94,6 @@ function obtenerNumeroDeImagenes() {
         archivo.toLowerCase().endsWith('.png')
     );
 
-    // Retornar el número de imágenes
     return imagenes.length;
 }
 
@@ -99,7 +112,6 @@ function guardarImagen(archivo, numeroDeImagenes) {
         });
     });
 }
-// Resto del código...
 
 module.exports = {
     registrarUsuario,

@@ -34,8 +34,6 @@ async function insertarUsuario(nombre, telefono, usuario, contrasena, correo, ro
     }
 }
 
-// Resto del código...
-
 module.exports = {
     insertarUsuario,
    
