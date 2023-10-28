@@ -70,6 +70,7 @@ async function eliminarImagen(rutaImagen) {
 }
 
 module.exports = {
+    formatearTelefono,
     obtenerDatosUsuariosDesdeBD,
     eliminarUsuario,
     obtenerUsuarioPorID,

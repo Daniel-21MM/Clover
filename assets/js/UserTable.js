@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // FILTER AND PAGINATION OF TABLE USERS 
 
-var table = document.getElementById("miTabla");
+var table = document.getElementById("miTablaPrincipal");
 var tbody = table.getElementsByTagName("tbody")[0];
 var rows = tbody.getElementsByTagName("tr");
 

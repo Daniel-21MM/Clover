@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi perfil</title>
+    <!-- CDN de Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- CDN BoxIcons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Enlace Css -->
+    <link rel="stylesheet" href="../assets/css/employeeDetailis.css">
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="AdminPanel.html" class="brand"><i class='bx bxs-smile icon'></i>Clover</a>
+        <ul class="side-menu">
+            <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+            <li class="divider" data-text="Principal">Principal</li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user icon'></i> Usuarios
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+
+                <ul class="side-dropdown">
+                    <li><a href="listUsers.html">Lista De Usuarios</a></li>
+                    <li><a href="addUser.html">Agregar Usuario</a></li>
+                    <li><a href="editUsers.html">Editar Usuarios</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
+            <li><a href="#"><i class='bx bxs-widget icon'></i> Widgets</a></li>
+            <li class="divider" data-text="table and forms">Table and forms</li>
+            <li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
+            <li>
+                <a href="#"><i class='bx bxs-notepad icon'></i> Forms <i class='bx bx-chevron-right icon-right'></i></a>
+                <ul class="side-dropdown">
+                    <li><a href="#">Basic</a></li>
+                    <li><a href="#">Select</a></li>
+                    <li><a href="#">Checkbox</a></li>
+                    <li><a href="#">Radio</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- NAVBAR -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu toggle-sidebar'></i>
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="Buscar...">
+                    <i class='bx bx-search icon'></i>
+                </div>
+            </form>
+            <a href="#" class="nav-link">
+                <i class='bx bxs-bell icon'></i>
+                <span class="badge">5</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class='bx bxs-message-square-dots icon'></i>
+                <span class="badge">8</span>
+            </a>
+            <span class="divider"></span>
+            <div class="profile">
+                <img src="" alt="" id="imagen-nav">
+                <ul class="profile-link">
+                    <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
+                    <li><a href="#"><i class='bx bxs-cog'></i>Configuracion</a></li>
+                    <li><a href="login.html"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <div class="bread-container">
+                <h1 class="title">Detalles Empleado</h1>
+                <ul class="breadcrumbs">
+                    <li><a href="AdminPanel.html">Dashboard</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="listUsers.html">lista de empleados</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="#" class="active">detalles empleado</a></li>
+                </ul>
+            </div>
+
+            <div class="card1">
+                <div class="card">
+                    <div class="left-container">
+                      <img src="" alt="">
+                        <h2 class="gradienttext"></h2>
+                        <p></p>
+                        <a href="listUsers.html">Regresar</a>
+                    </div>
+                    <div class="right-container">
+                        <h3 class="gradienttext">Detalles de empleado</h3>
+
+                        <table id="miTablaDetalles">
+                            <thead>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Id de usuario:</td>
+                                    <td id="userId"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre completo:</td>
+                                    <td id="nombreCompletoUsuario"></td>
+                                </tr>
+                                <tr>
+                                    <td>Telefono:</td>
+                                    <td id="telefonoUsuario"></td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre de usuario:</td>
+                                    <td id="nombreUsuario"></td>
+                                </tr>
+                                <tr>
+                                    <td>Correo:</td>
+                                    <td id="correoUsuario"></td>
+                                </tr>
+                                <tr>
+                                    <td>Rol:</td>
+                                    <td id="rolUsuario"></td>
+                                </tr>
+                                <tr>
+                                    <td>Direccion:</td>
+                                    <td id="direccionUsuario"></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de registro:</td>
+                                    <td id="fechaRegistro"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+
+        </main>
+        <!-- MAIN -->
+    </section>
+    <script src="../assets/js/Myprolife.js"></script>
+   
+
+    <script src="../models/showUsersModel.js"></script>
+    <script src="../controllers/employeeDetailsController.js"></script>
+</body>
+
+</html>

@@ -1,9 +1,14 @@
 const Swal = require('sweetalert2');
-const modelo = require('../models/showUsersModel'); // Importa el modelo
+const modelo = require('../models/showUsersModel');
 
-async function cargarDatosTabla() {
+function formatearTelefono(telefono) {
+    const telefonoStr = telefono.toString();
+    return telefonoStr.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1-$2-$3-$4');
+}
+
+async function cargarDatosTabla(tablaId) {
     try {
-        const tabla = document.querySelector('#miTabla tbody');
+        const tabla = document.querySelector(`#${tablaId} tbody`);
         tabla.innerHTML = '';
 
         const consultaSQL = 'SELECT id, usuario, rol, correo, telefono, fecha, imgPerfilUrl FROM usuarios';
@@ -26,6 +31,7 @@ async function cargarDatosTabla() {
                     <td>${telefonoFormateado}</td>
                     <td>${fecha}</td>
                     <td>
+                        <button class="details" data-id="${usuario.id}"><i class='bx bx-show'></i></button> 
                         <button class="edit" data-id="${usuario.id}"><i class='bx bx-edit'></i></button>
                         <button class="delete" data-id="${usuario.id}"><i class='bx bx-trash'></i></button>
                     </td>
@@ -35,20 +41,14 @@ async function cargarDatosTabla() {
 
                 const deleteButton = tr.querySelector('.delete');
                 deleteButton.addEventListener('click', eliminarUsuario);
+
+                // Agrega un manejador de eventos al botón "Detalles" para redirigir a la vista de detalles
+                const detailsButton = tr.querySelector('.details');
+                detailsButton.addEventListener('click', () => {
+                    const idUsuario = detailsButton.getAttribute('data-id');
+                    window.location.href = `employeeDetails.html?id=${idUsuario}`;
+                });
             }
-        });
-
-        // Agrega un manejador de eventos al botón "Editar" para redirigir a la vista de edición
-        const editButtons = document.querySelectorAll('.edit');
-
-        editButtons.forEach((editButton) => {
-            editButton.addEventListener('click', () => {
-                // Obtiene el ID del usuario que se está editando
-                const idUsuario = editButton.getAttribute('data-id');
-
-                // Redirige a la vista de edición (editUsers.html) con el ID del usuario como parámetro
-                window.location.href = `editUsers.html?id=${idUsuario}`;
-            });
         });
     } catch (error) {
         console.error('Error al cargar los datos en la tabla: ', error);
@@ -103,5 +103,5 @@ async function eliminarUsuario(event) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    cargarDatosTabla();
+    cargarDatosTabla('miTablaPrincipal'); // Llama a la función con el identificador de la tabla principal
 });
