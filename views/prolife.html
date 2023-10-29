@@ -17,10 +17,11 @@
 <body>
     <!-- SIDEBAR -->
     <section id="sidebar">
-        <a href="AdminPanel.html" class="brand"><i class='bx bxs-smile icon'></i>Clover</a>
+        <a href="AdminPanel.html" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
         <ul class="side-menu">
             <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-            <li class="divider" data-text="Principal">Principal</li>
+            <li class="divider" data-text="Panel de navegacion"></li>
+            <!-- Modulo usuarios-->
             <li>
                 <a href="#">
                     <i class='bx bxs-user icon'></i> Usuarios
@@ -28,22 +29,53 @@
                 </a>
 
                 <ul class="side-dropdown">
-                    <li><a href="listUsers.html">Lista De Usuarios</a></li>
-                    <li><a href="addUser.html">Agregar Usuario</a></li>
-                    <li><a href="editUsers.html">Editar Usuarios</a></li>
+                    <li><a href="listUsers.html">Lista de usuarios</a></li>
+                    <li><a href="addUser.html">Agregar usuario</a></li>
                 </ul>
             </li>
-            <li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
-            <li><a href="#"><i class='bx bxs-widget icon'></i> Widgets</a></li>
-            <li class="divider" data-text="table and forms">Table and forms</li>
-            <li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
+            <!--Modulo Articulos-->
             <li>
-                <a href="#"><i class='bx bxs-notepad icon'></i> Forms <i class='bx bx-chevron-right icon-right'></i></a>
+                <a href="#">
+                    <i class='bx bxs-package icon'></i> Articulos
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
                 <ul class="side-dropdown">
-                    <li><a href="#">Basic</a></li>
-                    <li><a href="#">Select</a></li>
-                    <li><a href="#">Checkbox</a></li>
-                    <li><a href="#">Radio</a></li>
+                    <li><a href="listUsers.html">Lista de articulos</a></li>
+                    <li><a href="addUser.html">Agregar articulos</a></li>
+                </ul>
+            </li>
+            <!--Modulo de mesas-->
+            <li>
+                <a href="#">
+                    <i class='bx bx-table icon'></i> Mesas
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="listUsers.html">Lista de mesas</a></li>
+                    <li><a href="addUser.html">Agregar mesas</a></li>
+                </ul>
+            </li>
+            <!--Modulo de ventas-->
+            <li>
+                <a href="#">
+                    <i class='bx bx-bar-chart icon'></i> Ventas
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="listSales.html">Lista de ventas</a></li>
+                    <li><a href="addSale.html">Agregar venta</a></li>
+                </ul>
+            </li>
+            <!--Modulo de configuraciones-->
+            <li class="divider" data-text="Opciones">Opciones</li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog icon'></i> Configuración
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="#">General</a></li>
+                    <li><a href="prolife.html">Perfil</a></li>
                 </ul>
             </li>
         </ul>
@@ -58,20 +90,13 @@
             <form action="#">
                 <div class="form-group">
                     <input type="text" placeholder="Buscar...">
-                    <i class='bx bx-search icon'></i>
+
                 </div>
             </form>
-            <a href="#" class="nav-link">
-                <i class='bx bxs-bell icon'></i>
-                <span class="badge">5</span>
-            </a>
-            <a href="#" class="nav-link">
-                <i class='bx bxs-message-square-dots icon'></i>
-                <span class="badge">8</span>
-            </a>
+
             <span class="divider"></span>
             <div class="profile">
-               <img src="" alt="" id="imagen-nav">
+                <img src="" alt="" id="imagen-nav">
                 <ul class="profile-link">
                     <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
                     <li><a href="#"><i class='bx bxs-cog'></i>Configuracion</a></li>
@@ -96,10 +121,10 @@
                                             <div class="user-avatar">
                                                 <input type="file" id="imageInput" accept=".jpg, .jpeg, .png" required
                                                     style="display: none;">
-                                               
+
                                                 <img src="" alt="" id="imagenMostrada">
                                             </div>
-                                         
+
                                         </form>
 
                                         <h5 class="user-name"></h5>
@@ -173,7 +198,8 @@
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group" style="opacity: 0; padding: 0; border-radius: 0">
                                                 <label for="id">ID del Usuario</label>
-                                                <input type="text" class="form-control" id="id" name="id" required value="1">
+                                                <input type="text" class="form-control" id="id" name="id" required
+                                                    value="1">
 
                                             </div>
                                         </div>
@@ -207,60 +233,60 @@
         crossorigin="anonymous"></script>
     <script src="../assets/js/Myprolife.js"></script>
     <script src="../models/updateProlifeModel.js"></script>
-    
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const imagenMostrada = document.getElementById('imagenMostrada');
-    const imageNav = document.getElementById('imagen-nav');
-    const otrasImagenes = document.querySelectorAll('.otra-imagen'); // selecciona todas las etiquetas con la clase 'otra-imagen'
-    const imageInput = document.getElementById('imageInput');
-    
-    // Obtener la imagen desde Local Storage si existe
-    const rutaImagen = localStorage.getItem('rutaImagen');
 
-    if (rutaImagen) {
-        imagenMostrada.src = rutaImagen;
-        imageNav.src = rutaImagen;
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imagenMostrada = document.getElementById('imagenMostrada');
+            const imageNav = document.getElementById('imagen-nav');
+            const otrasImagenes = document.querySelectorAll('.otra-imagen'); // selecciona todas las etiquetas con la clase 'otra-imagen'
+            const imageInput = document.getElementById('imageInput');
 
-        // Establecer la misma imagen en otras etiquetas img
-        otrasImagenes.forEach((imagen) => {
-            imagen.src = rutaImagen;
-        });
-    } else {
-        imagenMostrada.src = '../assets/imgUsers/imgPerfil.jpg';
-        imageNav.src = '../assets/imgUsers/imgPerfil.jpg';
+            // Obtener la imagen desde Local Storage si existe
+            const rutaImagen = localStorage.getItem('rutaImagen');
 
-        // Establecer la misma imagen en otras etiquetas img
-        otrasImagenes.forEach((imagen) => {
-            imagen.src = '../assets/imgUsers/imgPerfil.jpg';
-        });
-    }
-
-    // Agregar un evento para cambiar la imagen cuando el usuario selecciona un archivo
-    imageInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const rutaImagenTemporal = reader.result;
-                localStorage.setItem('rutaImagen', rutaImagenTemporal);
-                imagenMostrada.src = rutaImagenTemporal;
-                imageNav.src = rutaImagenTemporal;
+            if (rutaImagen) {
+                imagenMostrada.src = rutaImagen;
+                imageNav.src = rutaImagen;
 
                 // Establecer la misma imagen en otras etiquetas img
                 otrasImagenes.forEach((imagen) => {
-                    imagen.src = rutaImagenTemporal;
+                    imagen.src = rutaImagen;
+                });
+            } else {
+                imagenMostrada.src = '../assets/imgUsers/imgPerfil.jpg';
+                imageNav.src = '../assets/imgUsers/imgPerfil.jpg';
+
+                // Establecer la misma imagen en otras etiquetas img
+                otrasImagenes.forEach((imagen) => {
+                    imagen.src = '../assets/imgUsers/imgPerfil.jpg';
                 });
             }
-            reader.readAsDataURL(file);
-        }
-    });
 
-    // ...otros códigos y lógica de tu aplicación
-});
+            // Agregar un evento para cambiar la imagen cuando el usuario selecciona un archivo
+            imageInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
 
-</script>
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function () {
+                        const rutaImagenTemporal = reader.result;
+                        localStorage.setItem('rutaImagen', rutaImagenTemporal);
+                        imagenMostrada.src = rutaImagenTemporal;
+                        imageNav.src = rutaImagenTemporal;
+
+                        // Establecer la misma imagen en otras etiquetas img
+                        otrasImagenes.forEach((imagen) => {
+                            imagen.src = rutaImagenTemporal;
+                        });
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // ...otros códigos y lógica de tu aplicación
+        });
+
+    </script>
 
 </body>
 

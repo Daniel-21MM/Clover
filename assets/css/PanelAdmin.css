@@ -90,6 +90,14 @@ li {
 	align-items: center;
 	margin-right: 6px;
 }
+#sidebar .logo_img{
+	width: 38px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 13px 6px 10px 10px;
+
+}
 #sidebar .icon-right {
 	margin-left: auto;
 	transition: all .3s ease;
@@ -195,10 +203,6 @@ li {
 }
 /* SIDEBAR */
 
-
-
-
-
 /* CONTENT */
 #content {
 	position: relative;
@@ -236,46 +240,7 @@ nav .form-group {
 	position: relative;
 }
 nav .form-group input {
-	width: 100%;
-	background: var(--grey);
-	border-radius: 5px;
-	border: none;
-	outline: none;
-	padding: 10px 36px 10px 16px;
-	transition: all .3s ease;
-}
-nav .form-group input:focus {
-	box-shadow: 0 0 0 1px var(--blue), 0 0 0 4px var(--light-blue);
-}
-nav .form-group .icon {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 16px;
-	color: var(--dark-grey);
-}
-nav .nav-link {
-	position: relative;
-}
-nav .nav-link .icon {
-	font-size: 18px;
-	color: var(--dark);
-}
-nav .nav-link .badge {
-	position: absolute;
-	top: -12px;
-	right: -12px;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	border: 2px solid var(--light);
-	background: var(--red);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: var(--light);
-	font-size: 10px;
-	font-weight: 700;
+	opacity: 0;
 }
 nav .divider {
 	width: 1px;
