@@ -67,7 +67,7 @@ function crearVentanaEmpleados() {
   ventanaEmpleados = new BrowserWindow({
     width: 2000,
     height: 1200,
-    autoHideMenuBar: false,
+    autoHideMenuBar: true,
     resizable: true,
     webPreferences: {
       nodeIntegration: true,

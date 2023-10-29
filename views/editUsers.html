@@ -165,11 +165,8 @@
 
               <div class="column">
                 <label for="">Imagen</label>
-                <div class="form-group border-dotted" id="imageContainer" onclick="chooseFile()">
-                  <i class="fa fa-file-image-o fa-3x text-success" id="fileIcon"></i>
-
+                <div class="form-group border-dotted" id="imageContainer">
                   <input type="file" id="fileInput" style="display: none;" accept="image/*" onchange="previewImage()">
-
                   <img id="imagePreview"
                     style="width: 150px; height: 150px; object-fit: cover; display: none; cursor: pointer;"
                     onclick="changeImage()">
@@ -186,7 +183,6 @@
 
           </form>
 
-
         </div>
       </div>
 
@@ -197,8 +193,9 @@
   </section>
   <!-- NAVBAR -->
   <!-- Script CND de Bootstrap 5 -->
-  <script src="../assets/js/addUsers.js"></script>
+  <script src="../assets/js/editUser.js"></script>
   <script src="../controllers/updateEmployeeController.js"></script>
+  
 </body>
 
 </html>

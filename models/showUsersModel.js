@@ -2,7 +2,7 @@ const db = require('../database/db');
 const fs = require('fs');
 const path = require('path');
 
-function formatearTelefono(telefono) {
+async function formatearTelefono(telefono) {
     const telefonoStr = telefono.toString();
     return telefonoStr.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1-$2-$3-$4');
 }
@@ -39,10 +39,10 @@ async function eliminarUsuario(idUsuario) {
 
 async function obtenerUsuarioPorID(idUsuario) {
     return new Promise((resolve, reject) => {
-        const consultaSQL = 'SELECT imgPerfilUrl FROM usuarios WHERE id = ?';
+        const consultaSQL = 'SELECT * FROM usuarios WHERE id = ?';
         db.connection.query(consultaSQL, [idUsuario], (err, results) => {
             if (err) {
-                console.error('Error al obtener la imagen del usuario: ' + err.message);
+                console.error('Error al obtener los datos del usuario: ' + err.message);
                 reject(err);
                 return;
             }

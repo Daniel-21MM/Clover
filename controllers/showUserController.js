@@ -36,6 +36,18 @@ async function cargarDatosTabla(tablaId) {
                         <button class="delete" data-id="${usuario.id}"><i class='bx bx-trash'></i></button>
                     </td>
                 `;
+                // Obtén una referencia al botón de edición por su clase CSS
+                const editButton = tr.querySelector('.edit');
+
+                // Agrega un evento click al botón de edición
+                editButton.addEventListener('click', () => {
+                    // Obten el valor del atributo data-id para identificar al usuario
+                    const userId = editButton.getAttribute('data-id');
+
+                    // Redirige a la página de edición con el ID del usuario
+                    window.location.href = `editUsers.html?id=${userId}`;
+                });
+
 
                 tabla.appendChild(tr);
 
