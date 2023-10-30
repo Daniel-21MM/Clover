@@ -68,7 +68,7 @@ async function actualizarUsuario() {
 
     if (confirmacion.isConfirmed) {
         const archivo = document.getElementById('fileInput').files[0];
-        let imgPerfilUrl = '';
+        let imgPerfilUrl = ''; // Establece un valor predeterminado en caso de que no se proporcione una nueva imagen
 
         if (archivo) {
             try {
@@ -79,10 +79,13 @@ async function actualizarUsuario() {
                     await modeloUpdateEmployeeController.eliminarFotoAnterior(rutaFotoAnterior);
                 }
 
-                imgPerfilUrl = await modeloUpdateEmployeeController.guardarImagen(archivo); // Usa la función del modelo de actualización
+                imgPerfilUrl = await modeloUpdateEmployeeController.guardarImagen(archivo, rutaFotoAnterior); // Usa la función del modelo de actualización
             } catch (error) {
                 console.error('Error al guardar la imagen: ' + error);
             }
+        } else {
+            // Si no se proporciona una nueva imagen, simplemente conserva la imagen anterior
+            imgPerfilUrl = await modeloUpdateEmployeeController.obtenerRutaFotoAnterior(user_id);
         }
 
         const actualizacionExitosa = await modeloUpdateEmployeeController.actualizarUsuario(user_id, nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion);
@@ -132,6 +135,3 @@ function previewImage() {
 function changeImage() {
     document.getElementById('fileInput').click();
 }
-
-
-

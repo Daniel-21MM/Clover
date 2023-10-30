@@ -2,23 +2,30 @@ const fs = require('fs');
 const path = require('path');
 const db = require('../database/db');
 
-async function guardarImagen(archivo) {
-    return new Promise((resolve, reject) => {
+async function guardarImagen(archivo, rutaImagenAnterior) {
+    return new Promise(async (resolve, reject) => {
         const rutaCarpeta = path.join(__dirname, '../assets/imgUsers/');
-        const extension = path.extname(archivo.name); // Obtén la extensión del archivo
-        const nombreArchivo = `imgPerfil_${Date.now()}${extension}`; // Nombre único con sello de tiempo
-        const rutaCompleta = path.join(rutaCarpeta, nombreArchivo);
+        const extension = path.extname(archivo.name);
+        const nombreArchivo = `imgPerfil_${Date.now()}${extension}`;
 
-        fs.copyFile(archivo.path, rutaCompleta, (err) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve('../assets/imgUsers/' + nombreArchivo);
-            }
-        });
+        // Si se proporciona una nueva imagen y no es la misma que la anterior, elimina la imagen anterior
+        if (archivo && archivo.name !== rutaImagenAnterior) {
+            eliminarFotoAnterior(rutaImagenAnterior);
+            const rutaCompleta = path.join(rutaCarpeta, nombreArchivo);
+
+            fs.copyFile(archivo.path, rutaCompleta, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve('../assets/imgUsers/' + nombreArchivo);
+                }
+            });
+        } else {
+            // Si no se proporciona una nueva imagen, simplemente conserva la imagen anterior
+            resolve(rutaImagenAnterior);
+        }
     });
 }
-
 
 async function actualizarUsuario(user_id, nombre, telefono, usuario, contrasena, correo, rol, imgPerfilUrl, direccion) {
     const sql = 'UPDATE usuarios SET nombre=?, telefono=?, usuario=?, contrasena=?, correo=?, rol=?, imgPerfilUrl=?, direccion=? WHERE id=?';
