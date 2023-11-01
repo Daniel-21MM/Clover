@@ -21,7 +21,6 @@ allDropdown.forEach(item => {
 	})
 })
 
-
 // SIDEBAR COLLAPSE
 const toggleSidebar = document.querySelector('nav .toggle-sidebar');
 const allSideDivider = document.querySelectorAll('#sidebar .divider');
@@ -61,9 +60,6 @@ toggleSidebar.addEventListener('click', function () {
 	}
 })
 
-
-
-
 sidebar.addEventListener('mouseleave', function () {
 	if (this.classList.contains('hide')) {
 		allDropdown.forEach(item => {
@@ -76,8 +72,6 @@ sidebar.addEventListener('mouseleave', function () {
 		})
 	}
 })
-
-
 
 sidebar.addEventListener('mouseenter', function () {
 	if (this.classList.contains('hide')) {
@@ -92,9 +86,6 @@ sidebar.addEventListener('mouseenter', function () {
 	}
 })
 
-
-
-
 // PROFILE DROPDOWN
 const profile = document.querySelector('nav .profile');
 const imgProfile = profile.querySelector('img');
@@ -103,9 +94,6 @@ const dropdownProfile = profile.querySelector('.profile-link');
 imgProfile.addEventListener('click', function () {
 	dropdownProfile.classList.toggle('show');
 })
-
-
-
 
 // MENU
 const allMenu = document.querySelectorAll('main .content-data .head .menu');
@@ -118,8 +106,6 @@ allMenu.forEach(item => {
 		menuLink.classList.toggle('show');
 	})
 })
-
-
 
 window.addEventListener('click', function (e) {
 	if (e.target !== imgProfile) {
@@ -144,28 +130,27 @@ window.addEventListener('click', function (e) {
 	})
 })
 
-
-// MOSTRAR IMAGEN 
-document.addEventListener('DOMContentLoaded', () => {
-    const imagenEnOtraPagina = document.getElementById('imagenEnOtraPagina');
-    
-    // Obtener la imagen desde Local Storage si existe
-    const rutaImagen = localStorage.getItem('rutaImagen');
-
-    if (rutaImagen) {
-        imagenEnOtraPagina.src = rutaImagen;
-    } else {
-        imagenEnOtraPagina.src = 'ruta_predeterminada.jpg'; // Ruta predeterminada si no hay imagen en Local Storage
-    }
-});
-
-
 // PROGRESSBAR
 const allProgress = document.querySelectorAll('main .card .progress');
 
 allProgress.forEach(item => {
 	item.style.setProperty('--value', item.dataset.value)
 })
+
+
+// SHOW IMAGE NAV
+document.addEventListener('DOMContentLoaded', () => {
+	const imagenEnOtraPagina = document.getElementById('imagenEnOtraPagina');
+
+	// Obtener la imagen desde Local Storage si existe
+	const rutaImagen = localStorage.getItem('rutaImagen');
+
+	if (rutaImagen) {
+		imagenEnOtraPagina.src = rutaImagen;
+	} else {
+		imagenEnOtraPagina.src = 'ruta_predeterminada.jpg'; // Ruta predeterminada si no hay imagen en Local Storage
+	}
+});
 
 
 
