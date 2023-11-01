@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
-const db = require('../database/db'); // Importa la conexión a la base de datos desde db.js
+const db = require('../database/db'); 
 
 // Define la función para crear el transporte de correo
 const createTransporter = () => {
   return nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: 'danielsanz8001@gmail.com', // Coloca tu dirección de correo electrónico de Gmail
-      pass: 'ugjfyxooxzagdfyn', // Coloca tu contraseña de Gmail
+      user: 'danielsanz8001@gmail.com', 
+      pass: 'mdsl jtev tklb oltq', 
     },
   });
 };
@@ -24,7 +24,7 @@ const sendEmail = (email, usuario, contrasena) => {
 
   const mailOptions = {
     from: 'Clover Wings App',
-    to: email, // Utiliza el correo electrónico proporcionado por el usuario
+    to: email, 
     subject: 'Restablecer Contraseña',
     html: `<p>Estimado usuario de Clover Wings App</p>
            <p>Le informamos que su contraseña de inicio de sesión ha sido restablecida con éxito.
@@ -72,12 +72,10 @@ const sendEmail = (email, usuario, contrasena) => {
 
 // Agrega un manejador de eventos para el evento "submit" del formulario
 document.getElementById('form-create-account').addEventListener('submit', function (event) {
-  event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+  event.preventDefault(); 
 
   const email = document.getElementById('correo').value; // Obtiene el correo electrónico ingresado
 
-  // Realiza una consulta a la base de datos para obtener usuario y contraseña basado en el correo electrónico
-  // Asegúrate de tener la conexión a la base de datos configurada correctamente y adaptada a tu sistema
   const userIdQuery = 'SELECT usuario, contrasena FROM usuarios WHERE correo = ?';
 
   // Ejecuta la consulta
