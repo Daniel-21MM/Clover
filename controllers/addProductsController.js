@@ -58,8 +58,8 @@ async function registrarPlatillo() {
         .then((registroExitoso) => {
             if (registroExitoso) {
                 Swal.fire({
-                    title: 'Platillo registrado',
-                    text: 'El platillo se ha registrado con éxito.',
+                    title: 'Articulo registrado',
+                    text: 'El articulo se ha registrado con éxito.',
                     icon: 'success',
                 });
             }

@@ -20,7 +20,8 @@ async function cargarDatosTablaDetalles() {
                 document.getElementById('articuloId').textContent = articulo.id;
                 document.getElementById('nombreArticulo').textContent = articulo.nombrePlatillo;
                 document.getElementById('categoriaArticulo').textContent = articulo.categoria;
-                document.getElementById('precioArticulo').textContent = articulo.precio;
+                document.getElementById('precioArticulo').textContent = `$${articulo.precio}`;
+
 
                 // Formatea la fecha antes de asignarla al elemento HTML
                 const fechaRegistroElement = document.getElementById('fechaRegistroArticulo');
