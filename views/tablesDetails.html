@@ -4,14 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Usuarios</title>
+    <title>Mi perfil</title>
+    <!-- CDN de Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- CDN BoxIcons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Enlace Css -->
-    <link rel="stylesheet" href="../assets/css/UserList.css">
-
+    <link rel="stylesheet" href="../assets/css/detailsProduct.css">
 </head>
-
 
 <body>
     <!-- SIDEBAR -->
@@ -19,7 +21,7 @@
         <a href="AdminPanel.html" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
         <ul class="side-menu">
             <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-            <li class="divider" data-text="Panel de navegacion">Panel de navegacion</li>
+            <li class="divider" data-text="Panel de navegacion"></li>
             <!-- Modulo usuarios-->
             <li>
                 <a href="#">
@@ -81,7 +83,6 @@
     </section>
     <!-- SIDEBAR -->
 
-    <!-- NAVBAR -->
     <section id="content">
         <!-- NAVBAR -->
         <nav>
@@ -89,10 +90,8 @@
             <form action="#">
                 <div class="form-group">
                     <input type="text" placeholder="Buscar...">
-
                 </div>
             </form>
-
             <span class="divider"></span>
             <div class="profile">
                 <img src="" alt="" id="imagenEnOtraPagina">
@@ -107,55 +106,69 @@
 
         <!-- MAIN -->
         <main>
-            <h1 class="title">Lista de usuarios</h1>
-            <ul class="breadcrumbs">
-                <li><a href="AdminPanel.html">Dashboard</a></li>
-                <li class="divider">/</li>
-                <li><a href="#" class="active">usuarios</a></li>
-                <li class="divider">/</li>
-                <li><a href="#" class="active">lista de usuarios</a></li>
-            </ul>
+            <div class="bread-container">
+                <h1 class="title">Detalles de mesa</h1>
+                <ul class="breadcrumbs">
+                    <li><a href="AdminPanel.html">Dashboard</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="tableList.html">lista de mesa</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="#" class="active">detalles mesa</a></li>
+                </ul>
+            </div>
 
-            <div class="table-data">
-                <div class="order">
-                    <div class="head">
-                        <h3>Lista de usuarios</h3>
-                        <div class="form-input">
-                            <span class="icon bx bx-search"></span>
-                            <input type="text" id="searchInput" placeholder="Buscar...">
-                        </div>
+            <div class="card1">
+                <div class="card">
+                    <div class="left-container">
+                        <img src="" alt="" id="imagenMesa">
+                        <h2 class="gradienttext"></h2>
+                        <p></p>
+                        <a href="tableList.html">Regresar</a>
                     </div>
+                    <div class="right-container">
+                        <h3 class="gradienttext">Detalles de mesa</h3>
 
-                    <table id="miTablaPrincipal">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Imagen</th>
-                                <th>Usuario</th>
-                                <th>Rol</th>
-                                <th>Correo</th>
-                                <th>Teléfono</th>
-                                <th>Fecha</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Aquí se cargarán los datos de los usuarios -->
+                        <table id="miTablaDetallesMesa">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td>Id de mesa:</td>
+                                    <td id="mesaId"></td>
+                                </tr>
+                                <tr>
+                                    <td>Numero de mesa:</td>
+                                    <td id="numeroMesa"></td>
+                                </tr>
+                                <tr>
+                                    <td>Estado:</td>
+                                    <td id="estadoMesa"></td>
+                                </tr>
+                                <tr>
+                                    <td>Capacidad:</td>
+                                    <td id="capacidadMesa"></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de registro:</td>
+                                    <td id="fechaRegistroMesa"></td>
+                                </tr>
+                                <tr>
+                                    <td>Descripción de la mesa:</td>
+                                    <td id="descripcionMesa"></td>
+                                </tr>
 
-                        </tbody>
-                    </table>
-
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
         </main>
         <!-- MAIN -->
     </section>
-    <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/UserTable.js"></script>
-    <script src="../models/showUsersModel.js"></script>
-    <script src="../controllers/showUserController.js"></script>
 
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../models/showTablesModel.js"></script>
+    <script src="../controllers/tableDetailsController.js"></script>
 </body>
 
 </html>

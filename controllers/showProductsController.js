@@ -1,5 +1,5 @@
 const Swal = require('sweetalert2');
-const modelo = require('../models/showProductsModels'); // Asegúrate de que el modelo de platillos esté correctamente importado
+const modelo = require('../models/showProductsModels'); 
 
 async function cargarDatosTabla(tablaId) {
     try {

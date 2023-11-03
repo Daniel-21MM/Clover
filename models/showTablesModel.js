@@ -2,11 +2,11 @@ const db = require('../database/db');
 const fs = require('fs');
 const path = require('path');
 
-async function obtenerDatosPlatillosDesdeBD(consultaSQL) {
+async function obtenerDatosMesasDesdeBD(consultaSQL) {
     return new Promise((resolve, reject) => {
         db.connection.query(consultaSQL, (err, results) => {
             if (err) {
-                console.error('Error al obtener datos de platillos: ' + err.message);
+                console.error('Error al obtener datos de mesas: ' + err.message);
                 reject(err);
                 return;
             }
@@ -16,30 +16,29 @@ async function obtenerDatosPlatillosDesdeBD(consultaSQL) {
     });
 }
 
-async function eliminarPlatillo(idPlatillo) {
+async function eliminarMesa(idMesa) {
     return new Promise((resolve, reject) => {
-        const consultaSQL = 'DELETE FROM platillos WHERE id = ?';
+        const consultaSQL = 'DELETE FROM mesas WHERE idMesas = ?';
 
-        db.connection.query(consultaSQL, [idPlatillo], (err) => {
+        db.connection.query(consultaSQL, [idMesa], (err) => {
             if (err) {
-                console.error('Error al eliminar el platillo: ' + err.message);
+                console.error('Error al eliminar la mesa: ' + err.message);
                 reject(err);
                 return;
             }
 
             resolve();
         });
-    }); 
+    });
 }
 
-
-async function obtenerPlatilloPorID(idPlatillo) {
+async function obtenerMesaPorID(idMesa) {
     return new Promise((resolve, reject) => {
-        const consultaSQL = 'SELECT * FROM platillos WHERE id = ?';
-        console.log('ID del platillo a eliminar o actualizar: ', idPlatillo);
-        db.connection.query(consultaSQL, [idPlatillo], (err, results) => {
+        const consultaSQL = 'SELECT * FROM mesas WHERE idMesas = ?';
+        console.log('ID de la mesa a eliminar o actualizar: ', idMesa);
+        db.connection.query(consultaSQL, [idMesa], (err, results) => {
             if (err) {
-                console.error('Error al obtener los datos del platillo: ' + err.message);
+                console.error('Error al obtener los datos de la mesa: ' + err.message);
                 reject(err);
                 return;
             }
@@ -50,9 +49,8 @@ async function obtenerPlatilloPorID(idPlatillo) {
                 resolve(null);
             }
         });
-    }); 
+    });
 }
-
 
 async function eliminarImagen(rutaImagen) {
     return new Promise((resolve, reject) => {
@@ -68,8 +66,8 @@ async function eliminarImagen(rutaImagen) {
 }
 
 module.exports = {
-    obtenerDatosPlatillosDesdeBD,
-    eliminarPlatillo,
-    obtenerPlatilloPorID,
+    obtenerDatosMesasDesdeBD,
+    eliminarMesa,
+    obtenerMesaPorID,
     eliminarImagen,
 };
