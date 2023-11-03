@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agregar producto</title>
+  <!-- CDN BoxIcons -->
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Incluir Font Awesome desde CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Enlaces Css -->
+  <link rel="stylesheet" href="../assets/css/addUser.css">
+
+
+</head>
+
+<body>
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="AdminPanel.html" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
+    <ul class="side-menu">
+      <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+      <li class="divider" data-text="Panel de navegacion"></li>
+      <!-- Modulo usuarios-->
+      <li>
+        <a href="#">
+          <i class='bx bxs-user icon'></i> Usuarios
+          <i class='bx bx-chevron-right icon-right'></i>
+        </a>
+
+        <ul class="side-dropdown">
+          <li><a href="listUsers.html">Lista de usuarios</a></li>
+          <li><a href="addUser.html">Agregar usuario</a></li>
+        </ul>
+      </li>
+      <!--Modulo Articulos-->
+      <li>
+        <a href="#">
+          <i class='bx bxs-package icon'></i> Articulos
+          <i class='bx bx-chevron-right icon-right'></i>
+        </a>
+        <ul class="side-dropdown">
+          <li><a href="listUsers.html">Lista de articulos</a></li>
+          <li><a href="addUser.html">Agregar articulos</a></li>
+        </ul>
+      </li>
+      <!--Modulo de mesas-->
+      <li>
+        <a href="#">
+          <i class='bx bx-table icon'></i> Mesas
+          <i class='bx bx-chevron-right icon-right'></i>
+        </a>
+        <ul class="side-dropdown">
+          <li><a href="listUsers.html">Lista de mesas</a></li>
+          <li><a href="addUser.html">Agregar mesas</a></li>
+        </ul>
+      </li>
+      <!--Modulo de ventas-->
+      <li>
+        <a href="#">
+          <i class='bx bx-bar-chart icon'></i> Ventas
+          <i class='bx bx-chevron-right icon-right'></i>
+        </a>
+        <ul class="side-dropdown">
+          <li><a href="listSales.html">Lista de ventas</a></li>
+          <li><a href="addSale.html">Agregar venta</a></li>
+        </ul>
+      </li>
+      <!--Modulo de configuraciones-->
+      <li class="divider" data-text="Opciones">Opciones</li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-cog icon'></i> Configuración
+          <i class='bx bx-chevron-right icon-right'></i>
+        </a>
+        <ul class="side-dropdown">
+          <li><a href="#">General</a></li>
+          <li><a href="prolife.html">Perfil</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <!-- SIDEBAR -->
+
+  <!-- NAVBAR -->
+  <section id="content">
+    <!-- NAVBAR -->
+    <nav>
+      <i class='bx bx-menu toggle-sidebar'></i>
+      <form action="#">
+        <div class="form-group">
+          <input type="text" placeholder="Buscar...">
+        </div>
+      </form>
+
+      <span class="divider"></span>
+
+      <div class="profile">
+        <img src="" alt="" id="imagenEnOtraPagina">
+        <ul class="profile-link">
+          <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
+          <li><a href="#"><i class='bx bxs-cog'></i> Configuracion</a></li>
+          <li><a href="login.html"><i class='bx bxs-log-out-circle'></i> Salir</a></li>
+        </ul>
+      </div>
+
+    </nav>
+    <!-- NAVBAR -->
+
+    <!-- MAIN -->
+
+    <main>
+      <div class="bread-container">
+        <h1 class="title">Agregar articulo</h1>
+        <ul class="breadcrumbs">
+          <li><a href="AdminPanel.html">Dashboard</a></li>
+          <li class="divider">/</li>
+          <li><a href="#" class="active">articulos</a></li>
+          <li class="divider">/</li>
+          <li><a href="#" class="active">agregar articulo</a></li>
+        </ul>
+      </div>
+
+      <div class="container">
+
+        <div class="card">
+            
+            <form id="contact-form">
+                <div class="row">
+                  <div class="column">
+                    <div class="form-group">
+                      <label for="nombrePlatillo">Nombre del articulo*</label>
+                      <input id="nombrePlatillo" type="text" name="nombrePlatillo" required="required">
+                    </div>
+                  </div>
+              
+                  <div class="column">
+                    <div class="form-group">
+                      <label for="categoria">Categoría*</label>
+                      <select id="categoria" name ="categoria">
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Comidas">Comidas</option>
+                        <option value="Postres">Postres</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="column">
+                    <div class="form-group">
+                      <label for="fecha_creacion">Fecha de Creación*</label>
+                      <input id="fecha_creacion" type="date" name="fecha_creacion" required="required">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div class="form-group">
+                      <label for="precio">Precio*</label>
+                      <input id="precio" type="number" step="0.01" name="precio" required="required">
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="form-group">
+                      <label for="descripcionPlatillo">Descripción*</label>
+                      <textarea id="descripcionPlatillo" name="descripcionPlatillo" rows="5"></textarea>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <label for="imagenUrlPlatillo">Imagen del articulo*</label>
+                    <div class="form-group border-dotted" id="imageContainer" onclick="chooseFile()">
+                      <i class="fa fa-file-image-o fa-3x text-success" id="fileIcon"></i>
+                      <input type="file" id="fileInput" style="display: none;" accept="image/*" onchange="previewImage()">
+                      <img id="imagePreview"
+                        style="width: 150px; height: 150px; object-fit: cover; display: none; cursor: pointer;"
+                        onclick="changeImage()">
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <button type="button" class="btn-send" onclick="registrarPlatillo()">Registrar</button>
+                  <button type="button" class="btn-send" onclick="clearForm()">Limpiar</button>
+                </div>
+              </form>
+              
+              
+              
+
+        </div>
+
+      </div>
+
+    </main>
+    <!-- MAIN -->
+
+  </section>
+
+  <script src="../assets/js/addProducts.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <!-- <script src="../models/addUsersModel.js"></script> -->
+  <script src="../controllers/addProductsController.js"></script>
+</body>
+
+</html>

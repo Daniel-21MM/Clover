@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuarios</title>
+    <!-- CDN BoxIcons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Enlace Css -->
+    <link rel="stylesheet" href="../assets/css/UserList.css">
+
+</head>
+
+
+<body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="AdminPanel.html" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
+        <ul class="side-menu">
+            <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+            <li class="divider" data-text="Panel de navegacion">Panel de navegacion</li>
+            <!-- Modulo usuarios-->
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user icon'></i> Usuarios
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+
+                <ul class="side-dropdown">
+                    <li><a href="listUsers.html">Lista de usuarios</a></li>
+                    <li><a href="addUser.html">Agregar usuario</a></li>
+                </ul>
+            </li>
+            <!--Modulo Articulos-->
+            <li>
+                <a href="#">
+                    <i class='bx bxs-package icon'></i> Articulos
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="listUsers.html">Lista de articulos</a></li>
+                    <li><a href="addUser.html">Agregar articulos</a></li>
+                </ul>
+            </li>
+            <!--Modulo de mesas-->
+            <li>
+                <a href="#">
+                    <i class='bx bx-table icon'></i> Mesas
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="listUsers.html">Lista de mesas</a></li>
+                    <li><a href="addUser.html">Agregar mesas</a></li>
+                </ul>
+            </li>
+            <!--Modulo de ventas-->
+            <li>
+                <a href="#">
+                    <i class='bx bx-bar-chart icon'></i> Ventas
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="listSales.html">Lista de ventas</a></li>
+                    <li><a href="addSale.html">Agregar venta</a></li>
+                </ul>
+            </li>
+            <!--Modulo de configuraciones-->
+            <li class="divider" data-text="Opciones">Opciones</li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog icon'></i> Configuración
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="#">General</a></li>
+                    <li><a href="prolife.html">Perfil</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- NAVBAR -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu toggle-sidebar'></i>
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="Buscar...">
+
+                </div>
+            </form>
+
+            <span class="divider"></span>
+            <div class="profile">
+                <img src="" alt="" id="imagenEnOtraPagina">
+                <ul class="profile-link">
+                    <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
+                    <li><a href="#"><i class='bx bxs-cog'></i>Configuracion</a></li>
+                    <li><a href="login.html"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <h1 class="title">Lista de articulos</h1>
+            <ul class="breadcrumbs">
+                <li><a href="AdminPanel.html">Dashboard</a></li>
+                <li class="divider">/</li>
+                <li><a href="#" class="active">articulos</a></li>
+                <li class="divider">/</li>
+                <li><a href="#" class="active">lista de articulos</a></li>
+            </ul>
+
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Lista de articulos</h3>
+                        <div class="form-input">
+                            <span class="icon bx bx-search"></span>
+                            <input type="text" id="searchInput" placeholder="Buscar...">
+                        </div>
+                    </div>
+
+                    <table id="TablaArticulos">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th> 
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                                <th>Precio</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí se cargarán los datos de los usuarios -->
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </main>
+        <!-- MAIN -->
+    </section>
+    <script src="../assets/js/sidebar.js"></script>
+    <!-- <script src="../assets/js/UserTable.js"></script> -->
+    <script src="../models/showProductsModels.js"></script>
+    <script src="../controllers/showProductsController.js"></script>
+    
+   
+</body>
+
+</html>
