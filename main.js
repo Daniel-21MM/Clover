@@ -75,7 +75,7 @@ function crearVentanaEmpleados() {
       enableRemoteModule: true,
     },
   });
-  ventanaEmpleados.loadFile(path.join(__dirname, 'views', 'log.html'));
+  ventanaEmpleados.loadFile(path.join(__dirname, 'views', 'panelEmployee.html'));
 }
 
 // Agregar un manejador para el evento 'abrirVentanaInicio'
