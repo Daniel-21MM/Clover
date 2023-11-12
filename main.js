@@ -1,14 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const db = require('./database/db');
 const LoginControler = require('./controllers/LoginController');
 
-// Aquí creamos las variables para nuestras ventanas
 let ventanaPrincipal;
 let ventanaInicio;
 let ventanaEmpleados;
 
-// Creamos la función createWindow() para crear nuestra ventana y sus propiedades y manejo de mensajes
 function crearVentanaPrincipal() {
   ventanaPrincipal = new BrowserWindow({
     width: 1000,
@@ -37,16 +34,8 @@ function crearVentanaPrincipal() {
   ventanaPrincipal.on('closed', () => {
     ventanaPrincipal = null;
   });
-
-  // Aquí llamamos el evento de cerrar la ventana principal
-  ipcMain.on('cerrarVentanaActual', () => {
-    if (ventanaPrincipal) {
-      ventanaPrincipal.close();
-    }
-  });
 }
 
-// Función para crear la ventana de inicio (ya no toma un usuario como parámetro)
 function crearVentanaInicio() {
   ventanaInicio = new BrowserWindow({
     width: 1500,
@@ -60,9 +49,12 @@ function crearVentanaInicio() {
     },
   });
   ventanaInicio.loadFile(path.join(__dirname, 'views', 'AdminPanel.html'));
+
+  ventanaInicio.on('closed', () => {
+    ventanaInicio = null;
+  });
 }
 
-// Función para crear la ventana de empleados
 function crearVentanaEmpleados() {
   ventanaEmpleados = new BrowserWindow({
     width: 2000,
@@ -76,19 +68,47 @@ function crearVentanaEmpleados() {
     },
   });
   ventanaEmpleados.loadFile(path.join(__dirname, 'views', 'panelEmployee.html'));
+
+  ventanaEmpleados.on('closed', () => {
+    ventanaEmpleados = null;
+  });
 }
 
-// Agregar un manejador para el evento 'abrirVentanaInicio'
+// Agrega un manejador para el evento 'abrirVentanaInicio'
 ipcMain.on('abrirVentanaInicio', (event, usuario) => {
   crearVentanaInicio(usuario);
 });
 
-// Agregar un manejador para el evento 'abrirVentanaEmpleados'
+// Agrega un manejador para el evento 'abrirVentanaEmpleados'
 ipcMain.on('abrirVentanaEmpleados', () => {
   crearVentanaEmpleados();
 });
 
-// Estas funciones son por defecto, no modificar ni borrar nada de aquí
+// Manejar el clic en el enlace Salir desde el proceso principal
+ipcMain.on('btnSalirClick', () => {
+  if (ventanaInicio) {
+    // Cierra la ventana actual (AdminPanel.html)
+    ventanaInicio.close();
+    ventanaInicio = null;
+    // Abre la ventana de inicio (login.html)
+    crearVentanaPrincipal();
+  }
+});
+
+// ...
+
+// Manejar el clic en el enlace Salir desde el proceso principal
+ipcMain.on('cerrarVentanaActualLogin', () => {
+  if (ventanaPrincipal) {
+    // Cierra la ventana actual (login.html)
+    ventanaPrincipal.close();
+    ventanaPrincipal = null;
+  }
+});
+
+// ...
+
+
 app.on('ready', crearVentanaPrincipal);
 
 app.on('window-all-closed', () => {

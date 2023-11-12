@@ -76,5 +76,5 @@ function mostrarAlerta(title, text, icon, callback) {
 
 function abrirVentana(ventana) {
   ipcRenderer.send(`abrirVentana${ventana}`);
-  ipcRenderer.send('cerrarVentanaActual');
+  ipcRenderer.send('cerrarVentanaActualLogin'); // Nuevo mensaje para cerrar la ventana actual del login
 }
