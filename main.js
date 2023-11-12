@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const db = require('./database/db');
 const LoginControler = require('./controllers/LoginController');
 
 let ventanaPrincipal;
@@ -106,6 +107,16 @@ ipcMain.on('cerrarVentanaActualLogin', () => {
   }
 });
 
+// Manejar el clic en el botón Salir desde la ventana de empleados
+ipcMain.on('btnSalirEmpleadoClick', () => {
+  if (ventanaEmpleados) {
+    // Cierra la ventana actual (panelEmployee.html)
+    ventanaEmpleados.close();
+    ventanaEmpleados = null;
+    // Abre la ventana de inicio de sesión (login.html)
+    crearVentanaPrincipal();
+  }
+});
 // ...
 
 

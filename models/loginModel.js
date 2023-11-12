@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
 const usuarios = require('../controllers/LoginController');
+
 const Swal = require('sweetalert2');
 
 document.addEventListener('DOMContentLoaded', () => {

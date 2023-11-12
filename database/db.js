@@ -3,13 +3,10 @@ const mysql = require('mysql2');
 
 // Configuramos la conexión ala base de datos MySQL
 const connection = mysql.createConnection({
-  host: 'us-east.connect.psdb.cloud', 
-  user: 'cqgk5rqn5izkyaf4c9a5',
-  password: 'pscale_pw_J8DYbe6Slzvi150IqUt61ZeM5JAHNrLi0CeGg8Qi12W', 
-  database: 'cloverwingsdb',
-  ssl:{
-    rejectUnauthorized: false
-  }
+  host: 'localhost', 
+  user: 'root',
+  password: '', 
+  database: 'cloverwingsbd'
 });
 
 // Conectamos a la base de datos

@@ -77,7 +77,7 @@
 				<ul class="profile-link">
 					<li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
 					<li><a href="#"><i class='bx bxs-cog'></i> Configuracion</a></li>
-					<li><a href="login.html"><i class='bx bxs-log-out-circle'></i> Salir</a></li>
+					<li><a href="#" id="btnSalirEmpleado"><i class='bx bxs-log-out-circle'></i> Salir</a></li>
 				</ul>
 			</div>
 
@@ -97,13 +97,25 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- NAVBAR -->
 
 	<!-- SCRIPTS JS-->
+	<!-- Agregar este script al final de tu archivo panelEmployee.html -->
+	<script>
+		const { ipcRenderer } = require('electron');
+
+		document.addEventListener('DOMContentLoaded', () => {
+			const btnSalirEmpleado = document.getElementById('btnSalirEmpleado');
+
+			btnSalirEmpleado.addEventListener('click', () => {
+				ipcRenderer.send('btnSalirEmpleadoClick');
+			});
+		});
+	</script>
 
 	<script src="../assets/js/sidebar.js"></script>
 	<script src="../models/tablesModel.js"></script>
