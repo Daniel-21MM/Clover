@@ -155,7 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // APEXCHART
-var options = {
+
+// Grafica para ventas
+var optionsVentas = {
 	series: [{
 		name: 'series1',
 		data: [31, 40, 28, 51, 42, 109, 100]
@@ -184,5 +186,33 @@ var options = {
 	},
 };
 
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
+var chartVentas = new ApexCharts(document.querySelector("#chart"), optionsVentas);
+chartVentas.render();
+
+
+// Grafica para articulos
+// var optionsArticulos = {
+// 	series: [50, 30, 20], // Datos para las categorías Bebidas, Comidas, Postres
+// 	chart: {
+// 		height: 350,
+// 		type: 'pie',
+// 	},
+// 	plotOptions: {
+// 		pie: {
+// 			donut: {
+// 				size: '60%',
+// 			}
+// 		}
+// 	},
+// 	labels: ['Bebidas', 'Comidas', 'Postres'],
+// 	dataLabels: {
+// 		enabled: false
+// 	},
+// 	legend: {
+// 		show: true,
+// 		position: 'bottom'
+// 	}
+// };
+
+// var chartArticulos = new ApexCharts(document.querySelector("#pieChart"), optionsArticulos);
+// chartArticulos.render();

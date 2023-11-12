@@ -324,6 +324,16 @@ main .info-data {
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	grid-gap: 20px;
 }
+/*==============*/
+.box-icon-container {
+    text-align:end;
+}
+
+.box-icon-container i{
+    font-size: 4em; /* Ajusta el tamaño del icono según sea necesario */
+    color: #049935; /* Cambia el color del icono según sea necesario */
+}
+
 main .info-data .card {
 	padding: 20px;
 	border-radius: 10px;
@@ -436,7 +446,7 @@ main .content-data .head .menu-link a:hover {
 	background: var(--grey);
 }
 main .content-data .chart {
-	width: 100%;
+	width: 97%;
 	max-width: 100%;
 	overflow-x: auto;
 	scrollbar-width: none;
