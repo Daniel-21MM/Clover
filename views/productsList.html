@@ -99,7 +99,7 @@
                 <ul class="profile-link">
                     <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
                     <li><a href="#"><i class='bx bxs-cog'></i>Configuracion</a></li>
-                    <li><a href="login.html"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
+                    <li><a href="#" id="btnSalir"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
                 </ul>
             </div>
         </nav>
@@ -130,7 +130,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Imagen</th> 
+                                <th>Imagen</th>
                                 <th>Nombre</th>
                                 <th>Categoria</th>
                                 <th>Precio</th>
@@ -154,8 +154,37 @@
     <script src="../assets/js/productTable.js"></script>
     <script src="../models/showProductsModels.js"></script>
     <script src="../controllers/showProductsController.js"></script>
-    
-   
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnSalir = document.getElementById('btnSalir');
+
+            btnSalir.addEventListener('click', async () => {
+                // Mostrar SweetAlert de confirmación
+                const confirmacion = await mostrarConfirmacion();
+
+                // Si el usuario confirma, enviamos el mensaje para cerrar la ventana
+                if (confirmacion.value) {
+                    ipcRenderer.send('btnSalirClick');
+                }
+            });
+
+            // Función para mostrar el SweetAlert de confirmación
+            function mostrarConfirmacion() {
+                return Swal.fire({
+                    title: '¿Estás seguro de salir?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#049935',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, salir',
+                    cancelButtonText: 'Cancelar',
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>
