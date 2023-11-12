@@ -107,7 +107,7 @@ ipcMain.on('cerrarVentanaActualLogin', () => {
   }
 });
 
-// Manejar el clic en el botón Salir desde la ventana de empleados
+// Mantener este código al final de tu archivo main.js
 ipcMain.on('btnSalirEmpleadoClick', () => {
   if (ventanaEmpleados) {
     // Cierra la ventana actual (panelEmployee.html)
@@ -117,6 +117,7 @@ ipcMain.on('btnSalirEmpleadoClick', () => {
     crearVentanaPrincipal();
   }
 });
+
 // ...
 
 
