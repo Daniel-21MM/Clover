@@ -104,21 +104,9 @@
 	<!-- NAVBAR -->
 
 	<!-- SCRIPTS JS-->
-	<!-- Agregar este script al final de tu archivo panelEmployee.html -->
-	<script>
-		const { ipcRenderer } = require('electron');
-
-		document.addEventListener('DOMContentLoaded', () => {
-			const btnSalirEmpleado = document.getElementById('btnSalirEmpleado');
-
-			btnSalirEmpleado.addEventListener('click', () => {
-				ipcRenderer.send('btnSalirEmpleadoClick');
-			});
-		});
-	</script>
-
 	<script src="../assets/js/sidebar.js"></script>
 	<script src="../models/tablesModel.js"></script>
+	<script src="../assets/js/CloseWinEmployee.js"></script>
 
 
 </body>
