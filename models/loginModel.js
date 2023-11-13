@@ -1,6 +1,5 @@
 const { ipcRenderer } = require('electron');
 const usuarios = require('../controllers/LoginController');
-
 const Swal = require('sweetalert2');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,17 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const contrasenaInput = document.getElementById('contrasena');
   const iniciarSesionButton = document.getElementById('Iniciar');
 
-  let eventoConfigurado = false; 
+  let eventoConfigurado = false;
 
   if (!eventoConfigurado) {
- 
     iniciarSesionButton.addEventListener('click', async () => {
       const usuario = usuarioInput.value;
       const contrasena = contrasenaInput.value;
 
-      // Validar campos vacíos
+      // Validar campos vacíos con SweetAlert
       if (!usuario || !contrasena) {
-        console.log("Campos vacíos");
+        mostrarAlerta('¡Error!', 'Por favor, completa todos los campos.', 'error');
         return;
       }
 
