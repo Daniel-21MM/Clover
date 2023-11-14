@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agregar producto</title>
+    <!-- CDN BoxIcons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Incluir Font Awesome desde CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Enlaces Css -->
+    <link rel="stylesheet" href="../assets/css/addUser.css">
+
+
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="AdminPanel.html" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
+        <ul class="side-menu">
+            <li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+            <li class="divider" data-text="Panel de navegacion"></li>
+            <!-- Modulo usuarios-->
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user icon'></i> Usuarios
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+
+                <ul class="side-dropdown">
+                    <li><a href="listUsers.html">Lista de usuarios</a></li>
+                    <li><a href="addUser.html">Agregar usuario</a></li>
+                </ul>
+            </li>
+            <!--Modulo Articulos-->
+            <li>
+                <a href="#">
+                    <i class='bx bxs-package icon'></i> Articulos
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="productsList.html">Lista de articulos</a></li>
+                    <li><a href="addProduct.html">Agregar articulos</a></li>
+                </ul>
+            </li>
+            <!--Modulo de mesas-->
+            <li>
+                <a href="#">
+                    <i class='bx bx-table icon'></i> Mesas
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="tableList.html">Lista de mesas</a></li>
+                    <li><a href="addTable.html">Agregar mesas</a></li>
+                </ul>
+            </li>
+            <!--Modulo de ventas-->
+            <li>
+                <a href="#">
+                    <i class='bx bx-bar-chart icon'></i> Ventas
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="listSales.html">Lista de ventas</a></li>
+                    <li><a href="addSale.html">Agregar venta</a></li>
+                </ul>
+            </li>
+            <!--Modulo de configuraciones-->
+            <li class="divider" data-text="Opciones">Opciones</li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog icon'></i> Configuración
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="#">General</a></li>
+                    <li><a href="prolife.html">Perfil</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- NAVBAR -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu toggle-sidebar'></i>
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="Buscar...">
+                </div>
+            </form>
+
+            <span class="divider"></span>
+
+            <div class="profile">
+                <img src="" alt="" id="imagenEnOtraPagina">
+                <ul class="profile-link">
+                    <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
+                    <li><a href="#"><i class='bx bxs-cog'></i> Configuracion</a></li>
+                    <li><a href="#" id="btnSalir"><i class='bx bxs-log-out-circle'></i> Salir</a></li>
+                </ul>
+            </div>
+
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+
+        <main>
+            <div class="bread-container">
+                <h1 class="title">Datos de empresa</h1>
+                <ul class="breadcrumbs">
+                    <li><a href="AdminPanel.html">Dashboard</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="#" class="active">Configuracion</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="" class="active">Configuracion general</a></li>
+                </ul>
+            </div>
+
+            <div class="container">
+
+                <div class="card">
+
+                    <form id="contact-form">
+                        <div class="row">
+                            <div class="column">
+                                <div class="form-group">
+                                    <input type="hidden" id="id" name="id">
+                                    <label for="nombreEmpresa">Nombre de empresa*</label>
+                                    <input id="nombreEmpresa" type="text" name="nombreEmpresa" required="required">
+                                </div>
+                            </div>
+                    
+                            <div class="column">
+                                <div class="form-group">
+                                    <label for="correoElectronico">Correo electrónico*</label>
+                                    <input id="correoElectronico" type="text" name="correoElectronico" required="required">
+                                </div>
+                            </div>
+                    
+                            <div class="column">
+                                <div class="form-group">
+                                    <label for="numeroTelefono">Número de teléfono*</label>
+                                    <input id="numeroTelefono" type="number" name="numeroTelefono" required="required" maxlength="10">
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="column">
+                                <div class="form-group">
+                                    <label for="direccion">Dirección*</label>
+                                    <input id="direccion" type="text" name="direccion" required="required">
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="form-group">
+                                    <label for="detallesEmpresa">Detalles de empresa*</label>
+                                    <textarea id="detallesEmpresa" name="detallesEmpresa" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <label for="logoEmpresa">Logo*</label>
+                                <div class="form-group border-dotted" id="imageContainer" onclick="chooseFile()">
+                                   
+                                    <input type="file" id="logoEmpresa" style="display: none;" accept="image/*" onchange="previewImage()">
+                                    <img id="imagePreview"
+                                        style="width: 150px; height: 150px; object-fit: cover; display: none; cursor: pointer;"
+                                        >
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <button type="button" class="btn-send" onclick="actualizarDatosEmpresa()">Actualizar</button>
+                            <button type="button" class="btn-send"><a href="AdminPanel.html" style="color: white;">Salir</a></button>
+                        </div>
+                    </form>
+                    
+                </div>
+
+            </div>
+
+        </main>
+        <!-- MAIN -->
+
+    </section>
+
+    <script src="../assets/js/addProducts.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
+    <script src="../controllers/updateCompanyController.js"></script>
+    <!-- <script src="../controllers/addProductsController.js"></script> -->
+
+</body>
+
+</html>

@@ -1,10 +1,6 @@
 # Ignorar node_modules
 node_modules/
 
-# Ignorar los archivos package.json y package-lock.json
-package.json
-package-lock.json
-
 # Incluir las carpetas assets, controllers, database, models, public, views
 !assets/
 !controllers/
@@ -12,6 +8,8 @@ package-lock.json
 !models/
 !public/
 !views/
+!package.json/
+!package-lock.json/
 
 # Incluir el archivo main.js
 !main.js

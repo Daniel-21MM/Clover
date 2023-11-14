@@ -1,0 +1,39 @@
+{
+  "name": "clover-wings-app",
+  "version": "1.0.0",
+  "description": "Aplicación de escritorio para restaurante",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Daniel Mendez Mendez",
+  "license": "ISC",
+  "icon": "assets/icon/Icono.ico",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "electron-store": "^8.1.0",
+    "fontawesome": "^5.6.3",
+    "jquery": "^3.7.1",
+    "mysql2": "^3.6.0",
+    "nodemailer": "^6.9.5",
+    "pretty-bytes": "^6.1.1",
+    "sweetalert2": "^11.7.27"
+  },
+  "devDependencies": {
+    "electron": "^26.1.0",
+    "electron-builder": "^24.6.4",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.clover-wings-app",
+    "productName": "Clover Wings App",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "assets/icon/Icono.ico"
+    }
+  }
+}

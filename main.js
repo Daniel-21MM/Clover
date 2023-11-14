@@ -11,7 +11,7 @@ function crearVentanaPrincipal() {
   ventanaPrincipal = new BrowserWindow({
     width: 1000,
     height: 600,
-    autoHideMenuBar:true,
+    autoHideMenuBar:false,
     resizable: false,
     webPreferences: {
       nodeIntegration: true,
@@ -41,7 +41,7 @@ function crearVentanaInicio() {
   ventanaInicio = new BrowserWindow({
     width: 1500,
     height: 800,
-    autoHideMenuBar:true,
+    autoHideMenuBar:false,
     resizable: true,
     webPreferences: {
       nodeIntegration: true,
@@ -60,7 +60,7 @@ function crearVentanaEmpleados() {
   ventanaEmpleados = new BrowserWindow({
     width: 2000,
     height: 1200,
-    autoHideMenuBar:true,
+    autoHideMenuBar:false,
     resizable: true,
     webPreferences: {
       nodeIntegration: true,
