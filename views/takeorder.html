@@ -83,7 +83,6 @@
             </div>
 
             <div class="container">
-
                 <div class="card">
 
                     <form id="tomar-Orden">
@@ -139,20 +138,23 @@
                                     style="text-decoration: none;color: white;">Salir</a></button>
                         </div>
                     </form>
+                    
                 </div>
-
             </div>
 
+
+            <div id="contenedor-mesas" class="mesas-container" style="display: none;">
+                <!-- Aquí se cargarán las tarjetas de mesas dinámicamente -->
+            </div>
+            
         </main>
         <!-- MAIN -->
 
     </section>
 
-    <!-- <script src="../assets/js/addProducts.js"></script> -->
     <script src="../assets/js/sidebar.js"></script>
-    <script src="../controllers/takeOrderController.js"></script>
-    <script src="../models/takeOrderModel.js"></script>
-    <!-- Agrega el script para cargar opciones en el select -->
+    <script src="../models/tablesModel.js"></script>
+  
     <script>
 		const { ipcRenderer } = require('electron');
 		document.addEventListener('DOMContentLoaded', () => {

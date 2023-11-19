@@ -1,6 +1,6 @@
 
   const { ipcRenderer } = require('electron');
-  const Swal = require('sweetalert2');
+ 
 
   document.addEventListener('DOMContentLoaded', () => {
     const btnSalirEmpleado = document.getElementById('btnSalirEmpleado');

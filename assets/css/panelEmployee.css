@@ -380,25 +380,36 @@ main .breadcrumbs li.divider {
     font-family: 'Poppins', sans-serif;
 }
 
-.content-1 {
+/* Estado: Disponible */
+.content-1.Disponible {
     background-color: #049935;
     color: white;
 }
 
-.content-1 a {
-    color: #049935;
-    padding: 5px 0px;
-    background-color: white;
-    margin: 10px;
-    border-radius: 5px;
+.content-1 button{
+	background-color: white;
+   padding: 5px 0px;
+   border-radius: 5px;
 }
-
-.content img {
-    width: 25%; /* Ajusta el ancho de la imagen según tus necesidades */
+.content-1 img{
+	width: 25%; /* Ajusta el ancho de la imagen según tus necesidades */
     margin: 10px auto; /* Centra horizontalmente la imagen */
 }
+.content-1 button:hover{
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.878);
+}
 
+/* Estado: No disponible */
+.content-1.No-Disponible {
+    background-color: #FF0000;
+    color: white;
+}
 
+.atender-btn{
+	color: #049935;
+	border: none;
+}
 
 /* MAIN */
 /* CONTENT */
