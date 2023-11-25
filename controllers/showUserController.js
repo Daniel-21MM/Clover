@@ -23,13 +23,13 @@ async function cargarDatosTabla(tablaId) {
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${usuario.id}</td>
+                   
                     <td><img src="${usuario.imgPerfilUrl}" alt="Perfil de usuario"></td>
                     <td>${usuario.usuario}</td>
                     <td>${rolTexto}</td>
                     <td>${usuario.correo}</td>
                     <td>${telefonoFormateado}</td>
-                    <td>${fecha}</td>
+                    
                     <td>
                         <button class="details" data-id="${usuario.id}"><i class='bx bx-show'></i></button> 
                         <button class="edit" data-id="${usuario.id}"><i class='bx bx-edit'></i></button>

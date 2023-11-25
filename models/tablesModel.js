@@ -15,18 +15,47 @@ document.addEventListener('DOMContentLoaded', async function () {
             <p>Estado: ${mesa.estado}</p>
             <p>Capacidad: ${mesa.capacidad}</p>
             <img src="${mesa.imgMesaUrl}" alt="Imagen de la mesa">
-            <button class="atender-btn" data-mesa="${mesa.numeroMesa}">Atender</button>
         `;
+
+        // Crear botones según el estado de la mesa
+        if (mesa.estado === 'Disponible') {
+            const atenderBtn = document.createElement('button');
+            atenderBtn.className = 'atender-btn';
+            atenderBtn.textContent = 'Atender';
+            atenderBtn.dataset.mesa = mesa.numeroMesa;
+            atenderBtn.addEventListener('click', atenderMesa);
+
+            mesaCard.appendChild(atenderBtn);
+        } else if (mesa.estado === 'No Disponible') {
+            const editarBtn = document.createElement('button');
+            editarBtn.className = 'editar-btn';
+            editarBtn.textContent = 'Editar Pedido';
+            editarBtn.dataset.mesa = mesa.numeroMesa;
+            editarBtn.addEventListener('click', editarPedido);
+
+            const finalizarBtn = document.createElement('button');
+            finalizarBtn.className = 'finalizar-btn';
+            finalizarBtn.textContent = 'Finalizar';
+            finalizarBtn.dataset.mesa = mesa.numeroMesa;
+            finalizarBtn.addEventListener('click', finalizarPedido);
+
+            mesaCard.appendChild(editarBtn);
+            mesaCard.appendChild(finalizarBtn);
+        }
+
         contenedorMesas.appendChild(mesaCard);
     });
+
+    // Definir atenderMesa aquí para que esté disponible en el ámbito global
+    function atenderMesa(event) {
+        const numeroMesa = event.currentTarget.dataset.mesa;
+        window.location.href = `takeorder.html?mesa=${numeroMesa}`;
+    }
 
     // Agregar evento al botón "Atender"
     const botonesAtender = document.querySelectorAll('.atender-btn');
     botonesAtender.forEach(boton => {
-        boton.addEventListener('click', function (event) {
-            const numeroMesa = event.currentTarget.getAttribute('data-mesa');
-            window.location.href = `takeorder.html?mesa=${numeroMesa}`;
-        });
+        boton.addEventListener('click', atenderMesa);
     });
 
     // Código para cargar dinámicamente las opciones del select
@@ -157,6 +186,23 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         }
     });
+
+    function atenderMesa(event) {
+        const numeroMesa = event.currentTarget.dataset.mesa;
+        window.location.href = `takeorder.html?mesa=${numeroMesa}`;
+    }
+
+    function editarPedido(event) {
+        // Lógica para editar el pedido
+        const numeroMesa = event.currentTarget.dataset.mesa;
+        console.log(`Editar pedido de la mesa ${numeroMesa}`);
+    }
+
+    function finalizarPedido(event) {
+        // Lógica para finalizar el pedido
+        const numeroMesa = event.currentTarget.dataset.mesa;
+        console.log(`Finalizar pedido de la mesa ${numeroMesa}`);
+    }
 
     function obtenerNumeroMesaDeURL() {
         const urlParams = new URLSearchParams(window.location.search);
