@@ -434,17 +434,18 @@ main .breadcrumbs li.divider {
 	color: white;
 }
 
-.content-1 button {
+.btnatender {
 	background-color: white;
-	padding: 5px 0px;
+	padding: 5px 10px;
 	border-radius: 5px;
+	border: none;
+	color:#049935;
+	margin: 10px
 }
 
 .content-1 img {
 	width: 25%;
-	/* Ajusta el ancho de la imagen según tus necesidades */
 	margin: 10px auto;
-	/* Centra horizontalmente la imagen */
 }
 
 .content-1 button:hover {
@@ -457,27 +458,51 @@ main .breadcrumbs li.divider {
 	color: white;
 }
 
-.atender-btn {
-	color: #049935;
-	border: none;
-}
 
-/* Estilos para el botón "Editar Pedido" */
-.editar-btn {
-	color: #049935;
-	margin: 2%;
-	border: none;
-	background-color: white;
-}
 
 /* Estilos para el botón "Finalizar" */
-.finalizar-btn {
+/* .finalizar-btn {
 	color: #34a853;
-	/* Color de fondo */
 	margin: 2%;
 	border: none;
 	background-color: white;
+} */
+#tomar-Orden {
+	gap: 10px;
 }
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	flex-basis: calc(50% - 10px);
+	/* Dos elementos por fila con margen entre ellos */
+}
+
+#tomar-Orden label {
+	margin-bottom: 2px;
+}
+
+#tomar-Orden input:not([type="datetime-local"]),
+#tomar-Orden select,
+#tomar-Orden textarea {
+	flex: 1;
+	padding: 4px;
+	box-sizing: border-box;
+	border: 1px solid #049935;
+	outline-color: #049935;
+	border-radius: 6px;
+}
+
+#tomar-Orden input[type="datetime-local"] {
+	padding: 4px;
+	border: none;
+	outline-color: #049935;
+	border: 1px solid #049935;
+	border-radius: 6px;
+}
+
+
 
 /* MAIN */
 /* CONTENT */

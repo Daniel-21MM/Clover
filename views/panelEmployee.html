@@ -6,60 +6,51 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Panel empleados</title>
 	<!-- CDN Bootstrap 5 -->
-
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 	<!-- CDN BoxIcons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- BOOTSTRAP 5 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Enlaces Css -->
 	<link rel="stylesheet" href="../assets/css/panelEmployee.css">
+	<style>
+		#detallesPedido {
+			/* Agrega tus estilos aquí */
+			background-color: #f0f0f0;
+			border: 1px solid green;
+			padding: 10px;
+			height: 130px;
+			margin-top: 10px;
+		}
+	</style>
+	
+
 </head>
 
 <body>
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="AdminPanel.html" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
+		<a href="#" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
 		<ul class="side-menu">
-			<li><a href="AdminPanel.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+			<li><a href="#" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
 			<li class="divider" data-text="Panel de navegacion"></li>
-			<!-- Modulo usuarios-->
-			<li>
-				<a href="#">
-					<i class='bx bxs-user icon'></i> Usuarios
-					<i class='bx bx-chevron-right icon-right'></i>
-				</a>
-
-				<ul class="side-dropdown">
-					<li><a href="listUsers.html">Lista de usuarios</a></li>
-					<li><a href="addUser.html">Agregar usuario</a></li>
-				</ul>
-			</li>
-			<!--Modulo Articulos-->
+			<!--Modulo Pedidos-->
 			<li>
 				<a href="#">
 					<i class='bx bxs-package icon'></i>Pedidos
 					<i class='bx bx-chevron-right icon-right'></i>
 				</a>
 				<ul class="side-dropdown">
-					<li><a href="productsList.html">Lista de pedidos</a></li>
-					<li><a href="addProduct.html">Agregar articulos</a></li>
+					<li><a href="#">Lista de pedidos</a></li>
+					<li><a href="#">Facturas</a></li>
 				</ul>
 			</li>
 			<!--Modulo de configuraciones-->
-			<li class="divider" data-text="Opciones">Opciones</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog icon'></i> Configuración
-					<i class='bx bx-chevron-right icon-right'></i>
-				</a>
-				<ul class="side-dropdown">
-					<li><a href="Companydata.html">General</a></li>
-					<li><a href="prolife.html">Perfil</a></li>
-				</ul>
-			</li>
+
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
 
-	<!-- NAVBAR -->
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
@@ -73,7 +64,7 @@
 			<span class="divider"></span>
 
 			<div class="profile">
-				<img src="" alt="" id="imagenEnOtraPagina">
+				<img src="#" alt="" id="imagenEnOtraPagina">
 				<ul class="profile-link">
 					<!-- <li><a href="prolife.html"><i class='bx bxs-user-circle icon'></i> Perfil</a></li>
 					<li><a href="Companydata.html"><i class='bx bxs-cog'></i> Configuracion</a></li> -->
@@ -97,73 +88,33 @@
 					</div>
 				</div>
 			</div>
-			
-			<form id="tomar-Orden" style="display: none;">
-				<div class="row">
-					<div class="column">
-						<div class="form-group">
-							<label for="nombreCliente">Nombre del cliente*</label>
-							<input id="nombreCliente" type="text" name="nombreCliente" required>
-						</div>
-					</div>
 
-					<div class="column">
-						<div a class="form-group">
-							<label for="platillo">Platillo*</label>
-							<select id="platillo" name="platillo" required>
-								<!-- Las opciones se cargarán dinámicamente aquí desde la base de datos -->
-							</select>
+			<!-- Modal de Bootstrap -->
+			<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title text-success" id="exampleModalLabel">Tomar pedido de la mesa</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Cerrar"></button>
 						</div>
-					</div>
+						<div class="modal-body">
+							<!-- Contenido del modal, puedes personalizarlo según tus necesidades -->
+							<div id="tomar-Orden" class="d-flex flex-wrap">
+								<!-- Contenido del formulario -->
+							</div>
+						</div>
 
-					<div class="column">
-						<div class="form-group">
-							<label for="cantidad">Cantidad*</label>
-							<input id="cantidad" type="number" step="1" name="cantidad" required>
-						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="column">
-						<div class="form-group">
-							<label for="descuento">Agregar descuento % (opcional)</label>
-							<input id="descuento" type="number" step="0.01" name="descuento" min="0" max="100">
-						</div>
-					</div>
-					<div class="column">
-						<div class="form-group">
-							<label for="fechaCreacion">Fecha*</label>
-							<input id="fechaCreacion" type="datetime-local" name="fechaCreacion" required>
-						</div>
-					</div>
-					<div class="column">
-						<div class="form-group">
-							<label for="detallesPedido">Detalles de pedido*</label>
-							<textarea id="detallesPedido" name="detallesPedido" rows="5" required></textarea>
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<button type="button" class="btn-send" id="agregarOrden">Agregar</button>
-					<button type="button" class="btn-send" id="EnviarOrden">Enviar Orden</button>
-					<button class="btn-send"><a href="panelEmployee.html"
-							style="text-decoration: none;color: white;">Salir</a></button>
-				</div>
-			</form>
-
-
+			</div>
 		</main>
 		<!-- MAIN -->
 	</section>
-	<!-- NAVBAR -->
 
 	<!-- SCRIPTS JS-->
 	<script src="../assets/js/sidebar.js"></script>
-	<script src="../models/tablesModel.js"></script>
 	<script src="../assets/js/CloseWinEmployee.js"></script>
-	
+	<script src="../models/tablesModel.js"></script>
 </body>
-
-
 </html>
