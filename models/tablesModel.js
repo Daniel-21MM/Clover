@@ -234,8 +234,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
         
-        
-        
         function obtenerPrecioPlatillo(platilloSelect) {
             // Obtener el índice seleccionado
             const indiceSeleccionado = platilloSelect.selectedIndex;
@@ -298,8 +296,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
         
-        
-        
         function obtenerDetallesPedidoArray() {
             const detallesPedidoDiv = document.getElementById('detallesPedido');
             const detallesDivs = detallesPedidoDiv.getElementsByClassName('detalle-pedido');
@@ -354,7 +350,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
             }
         }
-        
         
         // Función asincrónica para generar el informe en formato PDF
        async function generarInforme(mesa) {
@@ -504,72 +499,4 @@ const totalVenta = detallesPedido.DetallesPedidos.reduce((total, detalle) => {
 
     main();
 });
-
-
-
-
-    
-    // EN ESTA PARTE FINALIZAREMOS EL PÉDIDO Y IMPRIMEROS EL REPORTE 
-    //     Función para generar el informe
-    //     async function generarInforme(mesa) {
-    //         try {
-    //             // Consultar la base de datos para obtener los detalles del pedido
-    //             const detallesPedido = await obtenerDetallesPedido(mesa.numeroMesa);
-
-    //             // Imprimir los detalles del pedido en la consola
-    //             console.log('Detalles del pedido:', detallesPedido);
-
-    //             // Construir el contenido del informe usando los detalles obtenidos
-                
-
-    //             // Utilizar una Promise para esperar a que se genere el PDF
-    //             return new Promise((resolve, reject) => {
-    //                 const pdfDoc = pdfMake.createPdf(contenidoInforme);
-
-    //                 // Generar el nombre de archivo único (por ejemplo, usando la fecha actual)
-    //                 const fileName = `Reporte${mesa.numeroMesa}_${new Date().toISOString()}.pdf`;
-
-    //                 // Usar el método download para guardar el PDF localmente
-    //                 pdfDoc.download(fileName, () => {
-    //                     // Resolver la Promise con la ruta del archivo
-    //                     const filePath = path.join(__dirname, fileName);
-    //                     console.log('Informe generado y guardado con éxito:', filePath);
-    //                     resolve(filePath);
-    //                 }, (error) => {
-    //                     // Rechazar la Promise si hay un error
-    //                     console.error('Error al generar el informe:', error);
-    //                     reject(error);
-    //                 });
-    //             });
-    //         } catch (error) {
-    //             console.error('Error al obtener detalles del pedido:', error);
-    //             throw error;
-    //         }
-    //     }
-    //     Función asincrónica para manejar la generación del informe
-    //     async function handleFinalizarButtonClick(mesa) {
-    //         const confirmacion = await Swal.fire({
-    //             icon: 'question',
-    //             title: '¿Estás seguro de finalizar el pedido?',
-    //             showCancelButton: true,
-    //             confirmButtonText: 'Sí, finalizar',
-    //             cancelButtonText: 'Cancelar',
-    //         });
-
-    //         if (!confirmacion.isConfirmed) {
-    //             return;
-    //         }
-
-    //         try {
-    //             // Después de finalizar el pedido, generar el informe
-    //             const filePath = await generarInforme(mesa);
-    //         } catch (error) {
-    //             console.error('Error al finalizar el pedido:', error);
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Error al finalizar el pedido',
-    //                 text: 'Hubo un error al intentar finalizar el pedido. Por favor, inténtalo de nuevo.',
-    //             });
-    //         }
-    //     }
-    //     == FUNCION PARA OBTENER EL NUMERO DE LA MESA    
+ 
