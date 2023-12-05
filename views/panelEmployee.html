@@ -14,16 +14,9 @@
 	<!-- Enlaces Css -->
 	<link rel="stylesheet" href="../assets/css/panelEmployee.css">
 	<style>
-		#detallesPedido {
-			/* Agrega tus estilos aquí */
-			background-color: #ffff;
-			border: 3px solid green;
-			padding: 10px;
-			height: 260px;
-			margin-top: 10px;
-		}
-	</style>
 	
+	</style>
+
 
 </head>
 
@@ -34,20 +27,30 @@
 		<ul class="side-menu">
 			<li><a href="#" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
 			<li class="divider" data-text="Panel de navegacion"></li>
-			<!--Modulo Pedidos-->
+		
+			<!-- Módulo Pedidos -->
 			<li>
 				<a href="#">
-					<i class='bx bxs-package icon'></i>Pedidos
+					<i class='bx bx-dish icon'></i>Pedidos
 					<i class='bx bx-chevron-right icon-right'></i>
 				</a>
 				<ul class="side-dropdown">
-					<li><a href="#">Lista de pedidos</a></li>
-					<li><a href="#">Facturas</a></li>
+					<li><a href="#"></i>Lista de pedidos</a></li>
 				</ul>
 			</li>
-			<!--Modulo de configuraciones-->
-
+		
+			<!-- Módulo de Facturas -->
+			<li>
+				<a href="#">
+					<i class='bx bx-receipt icon'></i>Facturar
+					<i class='bx bx-chevron-right icon-right'></i>
+				</a>
+				<ul class="side-dropdown">
+					<li><a href="#">Facturar cliente</a></li>
+				</ul>
+			</li>
 		</ul>
+		
 	</section>
 	<!-- SIDEBAR -->
 
@@ -91,7 +94,7 @@
 
 			<!-- Modal de Bootstrap -->
 			<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
+				<div class="modal-dialog lg">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title text-success" id="exampleModalLabel">Tomar pedido de la mesa</h5>
@@ -117,4 +120,5 @@
 	<script src="../assets/js/CloseWinEmployee.js"></script>
 	<script src="../models/tablesModel.js"></script>
 </body>
+
 </html>

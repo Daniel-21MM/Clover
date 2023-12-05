@@ -459,14 +459,34 @@ main .breadcrumbs li.divider {
 }
 
 
+#detallesPedido {
+	/* Agrega tus estilos aquí */
+	background-color: #ffff;
+	border: 3px solid green;
+	padding: 10px;
+	height: 260px;
+	width: 200px;
+	margin-top: 10px;
+}
 
-/* Estilos para el botón "Finalizar" */
-/* .finalizar-btn {
-	color: #34a853;
-	margin: 2%;
+.btn-eliminar {
+	background-color: #dc3545;
+	
+	color: #fff;
+	
 	border: none;
-	background-color: white;
-} */
+	padding: 0px 5px;
+	margin-left: 10px;
+	
+	cursor: pointer;
+}
+
+.btn-eliminar:hover {
+	background-color: #c82333;
+	/* Cambiamos el color de fondo en el hover (puedes cambiarlo) */
+}
+
+
 #tomar-Orden {
 	gap: 10px;
 }
@@ -476,7 +496,6 @@ main .breadcrumbs li.divider {
 	flex-direction: column;
 	gap: 5px;
 	flex-basis: calc(50% - 10px);
-	/* Dos elementos por fila con margen entre ellos */
 }
 
 #tomar-Orden label {
@@ -486,20 +505,17 @@ main .breadcrumbs li.divider {
 #tomar-Orden input:not([type="datetime-local"]),
 #tomar-Orden select,
 #tomar-Orden textarea {
-	flex: 1;
 	padding: 4px;
 	box-sizing: border-box;
 	border: 1px solid #049935;
 	outline-color: #049935;
 	border-radius: 6px;
 }
-
-#tomar-Orden input[type="datetime-local"] {
-	padding: 4px;
-	border: none;
-	outline-color: #049935;
-	border: 1px solid #049935;
-	border-radius: 6px;
+#cantidad{
+	margin-top: 5%;
+}
+.cantidad{
+	margin-top: 6%;
 }
 
 

@@ -151,7 +151,20 @@ async function obtenerUltimoPedidoEnProceso(numeroMesa) {
       throw error;
   }
 }
+async function guardarVentaEnTablaVentas(ventaData) {
+  const sql = 'INSERT INTO ventas SET ?';
 
+  return new Promise((resolve, reject) => {
+    db.connection.query(sql, ventaData, (queryErr, results) => {
+      if (queryErr) {
+        console.error('Error al insertar en la tabla "ventas": ' + queryErr.message);
+        reject(queryErr.message);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
 
 module.exports = {
   obtenerMesas,
@@ -161,5 +174,6 @@ module.exports = {
   obtenerDetallesPedido,
   obtenerEstadoPedido,
   obtenerUltimoPedidoEnProceso,
-  obtenerOpcionesPlatillos
+  obtenerOpcionesPlatillos,
+  guardarVentaEnTablaVentas
 };
