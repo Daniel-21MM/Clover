@@ -96,7 +96,6 @@ ipcMain.on('btnSalirClick', () => {
   }
 });
 
-// ...
 
 // Manejar el clic en el enlace Salir desde el proceso principal
 ipcMain.on('cerrarVentanaActualLogin', () => {

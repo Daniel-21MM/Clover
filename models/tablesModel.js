@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const Swal = require('sweetalert2');
-    const { obtenerMesas, obtenerOpcionesPlatillos, guardarPedido, actualizarEstadoMesa, obtenerDetallesPedido } = require('../controllers/tablesController');
+    const { obtenerMesas, obtenerOpcionesPlatillos, guardarPedido, actualizarEstadoMesa, obtenerDetallesPedido, actualizarEstadoPedido, obtenerEstadoPedido, obtenerUltimoPedidoEnProceso } = require('../controllers/tablesController');
     const pdfMake = require('pdfmake/build/pdfmake');
     const pdfFonts = require('pdfmake/build/vfs_fonts');
     const path = require('path')
@@ -161,13 +161,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         function agregarEventosFormulario() {
             const agregarOrdenButton = document.getElementById('agregarOrden');
             const enviarOrdenButton = document.getElementById('EnviarOrden'); // Nuevo
-    
+
             if (agregarOrdenButton && enviarOrdenButton) {
                 agregarOrdenButton.addEventListener('click', handleAgregarOrdenButtonClick);
                 enviarOrdenButton.addEventListener('click', handleEnviarOrdenButtonClick); // Nuevo
             }
         }
-        
+
         async function handleAgregarOrdenButtonClick() {
             // Obtener los valores del formulario
             const nombreCliente = document.getElementById('nombreCliente').value;
@@ -176,71 +176,71 @@ document.addEventListener('DOMContentLoaded', async function () {
             const cantidad = document.getElementById('cantidad').value;
             const descuento = document.getElementById('descuento').value;
             const fechaHora = document.getElementById('fechaHora').value;
-        
+
             // Obtener el precio del platillo seleccionado desde el select
             const precioPlatillo = obtenerPrecioPlatillo(platilloSelect);
-        
+
             // Calcular el total (precio x cantidad) considerando el descuento
             const total = calcularTotal(precioPlatillo, cantidad, descuento);
-        
+
             // Crear un objeto con los detalles del pedido
             const detallePedido = {
                 platillo: platilloSeleccionado,
                 cantidad: cantidad,
                 total: total,
             };
-        
+
             // Llamar a la función para agregar los detalles al arreglo
             agregarDetallesPedido(detallePedido);
         }
-        
-        
+
+
         function calcularTotal(precio, cantidad, descuento) {
             // Calcular el total considerando el descuento
             const subtotal = precio * cantidad;
             const descuentoPorcentaje = parseFloat(descuento) || 0;
             const descuentoMonto = (subtotal * descuentoPorcentaje) / 100;
             const total = subtotal - descuentoMonto;
-        
+
             return total.toFixed(2);
         }
-        
+
         function agregarDetallesPedido(detallePedido) {
             const detallesPedidoDiv = document.getElementById('detallesPedido');
-        
+
             if (detallesPedidoDiv) {
                 // Crear un elemento div para los detalles y añadirlo al div
                 const detallesDiv = document.createElement('div');
                 detallesDiv.classList.add('detalle-pedido');
-        
+
                 // Crear un span para mostrar el detalle formateado y añadirlo al div
                 const span = document.createElement('span');
-                
+
                 const platilloSpan = document.createElement('span');
                 platilloSpan.innerHTML = `Platillo: ${detallePedido.platillo}`;
                 detallesDiv.appendChild(platilloSpan);
-        
+
                 const cantidadSpan = document.createElement('span');
                 cantidadSpan.innerHTML = ` Cantidad: ${detallePedido.cantidad}`;
                 detallesDiv.appendChild(cantidadSpan);
-        
+
                 const totalSpan = document.createElement('span');
                 totalSpan.innerHTML = ` Total: $${detallePedido.total}`;
                 detallesDiv.appendChild(totalSpan);
-        
+
                 detallesPedidoDiv.appendChild(detallesDiv);
             } else {
                 console.error('No se encontró el elemento con ID "detallesPedido" en el DOM.');
             }
         }
-        
+
         function obtenerPrecioPlatillo(platilloSelect) {
             // Obtener el índice seleccionado
             const indiceSeleccionado = platilloSelect.selectedIndex;
-        
+
             // Obtener el precio de la opción seleccionada
             const precioPlatillo = platilloSelect.options[indiceSeleccionado].textContent.split(' - ')[1].replace('$', '');
-        
+
             return parseFloat(precioPlatillo);
         }
         async function handleEnviarOrdenButtonClick() {
@@ -249,14 +249,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const modalTitle = document.querySelector('.modal-title');
                 const numeroMesa = obtenerNumeroMesaDesdeEncabezado(modalTitle.textContent);
                 const nombreCliente = document.getElementById('nombreCliente').value;
-        
+
                 // Obtener el arreglo de detalles del pedido
                 const detallesPedidoArray = obtenerDetallesPedidoArray();
-        
+
                 // Obtener descuento, fechaHora, u otros valores del formulario según sea necesario
                 const descuento = document.getElementById('descuento').value;
                 const fechaHora = document.getElementById('fechaHora').value;
-        
+
                 // Mostrar SweetAlert para confirmar el envío del pedido
                 const confirmacion = await Swal.fire({
                     title: '¿Está seguro de enviar el pedido?',
@@ -265,20 +265,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                     confirmButtonText: 'Sí, enviar pedido',
                     cancelButtonText: 'Cancelar',
                 });
-        
+
                 if (confirmacion.isConfirmed) {
                     // Guardar el pedido en la base de datos
                     await guardarPedido(numeroMesa, nombreCliente, detallesPedidoArray, descuento, fechaHora);
-        
+
                     // Actualizar el estado de la mesa a "Ocupada"
                     await actualizarEstadoMesa(numeroMesa, 'No Disponible');
-        
+
                     // Cerrar el modal
                     const myModal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
                     if (myModal) {
                         myModal.hide();
                     }
-        
+
                     // Mostrar un mensaje de éxito con botón "Ok"
                     await Swal.fire({
                         title: 'Éxito',
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         icon: 'success',
                         confirmButtonText: 'Ok',
                     });
-        
+
                     // Recargar la página después de hacer clic en el botón "Ok"
                     window.location.reload();
                 }
@@ -295,11 +295,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 Swal.fire('Error', 'Ocurrió un error al enviar el pedido', 'error');
             }
         }
-        
+
         function obtenerDetallesPedidoArray() {
             const detallesPedidoDiv = document.getElementById('detallesPedido');
             const detallesDivs = detallesPedidoDiv.getElementsByClassName('detalle-pedido');
-        
+
             // Convertir los elementos div en un arreglo de objetos
             const detallesArray = Array.from(detallesDivs).map(detalleDiv => {
                 const detalle = {};
@@ -309,38 +309,43 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
                 return detalle;
             });
-        
+
             return detallesArray;
         }
+
         async function handleFinalizarButtonClick(mesa) {
-            const confirmacion = await Swal.fire({
-                icon: 'question',
-                title: '¿Estás seguro de finalizar el pedido?',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, finalizar',
-                cancelButtonText: 'Cancelar',
-            });
-        
-            if (!confirmacion.isConfirmed) {
-                return;
-            }
-        
             try {
-                // Después de finalizar el pedido, generar el informe
-                const filePath = await generarInforme(mesa);
-        
-                // Mostrar un mensaje de éxito con un botón "Ok"
-                await Swal.fire({
-                    icon: 'success',
-                    title: 'Pedido finalizado y ticket generado correctamente',
-                    confirmButtonText: 'Ok',
-                });
-        
-                // Actualizar el estado de la mesa a "Disponible"
-                await actualizarEstadoMesa(mesa.numeroMesa, 'Disponible');
-        
-                // Recargar la página después de hacer clic en el botón "Ok"
-                window.location.reload();
+                // Obtener el último pedido en proceso asociado a la mesa
+                const pedidoEnProceso = await obtenerUltimoPedidoEnProceso(mesa.numeroMesa);
+
+                // Verificar si hay un pedido en proceso antes de finalizar
+                if (pedidoEnProceso) {
+                    // Después de finalizar el pedido, generar el informe
+                    const filePath = await generarInforme(mesa.numeroMesa);
+
+                    // Actualizar el estado del pedido a "Finalizado"
+                    await actualizarEstadoPedido(mesa.numeroMesa, 'Finalizado');
+
+                    // Actualizar el estado de la mesa a "Disponible"
+                    await actualizarEstadoMesa(mesa.numeroMesa, 'Disponible');
+
+                    // Mostrar un mensaje de éxito con un botón "Ok"
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Pedido finalizado y ticket generado correctamente',
+                        confirmButtonText: 'Ok',
+                    });
+
+                    // Recargar la página después de hacer clic en el botón "Ok"
+                    // window.location.reload();
+                } else {
+                    // Si no hay pedido en proceso, mostrar un mensaje informativo
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'No hay pedido en proceso',
+                        text: 'No hay ningún pedido en proceso para la mesa seleccionada.',
+                    });
+                }
             } catch (error) {
                 console.error('Error al finalizar el pedido:', error);
                 Swal.fire({
@@ -350,153 +355,162 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
             }
         }
-        
         // Función asincrónica para generar el informe en formato PDF
-       async function generarInforme(mesa) {
-    try {
-        // Consultar la base de datos para obtener los detalles del pedido
-        const detallesPedido = await obtenerDetallesPedido(mesa.numeroMesa);
-        console.log('Detalles del pedido:', detallesPedido);
-
-        const fechaActual = new Date();
-        // Texto con la fecha actual en el formato deseado
-        const textoFechaActual = `Fecha: ${fechaActual.toLocaleString()}`;
-        // Calcula la suma de los totales de los detalles del pedido
-const totalVenta = detallesPedido.DetallesPedidos.reduce((total, detalle) => {
-    return total + parseFloat(detalle.Total.replace('$', '')); // Convierte el valor a número
-}, 0);
-    
-       // Construir el contenido del informe usando los detalles obtenidos
-        const contenidoInforme = {
-    pageSize: {
-        width: 250,
-        height: 450,
-    },
-    content: [
-        {
-            stack: [
-                {
-                    text: 'Clover Wings',
-                    fontSize: 14,
-                    bold: true,
-                    alignment: 'center',
-                    margin: [0, 0, 0, 10],
-                },
-                {
-                    text: `Factura de venta - Mesa ${mesa.numeroMesa}`,
-                    fontSize: 9,
-                    alignment: 'center',
-                    margin: [0, 0, 0, 10],
-                },
-            ],
-        },
-        {
-            text: 'Detalles de la venta',
-            fontSize: 9,
-            bold: true,
-            alignment: 'center',
-            margin: [0, 0, 0, 10],
-        },
-        {
-            table: {
-                widths: ['*', 'auto'],
-                body: [
-                    [
-                        { text: 'Artículo', bold: true, fontSize: 9, margin: [0, 10, 0, 2] },
-                        { text: 'Precio', bold: true, fontSize: 9, margin: [0, 10, 0, 2] },
-                    ],
-                    ...detallesPedido.DetallesPedidos.map(detalle => {
-                        return [
-                            { text: `${detalle.Platillo} x${detalle.Cantidad}`, fontSize: 8, margin: [0, 2, 0, 2] },
-                            { text: `${detalle.Total}`, fontSize: 8, margin: [0, 2, 0, 2] },
-                        ];
-                    }),
-                ],
-            },
-            layout: {
-                hLineWidth: function (i, node) {
-                    return i === 0 || i === node.table.body.length ? 1 : 0;
-                },
-                vLineWidth: function (i) {
-                    return 0;
-                },
-                hLineColor: function (i) {
-                    return i === 0 ? '#000' : '#ddd';
-                },
-                paddingLeft: function (i) {
-                    return i === 0 ? 0 : 8;
-                },
-                paddingRight: function (i, node) {
-                    return i === node.table.widths.length - 1 ? 0 : 8;
-                },
-            },
-            margin: [0, 0, 0, 10],
-        },
+        async function generarInforme(numeroMesa) {
+            try {
+                // Obtener el último pedido asociado a la mesa
+                const ultimoPedido = await obtenerUltimoPedidoEnProceso(numeroMesa);
         
-        {
-            text: `Total: $${totalVenta.toFixed(2)}`, 
-            bold: true,
-            fontSize: 10,
-            alignment: 'right',
-            margin: [0, 0, 0, 15],
-        },
-        {
-            text: '¡Gracias por su preferencia ' + detallesPedido.nombreCliente + '!',
-            fontSize: 9,
-            bold: true,
-            alignment: 'center',
-            margin: [0, 0, 0, 5],
-        },
-        {
-            text: textoFechaActual,
-            fontSize: 8,
-            alignment: 'center',
-            margin: [0, 0, 0, 10],
-        },
-        {
-            text: 'Calle Durango, esquina Sonora. Colonia Mexico, Poza Rica, Mexico.',
-            fontSize: 7,
-            alignment: 'center',
-            margin: [0, 0, 0, 5],
-        },
-        {
-            text: 'Tel: 7841425806',
-            fontSize: 7,
-            alignment: 'center',
-            margin: [0, 0, 0, 5],
-        },
-    ],
-      };
-        // Utilizar una Promise para esperar a que se genere el PDF
-        return new Promise((resolve, reject) => {
-            const pdfDoc = pdfMake.createPdf(contenidoInforme);
-
-            // Generar el nombre de archivo único (por ejemplo, usando la fecha actual)
-            const fileName = `Reporte${mesa.numeroMesa}_${new Date().toISOString()}.pdf`;
-
-            // Usar el método download para guardar el PDF localmente
-            pdfDoc.download(fileName, () => {
-                // Resolver la Promise con la ruta del archivo
-                const filePath = path.join(__dirname, fileName);
-                console.log('Informe generado y guardado con éxito:', filePath);
-                resolve(filePath);
-            }, (error) => {
-                // Rechazar la Promise si hay un error
-                console.error('Error al generar el informe:', error);
-                reject(error);
-            });
-        });
-    } catch (error) {
-        console.error('Error al obtener detalles del pedido:', error);
-        throw error;
-    }
+                console.log('Datos del pedido obtenido:', ultimoPedido);
+        
+                // Verificar si hay un pedido en proceso antes de finalizar
+                if (!ultimoPedido) {
+                    console.error('No se encontró un pedido en proceso válido para la mesa:', numeroMesa);
+                    return null;
+                }
+        
+                // Obtener los detalles del pedido
+                const detallesPedidos = JSON.parse(ultimoPedido.DetallesPedidos);
+        
+                const fechaActual = new Date();
+                const textoFechaActual = `Fecha: ${fechaActual.toLocaleString()}`;
+                const totalVenta = detallesPedidos.reduce((total, detalle) => {
+                    return total + parseFloat(detalle.Total.replace('$', ''));
+                }, 0);
+        
+                const contenidoInforme = {
+                    pageSize: {
+                        width: 250,
+                        height: 450,
+                    },
+                    content: [
+                        {
+                            stack: [
+                                {
+                                    text: 'Clover Wings',
+                                    fontSize: 14,
+                                    bold: true,
+                                    alignment: 'center',
+                                    margin: [0, 0, 0, 10],
+                                },
+                                {
+                                    text: `Factura de venta - Mesa ${numeroMesa}`,
+                                    fontSize: 9,
+                                    alignment: 'center',
+                                    margin: [0, 0, 0, 10],
+                                },
+                            ],
+                        },
+                        {
+                            text: 'Detalles de la venta',
+                            fontSize: 9,
+                            bold: true,
+                            alignment: 'center',
+                            margin: [0, 0, 0, 10],
+                        },
+                        {
+                            table: {
+                                widths: ['*', 'auto'],
+                                body: [
+                                    [
+                                        { text: 'Artículo', bold: true, fontSize: 9, margin: [0, 10, 0, 2] },
+                                        { text: 'Precio', bold: true, fontSize: 9, margin: [0, 10, 0, 2] },
+                                    ],
+                                    ...detallesPedidos.map(detalle => {
+                                        return [
+                                            { text: `${detalle.Platillo} x${detalle.Cantidad}`, fontSize: 8, margin: [0, 2, 0, 2] },
+                                            { text: `${detalle.Total}`, fontSize: 8, margin: [0, 2, 0, 2] },
+                                        ];
+                                    }),
+                                ],
+                            },
+                            layout: {
+                                hLineWidth: function (i, node) {
+                                    return i === 0 || i === node.table.body.length ? 1 : 0;
+                                },
+                                vLineWidth: function (i) {
+                                    return 0;
+                                },
+                                hLineColor: function (i) {
+                                    return i === 0 ? '#000' : '#ddd';
+                                },
+                                paddingLeft: function (i) {
+                                    return i === 0 ? 0 : 8;
+                                },
+                                paddingRight: function (i, node) {
+                                    return i === node.table.widths.length - 1 ? 0 : 8;
+                                },
+                            },
+                            margin: [0, 0, 0, 10],
+                        },
+                        {
+                            text: `Total: $${totalVenta.toFixed(2)}`,
+                            bold: true,
+                            fontSize: 10,
+                            alignment: 'right',
+                            margin: [0, 0, 0, 15],
+                        },
+                        {
+                            text: `¡Gracias por su preferencia ${ultimoPedido.nombreCliente}!`,
+                            fontSize: 9,
+                            bold: true,
+                            alignment: 'center',
+                            margin: [0, 0, 0, 5],
+                        },
+                        {
+                            text: textoFechaActual,
+                            fontSize: 8,
+                            alignment: 'center',
+                            margin: [0, 0, 0, 10],
+                        },
+                        {
+                            text: 'Calle Durango, esquina Sonora. Colonia Mexico, Poza Rica, Mexico.',
+                            fontSize: 7,
+                            alignment: 'center',
+                            margin: [0, 0, 0, 5],
+                        },
+                        {
+                            text: 'Tel: 7841425806',
+                            fontSize: 7,
+                            alignment: 'center',
+                            margin: [0, 0, 0, 5],
+                        },
+                    ],
+                };
+        
+                return new Promise((resolve, reject) => {
+                    const pdfDoc = pdfMake.createPdf(contenidoInforme);
+        
+                    const fileName = `Reporte${numeroMesa}_${new Date().toISOString()}.pdf`;
+        
+                    pdfDoc.download(fileName, () => {
+                        const filePath = path.join(__dirname, fileName);
+                        console.log('Informe generado y guardado con éxito:', filePath);
+                        resolve(filePath);
+                    }, (error) => {
+                        console.error('Error al generar el informe:', error);
+                        reject(error);
+                    });
+                });
+            } catch (error) {
+                console.error('Error al obtener detalles del pedido:', error);
+                throw error;
+            }
         }
+        
+        
+        
+        
+      
+        
+        
+
+
         function obtenerNumeroMesaDesdeEncabezado(encabezado) {
             const match = encabezado.match(/\d+/);
             return match ? parseInt(match[0], 10) : null;
-        }  
+        }
     }
 
     main();
 });
- 
