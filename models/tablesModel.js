@@ -6,6 +6,46 @@ document.addEventListener('DOMContentLoaded', async function () {
     const path = require('path')
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+
+    const formularioHTML = `
+    <form id="tomar-Orden" class="d-flex flex-wrap formulario-grande">
+    <div class="form-group flex-grow-1">
+        <label for="nombreCliente" class="form-label">Nombre del cliente*</label>
+        <input id="nombreCliente" type="text" name="nombreCliente" class="form-control">
+    </div>
+
+    <div class="form-group flex-grow-1">
+        <label for="platillos" class="form-label">Platillo*</label>
+        <select id="platillos" name="platillo" class="form-select" required>
+            <!-- Opciones de platillos aquí -->
+        </select>
+    </div>
+
+    <div class="form-group flex-grow-1">
+        <label for="cantidad" class="form-label cantidad">Cantidad*</label>
+        <input id="cantidad" type="number" step="1" name="cantidad" class="form-control">
+    </div>
+
+    <div class="form-group flex-grow-1">
+        <label for="descuento" class="form-label">Agregar descuento % (opcional)</label>
+        <input id="descuento" type="number" name="descuento" min="0" max="100" class="form-control">
+    </div>
+
+    <div class="form-group flex-grow-1">
+        <label for="fechaHora" class="form-label">Fecha*</label>
+        <input id="fechaHora" type="datetime-local" name="fechaHora" class="form-control">
+
+    </div>
+
+    <div id="detallesPedido" class="form-group flex-grow-1 detalles-pedido-container"></div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="agregarOrden">Agregar orden</button>
+        <button type="button" class="btn btn-success" id="EnviarOrden">Enviar orden</button>
+    </div>
+</form>
+    `;
+
     async function main() {
         const contenedorMesas = document.getElementById('contenedor-mesas');
 
@@ -25,6 +65,42 @@ document.addEventListener('DOMContentLoaded', async function () {
                 console.error('Error al cargar las mesas:', error);
             }
         }
+        // Agregar la siguiente función después de la función cargarMesas
+        async function handleEditarPedidoButtonClick(mesa) {
+            try {
+                // Obtener el último pedido en proceso asociado a la mesa
+                const pedidoEnProceso = await obtenerUltimoPedidoEnProceso(mesa.numeroMesa);
+
+                // Verificar si hay un pedido en proceso antes de editar
+                if (pedidoEnProceso) {
+                    // Crear un objeto con la información del pedido para prellenar el formulario
+                    const pedidoInfo = {
+                        nombreCliente: pedidoEnProceso.nombreCliente,
+                        detallesPedido: JSON.parse(pedidoEnProceso.DetallesPedidos),
+                        descuento: pedidoEnProceso.Descuento,
+                        fechaHora: pedidoEnProceso.fechaHora,
+                    };
+
+                    // Mostrar el modal con el formulario prellenado
+                    mostrarModal(`Editando Pedido de la Mesa ${mesa.numeroMesa}`, formularioHTML, pedidoInfo);
+                } else {
+                    // Si no hay pedido en proceso, mostrar un mensaje informativo
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'No hay pedido en proceso',
+                        text: 'No hay ningún pedido en proceso para la mesa seleccionada.',
+                    });
+                }
+            } catch (error) {
+                console.error('Error al editar el pedido:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al editar el pedido',
+                    text: 'Hubo un error al intentar editar el pedido. Por favor, inténtalo de nuevo.',
+                });
+            }
+        }
+
 
         function crearMesaCard(mesa) {
             const mesaCard = document.createElement('div');
@@ -43,7 +119,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const atenderButton = crearBoton('Atender', 'btnatender', () => handleAtenderButtonClick(mesa));
                 actionButtonContainer.appendChild(atenderButton);
             } else {
-                const editarPedidoButton = crearBoton('Editar Pedido', 'btnatender', () => handleActionButtonClick(mesa));
+                const editarPedidoButton = crearBoton('Editar Pedido', 'btneditar', () => handleEditarPedidoButtonClick(mesa)); // Modificado
                 const finalizarButton = crearBoton('Finalizar', 'btnatender', () => handleFinalizarButtonClick(mesa));
 
                 actionButtonContainer.appendChild(editarPedidoButton);
@@ -65,83 +141,99 @@ document.addEventListener('DOMContentLoaded', async function () {
         function handleAtenderButtonClick(mesa) {
             const numeroMesa = mesa.numeroMesa;
             const modalHeaderContent = `Atendiendo Orden de la Mesa ${numeroMesa}`;
-            const formularioHTML = `
-            <form id="tomar-Orden" class="d-flex flex-wrap formulario-grande">
-            <div class="form-group flex-grow-1">
-                <label for="nombreCliente" class="form-label">Nombre del cliente*</label>
-                <input id="nombreCliente" type="text" name="nombreCliente" class="form-control">
-            </div>
-        
-            <div class="form-group flex-grow-1">
-                <label for="platillos" class="form-label">Platillo*</label>
-                <select id="platillos" name="platillo" class="form-select" required>
-                    <!-- Opciones de platillos aquí -->
-                </select>
-            </div>
-        
-            <div class="form-group flex-grow-1">
-                <label for="cantidad" class="form-label cantidad">Cantidad*</label>
-                <input id="cantidad" type="number" step="1" name="cantidad" class="form-control">
-            </div>
-        
-            <div class="form-group flex-grow-1">
-                <label for="descuento" class="form-label">Agregar descuento % (opcional)</label>
-                <input id="descuento" type="number" name="descuento" min="0" max="100" class="form-control">
-            </div>
-        
-            <div class="form-group flex-grow-1">
-                <label for="fechaHora" class="form-label">Fecha*</label>
-                <input id="fechaHora" type="datetime-local" name="fechaHora" class="form-control">
 
-            </div>
-        
-            <div id="detallesPedido" class="form-group flex-grow-1 detalles-pedido-container"></div>
-        
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="agregarOrden">Agregar orden</button>
-                <button type="button" class="btn btn-success" id="EnviarOrden">Enviar orden</button>
-            </div>
-        </form>
-            `;
 
             mostrarModal(modalHeaderContent, formularioHTML);
         }
 
-        function mostrarModal(headerContenido, bodyContenido) {
+        // Dentro de la función mostrarModal
+        function mostrarModal(headerContenido, bodyContenido, pedidoInfo = null) { // Modificado
             const modalHeader = document.querySelector('.modal-title');
             const modalBody = document.querySelector('.modal-body');
-        
+
             modalHeader.textContent = headerContenido;
             modalBody.innerHTML = bodyContenido;
-        
+
+            // Preencher el formulario con la información del pedido si está disponible
+            if (pedidoInfo) {
+                prellenarFormulario(pedidoInfo);
+            }
+
             const formulario = document.getElementById('tomar-Orden');
             formulario.classList.add('formulario-grande');
-        
+
             const existingModal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
             if (existingModal) {
                 existingModal.dispose();
             }
-        
+
             const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
                 backdrop: 'static',
                 keyboard: false
             });
-        
+
             function onModalShown() {
                 cargarOpcionesPlatillos();
                 agregarEventosFormulario();
             }
-        
+
             myModal._element.removeEventListener('shown.bs.modal', onModalShown);
-        
+
             myModal.show();
-        
+
             myModal._element.addEventListener('shown.bs.modal', () => {
                 cargarOpcionesPlatillos();
                 agregarEventosFormulario();
             });
         }
-        
+
+        // Función para prellenar el formulario con la información del pedido
+        function prellenarFormulario(pedidoInfo) {
+            // Preencher los campos del formulario con la información del pedido
+            document.getElementById('nombreCliente').value = pedidoInfo.nombreCliente;
+            // Verificar si detallesPedido está definido en pedidoInfo
+            if (pedidoInfo.detallesPedido) {
+                // Preencher los detalles del pedido
+                pedidoInfo.detallesPedido.forEach(detalle => {
+                    const detallePedido = {
+                        platillo: detalle.Platillo,
+                        cantidad: parseInt(detalle.Cantidad, 10),
+                        total: detalle.Total.replace('$', ''),
+                    };
+
+                    agregarDetallesPedido(detallePedido);
+                });
+            }
+
+            // Preencher otros campos del formulario (descuento, fechaHora, etc.)
+            document.getElementById('descuento').value = pedidoInfo.descuento;
+
+            // Formatear la fecha en el formato adecuado para el input datetime-local
+            const fechaFormateada = formatearFechaParaInput(pedidoInfo.fechaHora);
+
+            // Imprimir la fecha formateada en la consola para depuración
+            console.log('FechaHora formateada:', fechaFormateada);
+
+            document.getElementById('fechaHora').value = fechaFormateada;
+        }
+
+      
+
+
+        // Función para formatear la fecha en el formato correcto para datetime-local
+        function formatearFechaParaInput(fecha) {
+            // Formato esperado por datetime-local: "YYYY-MM-DDTHH:mm"
+            const año = fecha.getFullYear();
+            const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+            const dia = String(fecha.getDate()).padStart(2, '0');
+            const hora = String(fecha.getHours()).padStart(2, '0');
+            const minutos = String(fecha.getMinutes()).padStart(2, '0');
+
+            return `${año}-${mes}-${dia}T${hora}:${minutos}`;
+        }
+
+
+
 
         function cargarOpcionesPlatillos() {
             const platillosSelect = document.getElementById('platillos');
@@ -182,7 +274,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const cantidad = document.getElementById('cantidad').value;
             const descuento = document.getElementById('descuento').value;
             const fechaHora = document.getElementById('fechaHora').value;
-        
+
             // Validar campos obligatorios
             if (!nombreCliente || !platilloSeleccionado || !cantidad || !fechaHora) {
                 Swal.fire({
@@ -192,24 +284,24 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
                 return;
             }
-        
+
             // Obtener el precio del platillo seleccionado desde el select
             const precioPlatillo = obtenerPrecioPlatillo(platilloSelect);
-        
+
             // Calcular el total (precio x cantidad) considerando el descuento
             const total = calcularTotal(precioPlatillo, cantidad, descuento);
-        
+
             // Crear un objeto con los detalles del pedido
             const detallePedido = {
                 platillo: platilloSeleccionado,
                 cantidad: cantidad,
                 total: total,
             };
-        
+
             // Llamar a la función para agregar los detalles al arreglo
             agregarDetallesPedido(detallePedido);
         }
-        
+
 
 
         function calcularTotal(precio, cantidad, descuento) {
@@ -222,50 +314,50 @@ document.addEventListener('DOMContentLoaded', async function () {
             return total.toFixed(2);
         }
 
-        function agregarDetallesPedido(detallePedido) {   
+        function agregarDetallesPedido(detallePedido) {
             const detallesPedidoDiv = document.getElementById('detallesPedido');
-        
+
             if (detallesPedidoDiv) {
                 // Crear un elemento div para los detalles y añadirlo al div
                 const detallesDiv = document.createElement('div');
                 detallesDiv.classList.add('detalle-pedido');
-        
+
                 // Crear un span para mostrar el detalle formateado y añadirlo al div
                 const span = document.createElement('span');
-        
+
                 const platilloSpan = document.createElement('span');
                 platilloSpan.innerHTML = `Platillo: ${detallePedido.platillo}`;
                 detallesDiv.appendChild(platilloSpan);
-        
+
                 const cantidadSpan = document.createElement('span');
                 cantidadSpan.innerHTML = ` Cantidad: ${detallePedido.cantidad}`;
                 detallesDiv.appendChild(cantidadSpan);
-        
+
                 const totalSpan = document.createElement('span');
                 totalSpan.innerHTML = ` Total: $${detallePedido.total}`;
                 detallesDiv.appendChild(totalSpan);
-        
+
                 // Crear un botón para eliminar el detalle
                 const botonEliminar = document.createElement('button');
                 botonEliminar.textContent = 'X';
                 botonEliminar.classList.add('btn-eliminar');
                 botonEliminar.addEventListener('click', () => eliminarDetalle(detallesDiv));
-        
+
                 detallesDiv.appendChild(botonEliminar);
-        
+
                 detallesPedidoDiv.appendChild(detallesDiv);
             } else {
                 console.error('No se encontró el elemento con ID "detallesPedido" en el DOM.');
             }
         }
-        
+
         function eliminarDetalle(detalleDiv) {
             const detallesPedidoDiv = document.getElementById('detallesPedido');
             if (detallesPedidoDiv) {
                 detallesPedidoDiv.removeChild(detalleDiv);
             }
         }
-        
+
 
         function obtenerPrecioPlatillo(platilloSelect) {
             // Obtener el índice seleccionado
@@ -282,14 +374,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const modalTitle = document.querySelector('.modal-title');
                 const numeroMesa = obtenerNumeroMesaDesdeEncabezado(modalTitle.textContent);
                 const nombreCliente = document.getElementById('nombreCliente').value;
-        
+
                 // Obtener el arreglo de detalles del pedido
                 const detallesPedidoArray = obtenerDetallesPedidoArray();
-        
+
                 // Obtener descuento, fechaHora, u otros valores del formulario según sea necesario
                 const descuento = document.getElementById('descuento').value;
                 const fechaHora = document.getElementById('fechaHora').value;
-        
+
                 // Validar campos obligatorios
                 if (!nombreCliente || detallesPedidoArray.length === 0 || !fechaHora) {
                     Swal.fire({
@@ -299,7 +391,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     });
                     return;
                 }
-        
+
                 // Mostrar SweetAlert para confirmar el envío del pedido
                 const confirmacion = await Swal.fire({
                     title: '¿Está seguro de enviar el pedido?',
@@ -308,20 +400,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                     confirmButtonText: 'Sí, enviar pedido',
                     cancelButtonText: 'Cancelar',
                 });
-        
+
                 if (confirmacion.isConfirmed) {
                     // Guardar el pedido en la base de datos
                     await guardarPedido(numeroMesa, nombreCliente, detallesPedidoArray, descuento, fechaHora);
-        
+
                     // Actualizar el estado de la mesa a "Ocupada"
                     await actualizarEstadoMesa(numeroMesa, 'No Disponible');
-        
+
                     // Cerrar el modal
                     const myModal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
                     if (myModal) {
                         myModal.hide();
                     }
-        
+
                     // Mostrar un mensaje de éxito con botón "Ok"
                     await Swal.fire({
                         title: 'Éxito',
@@ -329,7 +421,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         icon: 'success',
                         confirmButtonText: 'Ok',
                     });
-        
+
                     // Recargar la página después de hacer clic en el botón "Ok"
                     window.location.reload();
                 }
@@ -338,7 +430,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 Swal.fire('Error', 'Ocurrió un error al enviar el pedido', 'error');
             }
         }
-        
+
 
         function obtenerDetallesPedidoArray() {
             const detallesPedidoDiv = document.getElementById('detallesPedido');
@@ -361,7 +453,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             try {
                 // Obtener el último pedido en proceso asociado a la mesa
                 const pedidoEnProceso = await obtenerUltimoPedidoEnProceso(mesa.numeroMesa);
-        
+
                 // Verificar si hay un pedido en proceso antes de finalizar
                 if (pedidoEnProceso) {
                     // Mostrar SweetAlert para confirmar el envío del pedido
@@ -372,24 +464,24 @@ document.addEventListener('DOMContentLoaded', async function () {
                         confirmButtonText: 'Sí, finalizar pedido',
                         cancelButtonText: 'Cancelar',
                     });
-        
+
                     if (confirmacion.isConfirmed) {
                         // Después de finalizar el pedido, generar el informe
                         const filePath = await generarInforme(mesa.numeroMesa);
-        
+
                         // Actualizar el estado del pedido a "Finalizado"
                         await actualizarEstadoPedido(mesa.numeroMesa, 'Finalizado');
-        
+
                         // Actualizar el estado de la mesa a "Disponible"
                         await actualizarEstadoMesa(mesa.numeroMesa, 'Disponible');
-        
+
                         // Mostrar un mensaje de éxito con un botón "Ok"
                         await Swal.fire({
                             icon: 'success',
                             title: 'Pedido finalizado y ticket generado correctamente',
                             confirmButtonText: 'Ok',
                         });
-        
+
                         // Recargar la página después de hacer clic en el botón "Ok"
                         window.location.reload();
                     }
@@ -410,7 +502,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
             }
         }
-        
+
 
         // Función asincrónica para generar el informe en formato PDF
         async function generarInforme(numeroMesa) {
@@ -446,7 +538,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     totalGanancia: totalVenta.toFixed(2),
                 };
 
-                
+
                 guardarVentaEnTablaVentas(ventaData)
 
                 console.log('Datos de la venta guardados en la tabla "ventas".');

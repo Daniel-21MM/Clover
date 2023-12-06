@@ -33,26 +33,51 @@ function actualizarEstadoMesa(numeroMesa, nuevoEstado) {
   });
 }
 
-function guardarPedido(numeroMesa, nombreCliente, detallesPedido, descuento, fechaHora) {
-  const sql = 'INSERT INTO pedidos (numeroMesa, nombreCliente, DetallesPedidos, Descuento, fechaHora, estado) VALUES (?, ?, ?, ?, ?, ?)';
-
-  // Convertir detallesPedido a una cadena de texto
-  const detallesPedidoString = JSON.stringify(detallesPedido);
+async function guardarPedido(numeroMesa, nombreCliente, detallesPedido, descuento, fechaHora) {
   const estadoInicial = 'En proceso';
+  const estadoFinalizado = 'Finalizado';
 
-  const values = [numeroMesa, nombreCliente, detallesPedidoString, descuento, fechaHora, estadoInicial];
+  try {
+    // Verificar si hay un pedido en proceso para la mesa
+    const pedidoEnProceso = await obtenerUltimoPedidoEnProceso(numeroMesa);
 
-  return new Promise((resolve, reject) => {
-    db.connection.query(sql, values, (queryErr, results) => {
-      if (queryErr) {
-        console.error('Error al insertar el pedido: ' + queryErr.message);
-        reject(queryErr.message);
-      } else {
-        resolve(results);
-      }
-    });
-  });
+    if (pedidoEnProceso) {
+      // Si hay un pedido en proceso, actualizar el pedido existente
+      const sql = 'UPDATE pedidos SET nombreCliente = ?, DetallesPedidos = ?, Descuento = ?, fechaHora = ? WHERE numeroMesa = ? AND estado = ?';
+      const values = [nombreCliente, JSON.stringify(detallesPedido), descuento, fechaHora, numeroMesa, estadoInicial];
+
+      return new Promise((resolve, reject) => {
+        db.connection.query(sql, values, (queryErr, results) => {
+          if (queryErr) {
+            console.error('Error al actualizar el pedido: ' + queryErr.message);
+            reject(queryErr.message);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+    } else {
+      // Si no hay un pedido en proceso, insertar un nuevo pedido
+      const sql = 'INSERT INTO pedidos (numeroMesa, nombreCliente, DetallesPedidos, Descuento, fechaHora, estado) VALUES (?, ?, ?, ?, ?, ?)';
+      const values = [numeroMesa, nombreCliente, JSON.stringify(detallesPedido), descuento, fechaHora, estadoInicial];
+
+      return new Promise((resolve, reject) => {
+        db.connection.query(sql, values, (queryErr, results) => {
+          if (queryErr) {
+            console.error('Error al insertar el pedido: ' + queryErr.message);
+            reject(queryErr.message);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+    }
+  } catch (error) {
+    console.error('Error al guardar el pedido:', error);
+    throw error;
+  }
 }
+
 
 function obtenerMesas() {
   const sql = 'SELECT * FROM mesas';
@@ -98,16 +123,16 @@ async function obtenerEstadoPedido(numeroMesa) {
   const values = [numeroMesa];
 
   return new Promise((resolve, reject) => {
-      db.connection.query(sql, values, (queryErr, results) => {
-          if (queryErr) {
-              console.error('Error al obtener estado del pedido:', queryErr.message);
-              reject(queryErr.message);
-          } else {
-              // Devolver el estado del pedido
-              const estadoPedido = results[0] ? results[0].estado : null;
-              resolve(estadoPedido);
-          }
-      });
+    db.connection.query(sql, values, (queryErr, results) => {
+      if (queryErr) {
+        console.error('Error al obtener estado del pedido:', queryErr.message);
+        reject(queryErr.message);
+      } else {
+        // Devolver el estado del pedido
+        const estadoPedido = results[0] ? results[0].estado : null;
+        resolve(estadoPedido);
+      }
+    });
   });
 }
 function actualizarEstadoPedido(numeroMesa, nuevoEstado) {
@@ -128,27 +153,27 @@ function actualizarEstadoPedido(numeroMesa, nuevoEstado) {
 // Función para obtener el último pedido en proceso asociado a una mesa
 async function obtenerUltimoPedidoEnProceso(numeroMesa) {
   try {
-      // Realizar la consulta a la base de datos para obtener el último pedido en proceso
-      const sql = 'SELECT * FROM pedidos WHERE numeroMesa = ? AND estado = "En proceso" ORDER BY fechaHora DESC LIMIT 1';
-      const values = [numeroMesa];
+    // Realizar la consulta a la base de datos para obtener el último pedido en proceso
+    const sql = 'SELECT * FROM pedidos WHERE numeroMesa = ? AND estado = "En proceso" ORDER BY fechaHora DESC LIMIT 1';
+    const values = [numeroMesa];
 
-      return new Promise((resolve, reject) => {
-          db.connection.query(sql, values, (queryErr, results) => {
-              if (queryErr) {
-                  console.error('Error al obtener el último pedido en proceso:', queryErr);
-                  reject(queryErr);
-              } else {
-                  // Imprimir en la consola los datos del pedido obtenido
-                  // console.log('Datos del pedido obtenido:', results.length > 0 ? results[0] : null);
+    return new Promise((resolve, reject) => {
+      db.connection.query(sql, values, (queryErr, results) => {
+        if (queryErr) {
+          console.error('Error al obtener el último pedido en proceso:', queryErr);
+          reject(queryErr);
+        } else {
+          // Imprimir en la consola los datos del pedido obtenido
+          // console.log('Datos del pedido obtenido:', results.length > 0 ? results[0] : null);
 
-                  // Devolver el resultado, si existe
-                  resolve(results.length > 0 ? results[0] : null);
-              }
-          });
+          // Devolver el resultado, si existe
+          resolve(results.length > 0 ? results[0] : null);
+        }
       });
+    });
   } catch (error) {
-      console.error('Error al obtener el último pedido en proceso:', error);
-      throw error;
+    console.error('Error al obtener el último pedido en proceso:', error);
+    throw error;
   }
 }
 async function guardarVentaEnTablaVentas(ventaData) {

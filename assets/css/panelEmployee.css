@@ -442,6 +442,14 @@ main .breadcrumbs li.divider {
 	color:#049935;
 	margin: 10px
 }
+.btneditar{
+	background-color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: none;
+	color:#049935;
+	margin: 10px
+}
 
 .content-1 img {
 	width: 25%;
