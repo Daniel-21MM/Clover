@@ -3,10 +3,10 @@ const mysql = require('mysql2');
 
 // Configuramos la conexión ala base de datos MySQL
 const connection = mysql.createConnection({
-  host: 'localhost', 
-  user: 'root',
-  password: '', 
-  database: 'cloverwingsbd'
+  host: 'b3pktkex5xv1rqhte0ht-mysql.services.clever-cloud.com', 
+  user: 'uhlnf3rrmexpvqmb',
+  password: 'b0qCqrdf2ouRbL7EDzA9', 
+  database: 'b3pktkex5xv1rqhte0ht'
 });
 
 // Conectamos a la base de datos

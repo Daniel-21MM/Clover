@@ -1,10 +1,9 @@
-<!doctype html>
 <html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de productos</title>
+    <title>Lista de ventas</title>
     <!-- CDN BoxIcons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- Enlace Css -->
@@ -61,8 +60,7 @@
                     <i class='bx bx-chevron-right icon-right'></i>
                 </a>
                 <ul class="side-dropdown">
-                    <li><a href="orderlist.html">Lista de ventas</a></li>
-                   
+                    <li><a href="saleslist.html">Lista de ventas</a></li>
                 </ul>
             </li>
             <!--Modulo de configuraciones-->
@@ -89,6 +87,7 @@
             <form action="#">
                 <div class="form-group">
                     <input type="text" placeholder="Buscar...">
+
                 </div>
             </form>
 
@@ -106,39 +105,38 @@
 
         <!-- MAIN -->
         <main>
-            <h1 class="title">Lista de articulos</h1>
+            <h1 class="title">Lista de ventas</h1>
             <ul class="breadcrumbs">
                 <li><a href="AdminPanel.html">Dashboard</a></li>
                 <li class="divider">/</li>
-                <li><a href="#" class="active">articulos</a></li>
+                <li><a href="#" class="active">ventas</a></li>
                 <li class="divider">/</li>
-                <li><a href="#" class="active">lista de articulos</a></li>
+                <li><a href="#" class="active">lista de ventas</a></li>
             </ul>
 
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>Lista de articulos</h3>
+                        <h3>Lista de ventas</h3>
                         <div class="form-input">
                             <span class="icon bx bx-search"></span>
                             <input type="text" id="searchInput" placeholder="Buscar...">
                         </div>
                     </div>
 
-                    <table id="TablaArticulos">
+                    <table id="TablaMesas">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Imagen</th>
-                                <th>Nombre</th>
-                                <th>Categoria</th>
-                                <th>Precio</th>
+                                <th>Cliente</th> 
+                                <th>Mesa</th>
                                 <th>Fecha</th>
-                                <th>Acciones</th>
+                                <th>Estado</th>
+                                <th>Ganancia</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Aquí se cargarán los datos de los usuarios -->
+                            <!-- Aquí se cargarán las ventas -->
 
                         </tbody>
                     </table>
@@ -150,39 +148,11 @@
         <!-- MAIN -->
     </section>
     <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/productTable.js"></script>
-    <script src="../models/showProductsModels.js"></script>
-    <script src="../controllers/showProductsController.js"></script>
-    <script>
-        const { ipcRenderer } = require('electron');
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnSalir = document.getElementById('btnSalir');
-
-            btnSalir.addEventListener('click', async () => {
-                // Mostrar SweetAlert de confirmación
-                const confirmacion = await mostrarConfirmacion();
-
-                // Si el usuario confirma, enviamos el mensaje para cerrar la ventana
-                if (confirmacion.value) {
-                    ipcRenderer.send('btnSalirClick');
-                }
-            });
-
-            // Función para mostrar el SweetAlert de confirmación
-            function mostrarConfirmacion() {
-                return Swal.fire({
-                    title: '¿Estás seguro de salir?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#049935',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, salir',
-                    cancelButtonText: 'Cancelar',
-                });
-            }
-        });
-    </script>
+    <script src="../assets/js/tableMesas.js"></script>
+    <script src="../models/salesListModel.js"></script>
+    <script src="../controllers/salesListController.js"></script>
+    
+   
 </body>
 
 </html>

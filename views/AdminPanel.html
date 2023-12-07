@@ -11,6 +11,8 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- Enlaces Css -->
 	<link rel="stylesheet" href="../assets/css/PanelAdmin.css">
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 </head>
 
 <body>
@@ -61,8 +63,8 @@
 					<i class='bx bx-chevron-right icon-right'></i>
 				</a>
 				<ul class="side-dropdown">
-					<li><a href="listSales.html">Lista de ventas</a></li>
-					<li><a href="addSale.html">Agregar venta</a></li>
+					<li><a href="saleslist.html">Lista de ventas</a></li>
+					<!-- <li><a href="addSale.html">Agregar venta</a></li> -->
 				</ul>
 			</li>
 			<!--Modulo de configuraciones-->
@@ -145,7 +147,7 @@
 				<div class="card">
 					<div class="head">
 						<div>
-							<h2>465</h2>
+							<h2 id="ventasPorDia"></h2>
 							<p>Ventas</p>
 						</div>
 						<i class='bx bx-trending-up icon'></i>
@@ -158,13 +160,13 @@
 				<div class="card">
 					<div class="head">
 						<div>
-							<h2>235</h2>
-							<p>Clientes</p>
+							<h2 id="gananciasPorDia"></h2>
+							<p>Ganancias</p>
 						</div>
 						<i class='bx bx-trending-up icon'></i>
 					</div>
 					<div class="box-icon-container">
-						<i class='bx bx-group'></i>
+						<i class='bx bx-dollar'></i>
 					</div>
 				</div>
 
@@ -174,20 +176,16 @@
 				<!-- Contenedor Para La Grafica Ventas -->
 				<div class="content-data">
 					<div class="head">
-						<h3>Reporte de ventas</h3>
+						<h3>Grafico de ventas</h3>
 						<div class="menu">
-							<i class='bx bx-dots-horizontal-rounded icon'></i>
-							<ul class="menu-link">
-								<li><a href="#">Editar</a></li>
-								<li><a href="#">Guardar</a></li>
-								<li><a href="#">Eliminar</a></li>
-							</ul>
 						</div>
 					</div>
 					<div class="chart">
-						<div id="chart"></div>
+						<div id="ventasChart"></div>
 					</div>
 				</div>
+
+
 
 				<!-- Contenedor Para La Grafica Artículos -->
 				<div class="content-data">
@@ -216,10 +214,12 @@
 	<!-- NAVBAR -->
 
 	<!-- SCRIPTS JS-->
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
 	<script src="../models/dashboardModel.js"></script>
 	<script src="../assets/js/adminPanel.js"></script>
 	<script src="../assets/js/CloseWinAdmin.js"></script>
+
+
 
 </body>
 

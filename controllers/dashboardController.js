@@ -16,7 +16,73 @@ function obtenerNumeroRegistros(tabla, condicion = '') {
   });
 }
 
+async function obtenerVentasPorDia() {
+  const sql = 'SELECT DATE(fechaHora) as fecha, COUNT(*) as totalVentas FROM ventas GROUP BY fecha ORDER BY fecha DESC';
+  
+  return new Promise((resolve, reject) => {
+    db.connection.query(sql, (queryErr, results) => {
+      if (queryErr) {
+        console.error('Error al obtener el número de ventas por día: ' + queryErr.message);
+        reject([]);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
+async function obtenerGananciasPorDia() {
+  const sql = 'SELECT DATE(fechaHora) as fecha, SUM(totalGanancia) as totalGanancias FROM ventas GROUP BY fecha ORDER BY fecha DESC';
+  
+  return new Promise((resolve, reject) => {
+    db.connection.query(sql, (queryErr, results) => {
+      if (queryErr) {
+        console.error('Error al obtener el total de ganancias por día: ' + queryErr.message);
+        reject([]);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
+async function obtenerVentasPorDosDias() {
+  const hoy = new Date();
+  const ayer = new Date();
+  ayer.setDate(hoy.getDate() - 1);
+
+  const formatoFecha = (fecha) => {
+    return fecha.toISOString().split('T')[0];
+  };
+  
+
+  const sql = `
+  SELECT DATE(fechaHora) as fecha, COUNT(*) as totalVentas
+  FROM ventas
+  WHERE DATE(fechaHora) >= CURDATE() - INTERVAL 1 DAY
+  AND DATE(fechaHora) < CURDATE()
+  GROUP BY fecha
+  ORDER BY fecha DESC
+`;
+
+
+  return new Promise((resolve, reject) => {
+    db.connection.query(sql, (queryErr, results) => {
+      if (queryErr) {
+        console.error('Error al obtener el número de ventas por día: ' + queryErr.message);
+        reject([]);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
-  obtenerNumeroRegistros
+  obtenerNumeroRegistros,
+  obtenerVentasPorDia,
+  obtenerGananciasPorDia,
+  obtenerVentasPorDia,
+  obtenerVentasPorDosDias
 };
 
