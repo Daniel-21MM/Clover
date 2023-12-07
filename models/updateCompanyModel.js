@@ -28,7 +28,7 @@ async function guardarImagen(archivo, rutaImagenAnterior) {
 }
 
 async function actualizarDatosEmpresa(id, nombreEmpresa, direccionEmpresa, telefonoEmpresa, emailEmpresa, detallesEmpresa, imgUrl) {
-    const sql = 'UPDATE datosEmpresa SET nombreEmpresa=?, direccionEmpresa=?, telefonoEmpresa=?, emailEmpresa=?, detallesEmpresa=?, imgUrl=? WHERE id=?';
+    const sql = 'UPDATE datosempresa SET nombreEmpresa=?, direccionEmpresa=?, telefonoEmpresa=?, emailEmpresa=?, detallesEmpresa=?, imgUrl=? WHERE id=?';
     const values = [nombreEmpresa, direccionEmpresa, telefonoEmpresa, emailEmpresa, detallesEmpresa, imgUrl, id];
 
     return new Promise((resolve, reject) => {
@@ -60,7 +60,7 @@ async function obtenerNumeroDeImagenes() {
 }
 
 async function obtenerDatosEmpresa(id) {
-    const sql = 'SELECT * FROM datosEmpresa WHERE id = ?';
+    const sql = 'SELECT * FROM datosempresa WHERE id = ?';
     const values = [id];
 
     return new Promise((resolve, reject) => {
@@ -80,7 +80,7 @@ async function obtenerDatosEmpresa(id) {
 }
 
 async function obtenerRutaImagenAnterior(id) {
-    const sql = 'SELECT imgUrl FROM datosEmpresa WHERE id = ?';
+    const sql = 'SELECT imgUrl FROM datosempresa WHERE id = ?';
     const values = [id];
 
     return new Promise((resolve, reject) => {
