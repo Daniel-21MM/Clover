@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const Swal = require('sweetalert2');
-    const { obtenerMesas, obtenerOpcionesPlatillos, guardarPedido, actualizarEstadoMesa, guardarVentaEnTablaVentas, actualizarEstadoPedido, obtenerEstadoPedido, obtenerUltimoPedidoEnProceso } = require('../controllers/tablesController');
+    const { obtenerMesas, obtenerOpcionesPlatillos, guardarPedido, actualizarEstadoMesa, guardarVentaEnTablaVentas, actualizarEstadoPedido, obtenerEstadoPedido, obtenerUltimoPedidoEnProceso, obtenerDatosEmpresa } = require('../controllers/tablesController');
     const pdfMake = require('pdfmake/build/pdfmake');
     const pdfFonts = require('pdfmake/build/vfs_fonts');
     const path = require('path')
@@ -217,9 +217,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.getElementById('fechaHora').value = fechaFormateada;
         }
 
-      
-
-
         // Función para formatear la fecha en el formato correcto para datetime-local
         function formatearFechaParaInput(fecha) {
             // Formato esperado por datetime-local: "YYYY-MM-DDTHH:mm"
@@ -231,9 +228,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             return `${año}-${mes}-${dia}T${hora}:${minutos}`;
         }
-
-
-
 
         function cargarOpcionesPlatillos() {
             const platillosSelect = document.getElementById('platillos');
@@ -272,11 +266,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             const platilloSelect = document.getElementById('platillos');
             const platilloSeleccionado = platilloSelect.value;
             const cantidad = document.getElementById('cantidad').value;
-            const descuento = document.getElementById('descuento').value;
-            const fechaHora = document.getElementById('fechaHora').value;
+            let descuento = document.getElementById('descuento').value;
 
             // Validar campos obligatorios
-            if (!nombreCliente || !platilloSeleccionado || !cantidad || !fechaHora) {
+            if (!nombreCliente || !platilloSeleccionado || !cantidad) {
                 Swal.fire({
                     icon: 'warning',
                     title: '¡Campos incompletos!',
@@ -287,6 +280,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             // Obtener el precio del platillo seleccionado desde el select
             const precioPlatillo = obtenerPrecioPlatillo(platilloSelect);
+
+            // Si el campo de descuento está vacío, asignarle un valor predeterminado de 0
+            descuento = descuento || 0;
 
             // Calcular el total (precio x cantidad) considerando el descuento
             const total = calcularTotal(precioPlatillo, cantidad, descuento);
@@ -301,8 +297,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             // Llamar a la función para agregar los detalles al arreglo
             agregarDetallesPedido(detallePedido);
         }
-
-
 
         function calcularTotal(precio, cantidad, descuento) {
             // Calcular el total considerando el descuento
@@ -392,6 +386,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                     return;
                 }
 
+                // Verificar si el descuento es una cadena no vacía y es un número
+                const descuentoValue = (descuento !== '' && !isNaN(descuento)) ? descuento : '0';
+
                 // Mostrar SweetAlert para confirmar el envío del pedido
                 const confirmacion = await Swal.fire({
                     title: '¿Está seguro de enviar el pedido?',
@@ -402,8 +399,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
 
                 if (confirmacion.isConfirmed) {
-                    // Guardar el pedido en la base de datos
-                    await guardarPedido(numeroMesa, nombreCliente, detallesPedidoArray, descuento, fechaHora);
+                    // Resto del código para enviar el pedido a la base de datos
+                    await guardarPedido(numeroMesa, nombreCliente, detallesPedidoArray, descuentoValue, fechaHora);
 
                     // Actualizar el estado de la mesa a "Ocupada"
                     await actualizarEstadoMesa(numeroMesa, 'No Disponible');
@@ -430,6 +427,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 Swal.fire('Error', 'Ocurrió un error al enviar el pedido', 'error');
             }
         }
+
 
 
         function obtenerDetallesPedidoArray() {
@@ -521,6 +519,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Obtener los detalles del pedido
                 const detallesPedidos = JSON.parse(ultimoPedido.DetallesPedidos);
 
+                // Obtener los datos de la empresa desde la base de datos
+                const datosEmpresa = await obtenerDatosEmpresa();
+
+                if (!datosEmpresa) {
+                    console.error('No se pudieron obtener los datos de la empresa.');
+                    return null;
+                  }
+              
+                  const { nombreEmpresa, direccionEmpresa, telefonoEmpresa } = datosEmpresa;
+
                 const fechaActual = new Date();
                 const textoFechaActual = `Fecha: ${fechaActual.toLocaleString()}`;
                 const totalVenta = detallesPedidos.reduce((total, detalle) => {
@@ -552,7 +560,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         {
                             stack: [
                                 {
-                                    text: 'Clover Wings',
+                                    text: nombreEmpresa,
                                     fontSize: 14,
                                     bold: true,
                                     alignment: 'center',
@@ -629,17 +637,19 @@ document.addEventListener('DOMContentLoaded', async function () {
                             margin: [0, 0, 0, 10],
                         },
                         {
-                            text: 'Calle Durango, esquina Sonora. Colonia Mexico, Poza Rica, Mexico.',
+                            text: direccionEmpresa,
                             fontSize: 7,
                             alignment: 'center',
                             margin: [0, 0, 0, 5],
                         },
                         {
-                            text: 'Tel: 7841425806',
-                            fontSize: 7,
+                            text: [
+                              { text: 'Tel: ', fontSize: 7 },
+                              { text: telefonoEmpresa, fontSize: 7 },
+                            ],
                             alignment: 'center',
                             margin: [0, 0, 0, 5],
-                        },
+                          },
                     ],
                 };
 

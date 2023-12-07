@@ -12,27 +12,21 @@ async function cargarDatosTabla(tablaId) {
         const resultados = await modelo.obtenerDatosPedidosDesdeBD(consultaSQL);
 
         resultados.forEach((pedido) => {
-            // Dentro del bucle forEach en cargarDatosTabla
-            resultados.forEach((pedido) => {
-                const fecha = new Date(pedido.fechaHora).toISOString().split('T')[0];
+            const fecha = new Date(pedido.fechaHora).toISOString().split('T')[0];
 
-                const tr = document.createElement('tr');
+            const tr = document.createElement('tr');
 
-                tr.innerHTML = `
-        <td>${pedido.idPedido}</td>
-        <td>${pedido.numeroMesa}</td>
-        <td>${pedido.nombreCliente}</td>
-        <td style="color: ${pedido.estado === 'En proceso' ? '#0C5FCD' : '#DB504A'}">${pedido.estado}</td>
-        <td>${fecha}</td>
-        <td>
-            <!-- Agrega aquí los botones de acciones según tus necesidades -->
-        </td>
-    `;
+            tr.innerHTML = `
+                <td>${pedido.idPedido}</td>
+                <td>${pedido.numeroMesa}</td>
+                <td>${pedido.nombreCliente}</td>
+                <td style="color: ${pedido.estado === 'En proceso' ? '#0C5FCD' : '#DB504A'}">${pedido.estado}</td>
+                <td>${fecha}</td>
+            `;
 
-                // Puedes agregar aquí los botones de acciones (editar, detalles, eliminar) de manera similar al ejemplo anterior
+            // Puedes agregar aquí los botones de acciones (editar, detalles, eliminar) de manera similar al ejemplo anterior
 
-                tabla.appendChild(tr);
-            });
+            tabla.appendChild(tr);
         });
     } catch (error) {
         console.error('Error al cargar los datos en la tabla: ', error);
@@ -43,6 +37,7 @@ async function cargarDatosTabla(tablaId) {
         });
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarDatosTabla('TablaMesas');

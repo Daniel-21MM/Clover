@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de  pedidos</title>
+    <title>Lista de pedidos</title>
     <!-- CDN BoxIcons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- Enlace Css -->
@@ -16,22 +16,22 @@
 <body>
     <!-- SIDEBAR -->
     <section id="sidebar">
-		<a href="#" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
-		<ul class="side-menu">
-			<li><a href="panelEmployee.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-			<li class="divider" data-text="Panel de navegacion"></li>
-		
-			<li>
-				<a href="#">
-					<i class='bx bx-dish icon'></i>Pedidos
-					<i class='bx bx-chevron-right icon-right'></i>
-				</a>
-				<ul class="side-dropdown">
-					<li><a href="saleslist.html"></i>Lista de pedidos</a></li>
-				</ul>
-			</li>
-		
-			<!-- <li>
+        <a href="#" class="brand"><img src="../assets/img/Clover.png" class="logo_img">Clover</a>
+        <ul class="side-menu">
+            <li><a href="panelEmployee.html" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+            <li class="divider" data-text="Panel de navegacion"></li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-dish icon'></i>Pedidos
+                    <i class='bx bx-chevron-right icon-right'></i>
+                </a>
+                <ul class="side-dropdown">
+                    <li><a href="#"></i>Lista de pedidos</a></li>
+                </ul>
+            </li>
+
+            <!-- <li>
 				<a href="#">
 					<i class='bx bx-receipt icon'></i>Facturar
 					<i class='bx bx-chevron-right icon-right'></i>
@@ -40,9 +40,9 @@
 					<li><a href="#">Facturar cliente</a></li>
 				</ul>
 			</li> -->
-		</ul>
-		
-	</section>
+        </ul>
+
+    </section>
     <!-- SIDEBAR -->
 
     <!-- NAVBAR -->
@@ -61,7 +61,7 @@
             <div class="profile">
                 <img src="" alt="" id="imagenEnOtraPagina">
                 <ul class="profile-link">
-                    <li><a href="#" id="btnSalir"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
+                    <li><a href="#" id="btnSalirEmpleado"><i class='bx bxs-log-out-circle'></i>Salir</a></li>
                 </ul>
             </div>
         </nav>
@@ -73,7 +73,7 @@
             <ul class="breadcrumbs">
                 <li><a href="panelEmployee.html">Dashboard</a></li>
                 <li class="divider">/</li>
-                <li><a href="#" class="active">Pedidos</a></li>
+                <li><a href="#" class="active">pedidos</a></li>
                 <li class="divider">/</li>
                 <li><a href="#" class="active">lista de pedidos</a></li>
             </ul>
@@ -92,11 +92,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Numero Mesa</th> 
+                                <th>Numero Mesa</th>
                                 <th>Cliente</th>
                                 <th>Estado</th>
                                 <th>Fecha</th>
-                              
                             </tr>
                         </thead>
                         <tbody>
@@ -112,13 +111,62 @@
         <!-- MAIN -->
     </section>
     <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/tableMesas.js"></script>
-  
     <script src="../models/orderListModel.js"></script>
     <script src="../controllers/orderListController.js"></script>
- 
-    
-   
+    <script>
+      
+
+        const { ipcRenderer } = require('electron');
+      
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnSalirEmpleado = document.getElementById('btnSalirEmpleado');
+
+            btnSalirEmpleado.addEventListener('click', async () => {
+                // Mostrar SweetAlert de confirmación
+                const confirmacion = await mostrarConfirmacion();
+
+                // Si el usuario confirma, enviamos el mensaje para cerrar la ventana
+                if (confirmacion.value) {
+                    ipcRenderer.send('btnSalirEmpleadoClick');
+                }
+            });
+
+            // Función para mostrar el SweetAlert de confirmación
+            function mostrarConfirmacion() {
+                return Swal.fire({
+                    title: '¿Estás seguro de salir?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#049935',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, salir',
+                    cancelButtonText: 'Cancelar',
+                });
+            }
+        });
+
+        var table = document.getElementById("TablaMesas");
+        var tbody = table.getElementsByTagName("tbody")[0];
+        var rows = tbody.getElementsByTagName("tr");
+
+        var searchInput = document.getElementById("searchInput");
+
+        function filterTable() {
+            var searchTerm = searchInput.value.toLowerCase();
+            for (var i = 0; i < rows.length; i++) {
+                var rowText = rows[i].textContent.toLowerCase();
+                rows[i].style.display = rowText.includes(searchTerm) ? "" : "none";
+            }
+        }
+
+        searchInput.addEventListener("input", function () {
+            filterTable();
+        });
+    </script>
+
+
+
 </body>
 
 </html>

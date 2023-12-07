@@ -78,7 +78,6 @@ async function guardarPedido(numeroMesa, nombreCliente, detallesPedido, descuent
   }
 }
 
-
 function obtenerMesas() {
   const sql = 'SELECT * FROM mesas';
   return new Promise((resolve, reject) => {
@@ -190,6 +189,21 @@ async function guardarVentaEnTablaVentas(ventaData) {
     });
   });
 }
+function obtenerDatosEmpresa() {
+  const sql = 'SELECT * FROM datosempresa';
+  
+  return new Promise((resolve, reject) => {
+    db.connection.query(sql, (queryErr, results) => {
+      if (queryErr) {
+        console.error('Error al obtener datos de la empresa: ' + queryErr.message);
+        reject(null);
+      } else {
+        const datosEmpresa = results.length > 0 ? results[0] : null;
+        resolve(datosEmpresa);
+      }
+    });
+  });
+}
 
 module.exports = {
   obtenerMesas,
@@ -200,5 +214,6 @@ module.exports = {
   obtenerEstadoPedido,
   obtenerUltimoPedidoEnProceso,
   obtenerOpcionesPlatillos,
-  guardarVentaEnTablaVentas
+  guardarVentaEnTablaVentas,
+  obtenerDatosEmpresa
 };
