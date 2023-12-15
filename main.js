@@ -117,8 +117,6 @@ ipcMain.on('btnSalirEmpleadoClick', () => {
   }
 });
 
-// ...
-
 app.on('ready', crearVentanaPrincipal);
 
 app.on('window-all-closed', () => {
