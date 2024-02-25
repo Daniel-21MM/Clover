@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 const fechas = ventasPorDia.map(venta => formatoFecha(new Date(venta.fecha))); // Asegúrate de que formatoFecha acepte un objeto Date
 const ventasDiaActual = ventasPorDia.reduce((total, venta) => total + venta.totalVentas, 0);
 
-console.log('Fechas:', fechas);
-console.log('Total Ventas Día Actual:', ventasDiaActual);
-console.log('Total Ventas Día Anterior:', totalVentasDosDias);
+// console.log('Fechas:', fechas);
+// console.log('Total Ventas Día Actual:', ventasDiaActual);
+// console.log('Total Ventas Día Anterior:', totalVentasDosDias);
 
 const chartOptions = {
   series: [

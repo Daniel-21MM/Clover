@@ -1,57 +1,79 @@
 const Swal = require('sweetalert2');
-const modelo = require('../models/showProductsModels'); 
+const modelo = require('../models/showProductsModels');
+
+let paginaActual = 1;
+const registrosPorPagina = 3;
+
 
 async function cargarDatosTabla(tablaId) {
     try {
         const tabla = document.querySelector(`#${tablaId} tbody`);
         tabla.innerHTML = '';
 
-        const consultaSQL = 'SELECT id, nombrePlatillo, categoria, descripcionPlatillo, precio, fecha_creacion, imagenUrlPlatillo FROM platillos';
+        const inicio = (paginaActual - 1) * registrosPorPagina;
+
+        const consultaSQL = `SELECT id, nombrePlatillo, categoria, descripcionPlatillo, precio, fecha_creacion, imagenUrlPlatillo 
+                     FROM platillos LIMIT ${inicio}, ${registrosPorPagina}`;
 
         const resultados = await modelo.obtenerDatosPlatillosDesdeBD(consultaSQL);
 
-        resultados.forEach((platillo) => {
-            const fecha = new Date(platillo.fecha_creacion).toISOString().split('T')[0];
-
+        if (resultados.length === 0) {
             const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${platillo.id}</td>
-                <td><img src="${platillo.imagenUrlPlatillo}" alt="Imagen del platillo"></td>
-                <td>${platillo.nombrePlatillo}</td>
-                <td>${platillo.categoria}</td>
-                <td>$ ${platillo.precio}</td>
-                <td>${fecha}</td>
-                <td>
-                    <button class="details" data-id="${platillo.id}"><i class='bx bx-show'></i></button> 
-                    <button class="edit" data-id="${platillo.id}"><i class='bx bx-edit'></i></button>
-                    <button class="delete" data-id="${platillo.id}"><i class='bx bx-trash'></i></button>
-                </td>
-            `;
-
-            // Obtener una referencia al botón de edición por su clase CSS
-            const editButton = tr.querySelector('.edit');
-
-            // Agregar un evento click al botón de edición
-            editButton.addEventListener('click', () => {
-                // Obtener el valor del atributo data-id para identificar el platillo
-                const platilloId = editButton.getAttribute('data-id');
-
-                // Redirigir a la página de edición con el ID del platillo
-                window.location.href = `editProduct.html?id=${platilloId}`;
-            });
-
+            tr.innerHTML = '<td colspan="7">No hay datos para mostrar</td>'; 
+            tr.classList.add('tablaDatos')
             tabla.appendChild(tr);
+           
 
-            const deleteButton = tr.querySelector('.delete');
-            deleteButton.addEventListener('click', eliminarPlatillo);
-
-            // Agregar un manejador de eventos al botón "Detalles" para redirigir a la vista de detalles
-            const detailsButton = tr.querySelector('.details');
-            detailsButton.addEventListener('click', () => {
-                const idPlatillo = detailsButton.getAttribute('data-id');
-                window.location.href = `productsDetails.html?id=${idPlatillo}`;
+            document.getElementById('prevBtn').disabled = true;
+            document.getElementById('nextBtn').disabled = true;
+        } else {
+            // Mostrar los datos en la tabla
+            resultados.forEach((platillo) => {
+                const fecha = new Date(platillo.fecha_creacion).toISOString().split('T')[0];
+    
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${platillo.id}</td>
+                    <td><img src="${platillo.imagenUrlPlatillo}" alt="Imagen del platillo"></td>
+                    <td>${platillo.nombrePlatillo}</td>
+                    <td>${platillo.categoria}</td>
+                    <td>$ ${platillo.precio}</td>
+                    <td>${fecha}</td>
+                    <td>
+                        <button class="details" data-id="${platillo.id}"><i class='bx bx-show'></i></button> 
+                        <button class="edit" data-id="${platillo.id}"><i class='bx bx-edit'></i></button>
+                        <button class="delete" data-id="${platillo.id}"><i class='bx bx-trash'></i></button>
+                    </td>
+                `;
+    
+            
+                const editButton = tr.querySelector('.edit');
+    
+           
+                editButton.addEventListener('click', () => {
+          
+                    const platilloId = editButton.getAttribute('data-id');
+    
+                    window.location.href = `editProduct.html?id=${platilloId}`;
+                });
+    
+                tabla.appendChild(tr);
+    
+                const deleteButton = tr.querySelector('.delete');
+                deleteButton.addEventListener('click', eliminarPlatillo);
+    
+                const detailsButton = tr.querySelector('.details');
+                detailsButton.addEventListener('click', () => {
+                    const idPlatillo = detailsButton.getAttribute('data-id');
+                    window.location.href = `productsDetails.html?id=${idPlatillo}`;
+                });
             });
-        });
+
+            // Habilitar o deshabilitar los botones de paginación según corresponda
+            document.getElementById('prevBtn').disabled = (paginaActual === 1);
+            document.getElementById('nextBtn').disabled = (resultados.length < registrosPorPagina);
+        }
+
     } catch (error) {
         console.error('Error al cargar los datos en la tabla: ', error);
         Swal.fire({
@@ -61,6 +83,25 @@ async function cargarDatosTabla(tablaId) {
         });
     }
 }
+
+function cargarPaginaAnterior() {
+    if (paginaActual > 1) {
+        paginaActual--;
+        cargarDatosTabla('TablaArticulos');
+    }
+}
+
+function cargarPaginaSiguiente() {
+    paginaActual++;
+    cargarDatosTabla('TablaArticulos');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    cargarDatosTabla('TablaArticulos');
+
+    document.getElementById('prevBtn').addEventListener('click', cargarPaginaAnterior);
+    document.getElementById('nextBtn').addEventListener('click', cargarPaginaSiguiente);
+});
 
 async function eliminarPlatillo(event) {
     const row = event.currentTarget.parentElement.parentElement;
@@ -108,6 +149,3 @@ async function eliminarPlatillo(event) {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    cargarDatosTabla('TablaArticulos');
-});
